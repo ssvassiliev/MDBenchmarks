@@ -14,8 +14,9 @@ class Software(models.Model):
     module_version = models.CharField(max_length=100, help_text='Enter a module version')    
     toolchain = models.CharField(max_length=100, help_text='Enter a toolchain name') 
     toolchain_version = models.CharField(max_length=100, help_text='Enter a toolchain version') 
-    instruction_set = models.CharField(max_length=100, help_text='Enter CPU instruction set (avx2/avx512)')  
-    submission = models.TextField()
+    instruction_set = models.CharField(max_length=100, help_text='Enter CPU instruction set (avx2/avx512)')
+    example_submission  = models.TextField()
+    benchmark_submission = models.TextField()
     def __str__(self):
         return f'{self.name}({self.module}/{self.module_version}-{self.toolchain}-{self.toolchain_version}-{self.instruction_set})'    
 
