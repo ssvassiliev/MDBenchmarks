@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Lst of all datasets</h1>
+  {% if benchmark_list %}
+  <ul>
+    {% for dataset in benchmark_list %}
+      <li>
+        <a href="{{ dataset.get_absolute_url }}"> {{dataset.name}}, </a> {{dataset.natoms}} atoms
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no software in the database.</p>
+  {% endif %}
+{% endblock %}

@@ -10,10 +10,12 @@ def index(request):
     # Generate counts of some of the main objects
     num_software = Software.objects.all().count()
     num_benchmarks = BenchmarkInstance.objects.all().count()
+    num_datasets = Benchmark.objects.all().count()
 
     context = {
         'num_software': num_software,
         'num_benchmarks': num_benchmarks,
+        'num_datasets': num_datasets,   
     }
 
     # Render the HTML template index.html with the data in the context variable
@@ -22,17 +24,22 @@ def index(request):
 class BenchmarkListView(generic.ListView):
     queryset = BenchmarkInstance.objects.order_by('-rate_max')    
 
-class NamdCudaBenchmarkListView(generic.ListView):
-   # model = BenchmarkInstance    
+class BenchmarkDetailView(generic.DetailView):
+    model = BenchmarkInstance
+
+class NamdCudaBenchmarkListView(generic.ListView): 
     qs1=BenchmarkInstance.objects.filter(software__name__icontains='NAMD')
     qs2=BenchmarkInstance.objects.filter(software__name__icontains='cuda')
     queryset=qs1.intersection(qs2).order_by('-rate_max')
-
-class BenchmarkDetailView(generic.DetailView):
-    model = BenchmarkInstance
 
 class SoftwareListView(generic.ListView):
     model = Software
 
 class SoftwareDetailView(generic.DetailView):
     model = Software
+
+class DatasetListView(generic.ListView):
+    model = Benchmark
+
+class DatasetDetailView(generic.DetailView):
+    model = Benchmark

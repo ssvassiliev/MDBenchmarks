@@ -1,0 +1,10 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h2>Dataset details</h2>
+<ul>
+  <li><strong>Name:</strong> {{ benchmark.name}}</li> 
+  <li><strong>Number of atoms:</strong> {{ benchmark.natoms}}</li> 
+  <li><strong>Description:</strong> {{ benchmark.description}}</li>
+</ul>
+{% endblock %}

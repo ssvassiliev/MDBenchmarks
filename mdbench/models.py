@@ -13,6 +13,8 @@ class Benchmark(models.Model):
     name = models.CharField(max_length=100, help_text='Enter a benchmark name')
     natoms = models.IntegerField()
     description = models.TextField()
+    def get_absolute_url(self):
+        return reverse('dataset-detail', args=[str(self.id)])
     def __str__(self):
         return f'{self.name}, {self.natoms} particles'
 

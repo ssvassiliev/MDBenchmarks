@@ -3,8 +3,10 @@
 {% block content %}
   <h1>List of all benchmarks</h1>
   {% if benchmarkinstance_list %}
-  <table class="table">
+  <table class="table table-hover">
     <caption>List of benchmarks. Click on a link in the ID column for benchmark details.</caption>
+    <thead class="thead-dark">
+    <tr>
       <th>ID</th> 
       <th>Software</th> 
       <th>Dataset</th>  
@@ -16,6 +18,7 @@
       <th>NVLink</th>  
       <th>Site</th> 
     </tr>
+    </thead> 
   <tr>
     {% for benchmark in benchmarkinstance_list %}
       <td> <a href="{{ benchmark.get_absolute_url }}"> {{benchmark.id}}</a> </td>
