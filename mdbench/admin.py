@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Benchmark, BenchmarkInstance, SerialBenchmarkInstance, Software, CPU, GPU, Resource, Site
+from .models import SimulationInput, Benchmark, BenchmarkInstance, SerialBenchmarkInstance, Software, CPU, GPU, Resource, Site
 
 admin.site.register(Benchmark)
 admin.site.register(BenchmarkInstance)
@@ -10,3 +10,4 @@ admin.site.register(CPU)
 admin.site.register(GPU)
 admin.site.register(Resource)
 admin.site.register(Site)
+admin.site.register(SimulationInput)

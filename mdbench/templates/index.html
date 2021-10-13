@@ -1,0 +1,13 @@
+{% extends "base_generic.html" %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'mdbench/css/style.css' %}">
+
+{% block content %}
+  <h1>Molecular Dynamics Benchmarks</h1>
+  <h2>Database content</h2>
+  <p>The database has the following record counts:</p>
+  <ul>
+    <li><strong>Benchmarks:</strong> {{ num_benchmarks }}</li>
+    <li><strong>Software:</strong> {{ num_software }}</li>
+  </ul>
+{% endblock %}

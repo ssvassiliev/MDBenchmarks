@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Software List</h1>
+  {% if software_list %}
+  <ul>
+    {% for software in software_list %}
+      <li>
+        <a href="{{ software.get_absolute_url }}"> {{software.name}} </a>({{software.module}}/{{software.module_version}}-{{ software.toolchain}}-{{software.toolchain_version}}-{{software.instruction_set}})
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no software in the database.</p>
+  {% endif %}
+{% endblock %}

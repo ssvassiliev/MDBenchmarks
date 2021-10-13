@@ -1,0 +1,15 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h2>Benchmark details</h2>
+<ul>
+  <li><strong>Dataset:</strong></strong> {{ benchmarkinstance.benchmark }}</li> 
+  <li><strong>Software:</strong> {{ benchmarkinstance.software }}</li>
+  <li><strong>Resource:</strong> {{ benchmarkinstance.resource }}</li>
+  <li><strong>CPU:</strong> {{ benchmarkinstance.cpu }}</li> 
+  <li><strong>Simulation speed:</strong> {{ benchmarkinstance.rate_max }} ns/day</li> 
+  <li><strong>Efficiency:</strong> {{ benchmarkinstance.cpu_efficiency }} %</li> 
+  <li><strong>Site:</strong> {{ benchmarkinstance.site }} <p></p></li> 
+  <li><p><strong>Simulation input file:</strong> {{ benchmarkinstance.serial.simulation_input.input | linebreaks }} </p></li> 
+</ul> 
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>List of all benchmarks</h1>
+  {% if benchmarkinstance_list %}
+  <table class="table">
+    <caption>List of benchmarks. Click on a link in the ID column for benchmark details.</caption>
+      <th>ID</th> 
+      <th>Software</th> 
+      <th>Dataset</th>  
+      <th>ns/day</th>
+      <th>Efficiency</th>
+      <th>Tasks</th> 
+      <th>CPUs</th> 
+      <th>GPUs</th>  
+      <th>NVLink</th>  
+      <th>Site</th> 
+    </tr>
+  <tr>
+    {% for benchmark in benchmarkinstance_list %}
+      <td> <a href="{{ benchmark.get_absolute_url }}"> {{benchmark.id}}</a> </td>
+      <td> <a href="{{ benchmark.software.get_absolute_url }}">{{ benchmark.software.name }}</a> </td>
+      <td> {{ benchmark.benchmark.name }}</td>
+      <td> {{ benchmark.rate_max }} </td> 
+      <td> {{ benchmark.cpu_efficiency }}%</a> </td>
+      <td> {{ benchmark.resource.ntasks }}</td>
+      <td> {{ benchmark.resource.ncpu }}</td>
+      <td> {{ benchmark.resource.ngpu }}</td>
+      <td> {{ benchmark.resource.nvlink }}</td>
+      <td> {{ benchmark.site }}</td>
+  </tr>   
+    {% endfor %} 
+  </table>
+  {% else %}
+    <p>There are no benchmarks in the database.</p>
+  {% endif %}
+{% endblock %}

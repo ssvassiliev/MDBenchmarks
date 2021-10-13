@@ -1,0 +1,12 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h2>Software details</h2>
+<ul>
+<li><strong>Module/Version:</strong> {{ software.module}}/{{ software.module_version }}</li>
+<li><strong>Toolchain/Version:</strong> {{ software.toolchain}}/{{ software.toolchain_version }}</li>
+<li><strong>CPU instruction set:</strong> {{ software.instruction_set}}<p></p></li>
+<li><p><strong>Example job submission script:</strong> {{ software.example_submission | linebreaks}}</p></li> 
+<li><p><strong>Benchmark submission script:</strong> {{ software.benchmark_submission  | linebreaks}}</p></li> 
+</ul>
+{% endblock %}
