@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views import generic
 
-from .models import Benchmark, Software, BenchmarkInstance
+from .models import Benchmark, Software, BenchmarkInstance, CPU, GPU
 
 def index(request):
     """View function for home page of site."""
@@ -11,11 +11,16 @@ def index(request):
     num_software = Software.objects.all().count()
     num_benchmarks = BenchmarkInstance.objects.all().count()
     num_datasets = Benchmark.objects.all().count()
+    num_cpu_types = CPU.objects.all().count()
+    num_gpu_types = GPU.objects.all().count()
 
     context = {
         'num_software': num_software,
         'num_benchmarks': num_benchmarks,
         'num_datasets': num_datasets,   
+        'num_cpu_types': num_cpu_types,   
+        'num_gpu_types': num_gpu_types,   
+
     }
 
     # Render the HTML template index.html with the data in the context variable
