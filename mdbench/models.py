@@ -84,7 +84,7 @@ class Resource(models.Model):
     ngpu = models.IntegerField()
     nvlink = models.BooleanField() 
     def __str__(self):
-        return f'tasks{self.ntasks}-cpus{self.ncpu}-gpus{self.ngpu}-nvlink{self.nvlink}'
+        return f'tasks{self.ntasks}-threads{self.ncpu}-gpus{self.ngpu}-nvlink{self.nvlink}'
 
 class CPU(models.Model):
     class Meta:

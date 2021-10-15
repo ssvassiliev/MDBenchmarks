@@ -1,8 +1,6 @@
 {% extends "base_generic.html" %}
-{% load pygmentify %}
 
 {% block content %}
-{% pygment %}
 <h2>Benchmark details</h2>
 <ul>
   <li><strong>Dataset:</strong></strong> {{ benchmarkinstance.benchmark }}</li> 
@@ -12,7 +10,6 @@
   <li><strong>Simulation speed:</strong> {{ benchmarkinstance.rate_max }} ns/day</li> 
   <li><strong>Efficiency:</strong> {{ benchmarkinstance.cpu_efficiency }} %</li> 
   <li><strong>Site:</strong> {{ benchmarkinstance.site }}</li> 
-  <li><strong>Simulation input file:</strong><div class='p-3 mb-0 bg-light text-secondary'><pre lang="tcl">{{ benchmarkinstance.serial.simulation_input.input | linebreaks }} </pre></div></li> 
+  <li><strong>Simulation input file:</strong><div class='p-3 mb-0 bg-light text-secondary'>{{ benchmarkinstance.serial.simulation_input.input | linebreaks }}</div></li> 
 </ul> 
-{% endpygment %}
 {% endblock %}

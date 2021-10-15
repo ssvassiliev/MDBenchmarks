@@ -12,7 +12,17 @@
   <link rel="stylesheet" type="text/css" href="{% static 'mdbench/css/vs.css' %}">
 </head>
 <body>
+
   <div class="container-fluid">
+    <form class="form-inline" action = "{% url 'filteredbenchmarks' %}" method="get">
+      <div class="input-group">
+      <input class="form-control" aria-label="Search" name="q" type="text" placeholder="Search benchmarks by the name of the executable program, e.g. pmemd">
+      <div class="input-group-append">
+      <button class="btn btn-primary" type="submit">Search</button>
+      </div>
+    </div>
+    </form>
+
     <div class="row">
       <div class="col-sm-2">
       {% block sidebar %}

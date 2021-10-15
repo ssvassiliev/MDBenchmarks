@@ -1,16 +1,13 @@
 {% extends "base_generic.html" %}
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'mdbench/css/style.css' %}">
 
 {% block content %}
-  <h1>Molecular Dynamics Benchmarks</h1>
-  <p>Benchmarking is essential for finding the optimal job simulation and submission parameters. New users might be unaware of the hardware- and software-specific details required to run efficient simulations on Compute Canada HPC clusters.  A poor choice of parameters can increase the simulation speed only by a narrow margin or even degrade it leading to a waste of computing resources. Therefore, it is in the interest of every user to optimize their usage of hardware resources and, at the same time, keep their simulation time to a minimum. </p>
+<h1>Molecular Dynamics Benchmarks</h1>
+<p>Benchmarking is essential for finding the optimal job simulation and submission parameters. New users might be unaware of the hardware- and software-specific details required to run efficient simulations on Compute Canada HPC clusters.  A poor choice of parameters can increase the simulation speed only by a narrow margin or even degrade it leading to a waste of computing resources. Therefore, it is in the interest of every user to optimize their usage of hardware resources and, at the same time, keep their simulation time to a minimum. </p>
 
-  <p>We created this database to provide researchers with detailed information about MD simulations on CC clusters, the achieved performance, and efficiency. It allows the fast estimation of the performance that users can expect for similar simulations. Currently, we have benchmarks for three major MD software packages: AMBER, GROMACS, and NAMD. All entries include example submission scripts and simulation input parameters. Database entries also include benchmark submission scripts that users can use for easy benchmarking of their systems. 
-  </p>
+<p>This database provides researchers with detailed information about the performance and efficiency of MD simulations on heterogeneous Compute Canada clusters. Currently, it contains benchmarks for three major MD software packages: AMBER, GROMACS, and NAMD. This information should allow researchers to estimate the performance they can expect for similar simulations. All entries include example submission scripts and simulation input parameters to help new users to get started with MD simulations and optimize submission of their simulations. </p>
 
-  <h2>Database content</h2>
-  <p>The database has the following record counts:</p>
+<h2>Database content</h2>
+ <p>The database has the following record counts:</p>
   <ul>
     <li><strong>Benchmarks:</strong> {{ num_benchmarks }}</li>
     <li><strong>Software:</strong> {{ num_software }}</li>
