@@ -3,13 +3,13 @@
 {% block content %}
   <h1>List of all software</h1>
   {% if software_list %}
-  <ul>
+  <ol>
     {% for software in software_list %}
       <li>
         <a href="{{ software.get_absolute_url }}"> {{software.name}} </a>({{software.module}}/{{software.module_version}}-{{ software.toolchain}}-{{software.toolchain_version}}-{{software.instruction_set}})
       </li>
     {% endfor %}
-  </ul>
+  </ol>
   {% else %}
     <p>There are no software in the database.</p>
   {% endif %}
