@@ -16,7 +16,7 @@ class Benchmark(models.Model):
     def get_absolute_url(self):
         return reverse('dataset-detail', args=[str(self.id)])
     def __str__(self):
-        return f'{self.name}, {self.natoms} particles'
+        return f'{self.name}'
 
 class Software(models.Model):
     class Meta:
@@ -32,7 +32,7 @@ class Software(models.Model):
     def get_absolute_url(self):
         return reverse('software-detail', args=[str(self.id)])
     def __str__(self):
-        return f'{self.name}({self.module}/{self.module_version}-{self.toolchain}-{self.toolchain_version}-{self.instruction_set})'    
+        return f'{self.name} ({self.module}/{self.module_version}-{self.toolchain}-{self.toolchain_version}-{self.instruction_set})'    
 
 class SerialBenchmarkInstance(models.Model):
     class Meta:
