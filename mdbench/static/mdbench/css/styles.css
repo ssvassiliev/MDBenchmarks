@@ -12,8 +12,8 @@ body {
   h1 {
     color: rgb(0, 0, 0);
   }
-
-  ol, ul {
-    list-style-position: inside;
-    padding: 0;
+ 
+ ol, ul {
+   list-style-position: outside;
+   padding: 0;
 }

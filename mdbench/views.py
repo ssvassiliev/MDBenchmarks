@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from django.views import generic
 from django.db.models import Q
-
+from .filters import BenchmarkInstanceFilter
+import django_filters
 
 from .models import Benchmark, Software, BenchmarkInstance, CPU, GPU
 
@@ -53,8 +53,13 @@ class DatasetDetailView(generic.DetailView):
 
 class FilteredBenchmarksListView(generic.ListView):
     template_name = 'mdbench/filteredbenchmarks.html'
-
     def get_queryset(self): 
         query = self.request.GET.get('q')
         object_list = BenchmarkInstance.objects.filter(Q(software__name__icontains=query)).order_by('-rate_max')
         return object_list
+
+def filtered_benchmarks_list(request):
+	benchmarks = BenchmarkInstance.objects.all().order_by('-rate_max')
+	filter = BenchmarkInstanceFilter(request.GET, queryset = benchmarks)
+	return render(request, 'mdbench/benchmarkinstance_filter.html', {'filter' : filter})
+

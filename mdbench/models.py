@@ -4,7 +4,6 @@
 # python3 manage.py runserver
 # python3 manage.py createsuperuser
 from django.db import models
-import uuid 
 from django.urls import reverse
 
 class Benchmark(models.Model):
@@ -110,4 +109,3 @@ class Site(models.Model):
     name = models.CharField(max_length=100, help_text='Enter a site name (e.g. Cedar)')
     def __str__(self):
         return f'{self.name}'      
-
