@@ -1,16 +1,26 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
+{% if software_list %}
   <h1>List of all software</h1>
-  {% if software_list %}
-  <ol>
-    {% for software in software_list %}
-      <li>
-        <a href="{{ software.get_absolute_url }}"> {{software.name}} </a>({{software.module}}/{{software.module_version}}-{{ software.toolchain}}-{{software.toolchain_version}}-{{software.instruction_set}})
-      </li>
-    {% endfor %}
-  </ol>
-  {% else %}
-    <p>There are no software in the database.</p>
+  <table class="table table-hover">
+    <caption>List of tested software.</caption>
+    <thead class="thead-dark">
+      <th>Name</th> 
+      <th>Module</th> 
+      <th>Toolchain</th> 
+      <th>Instruction set</th> 
+  </thead> 
+  {% for software in software_list %}
+    <tr>
+       <td> <a href="{{ software.get_absolute_url }}">{{ software.name }}</a></td>
+       <td> {{ software.module }}/{{ software.module_version }}</td> 
+       <td> {{ software.toolchain }}-{{ software.toolchain_version }}</td> 
+       <td> {{ software.instruction_set }}</td> 
+  {% endfor %} 
+  </tr>
+  </table>
+{% else %}
+  <p>There are no software in the database.</p>
   {% endif %}
 {% endblock %}

@@ -52,7 +52,8 @@ class SerialBenchmarkInstance(models.Model):
 class BenchmarkInstance(models.Model):
     class Meta:
         verbose_name_plural = "4. Parallel Benchmarks"
-        
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     benchmark = models.ForeignKey('Benchmark', on_delete=models.RESTRICT, null=True)
     software = models.ForeignKey('Software', on_delete=models.RESTRICT, null=True) 
     simulation_input = models.ForeignKey('SimulationInput', on_delete=models.RESTRICT, null=True)

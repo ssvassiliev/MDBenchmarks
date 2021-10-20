@@ -41,6 +41,7 @@ class NamdCudaBenchmarkListView(generic.ListView):
 
 class SoftwareListView(generic.ListView):
     model = Software
+    queryset = Software.objects.order_by('name')    
 
 class SoftwareDetailView(generic.DetailView):
     model = Software
