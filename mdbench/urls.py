@@ -6,8 +6,7 @@ from .filters import BenchmarkInstanceFilter
 
 urlpatterns = [
     path('', views.index, name='index'),
-    re_path(r'^search/$', views.filtered_benchmarks_list, name='searcher'),
- #   re_path(r'^search/$', FilterView.as_view(filterset_class=BenchmarkInstanceFilter, template_name='mdbench/benchmarkinstance_filter.html'), name='searcher'),
+    path('search/', views.filtered_benchmarks_list, name='searcher'),
     path('filteredbenchmarks/', views.FilteredBenchmarksListView.as_view(), name='filteredbenchmarks'),
     path('benchmarks/', views.BenchmarkListView.as_view(), name='benchmarks'),
     path('benchmark/<int:pk>', views.BenchmarkDetailView.as_view(), name='benchmark-detail'),

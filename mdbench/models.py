@@ -36,6 +36,8 @@ class Software(models.Model):
 class SerialBenchmarkInstance(models.Model):
     class Meta:
         verbose_name_plural = "3. Serial Benchmarks"
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     benchmark = models.ForeignKey('Benchmark', on_delete=models.RESTRICT, null=True)
     software = models.ForeignKey('Software', on_delete=models.RESTRICT, null=True) 
     simulation_input = models.ForeignKey('SimulationInput', on_delete=models.RESTRICT, null=True)
@@ -50,6 +52,7 @@ class SerialBenchmarkInstance(models.Model):
 class BenchmarkInstance(models.Model):
     class Meta:
         verbose_name_plural = "4. Parallel Benchmarks"
+        
     benchmark = models.ForeignKey('Benchmark', on_delete=models.RESTRICT, null=True)
     software = models.ForeignKey('Software', on_delete=models.RESTRICT, null=True) 
     simulation_input = models.ForeignKey('SimulationInput', on_delete=models.RESTRICT, null=True)
@@ -81,9 +84,10 @@ class Resource(models.Model):
     ncpu = models.IntegerField()
     ntasks = models.IntegerField()
     ngpu = models.IntegerField()
+    nnodes = models.IntegerField()
     nvlink = models.BooleanField() 
     def __str__(self):
-        return f'tasks{self.ntasks}-threads{self.ncpu}-gpus{self.ngpu}-nvlink{self.nvlink}'
+        return f'tasks {self.ntasks} - threads {self.ncpu} - nodes {self.nnodes} - gpus {self.ngpu} - nvlink {self.nvlink}'
 
 class CPU(models.Model):
     class Meta:

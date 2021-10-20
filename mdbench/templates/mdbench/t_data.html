@@ -1,0 +1,12 @@
+<td> <a href="{{ benchmark.get_absolute_url }}"> {{benchmark.id}}</a> </td>
+<td> <a href="{{ benchmark.software.get_absolute_url }}">{{ benchmark.software.name }}</a> </td>
+<td> {{ benchmark.software.module }}/{{ benchmark.software.module_version }}-{{ benchmark.software.toolchain }}</td>
+<td> {{ benchmark.benchmark.name }}</td>
+<td> {{ benchmark.rate_max }} </td> 
+<td> {{ benchmark.cpu_efficiency }}%</a> </td>
+<td> {{ benchmark.resource.ntasks }}</td>
+<td> {{ benchmark.resource.ncpu }}</td>
+<td> {{ benchmark.resource.nnodes }}</td> 
+<td> {{ benchmark.resource.ngpu }}</td>
+<td> {{ benchmark.resource.nvlink }}</td>
+<td> {{ benchmark.site }}</td>

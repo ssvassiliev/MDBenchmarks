@@ -9,7 +9,8 @@
   <li><strong>CPU:</strong> {{ benchmarkinstance.cpu }}</li> 
   <li><strong>Simulation speed:</strong> {{ benchmarkinstance.rate_max }} ns/day</li> 
   <li><strong>Efficiency:</strong> {{ benchmarkinstance.cpu_efficiency }} %</li> 
-  <li><strong>Site:</strong> {{ benchmarkinstance.site }}</li> 
+  <li><strong>Site:</strong> {{ benchmarkinstance.site }}</li>
+  <li><strong>Date:</strong> {{ benchmarkinstance.updated_at }}</li>  
   <li><strong>Simulation input file:</strong><div class='p-3 mb-0 bg-light text-secondary'>{{ benchmarkinstance.serial.simulation_input.input | linebreaks }}</div></li> 
 </ul> 
 {% endblock %}
