@@ -1,6 +1,8 @@
 <td> <a href="{{ benchmark.get_absolute_url }}"> {{benchmark.id}}</a> </td>
 <td> <a href="{{ benchmark.software.get_absolute_url }}">{{ benchmark.software.name }}</a> </td>
-<td> {{ benchmark.software.module }}/{{ benchmark.software.module_version }}-{{ benchmark.software.toolchain }}</td>
+<td class="text-nowrap"> {{ benchmark.software.module }}/{{ benchmark.software.module_version }}</td>
+<td> {{ benchmark.software.toolchain }}</td>
+<td> {{ benchmark.software.instruction_set }}</td>
 <td> {{ benchmark.benchmark.name }}</td>
 <td> {{ benchmark.rate_max }} </td> 
 <td> {{ benchmark.cpu_efficiency }}%</a> </td>
