@@ -6,6 +6,7 @@ from .filters import BenchmarkInstanceFilter
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('about/', views.about, name='about'),
     path('search/', views.filtered_benchmarks_list, name='searcher'),
     path('filteredbenchmarks/', views.FilteredBenchmarksListView.as_view(), name='filteredbenchmarks'),
     path('benchmarks/', views.BenchmarkListView.as_view(), name='benchmarks'),

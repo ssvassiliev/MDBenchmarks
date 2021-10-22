@@ -8,27 +8,37 @@
   <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">
   <!-- Add additional CSS in static file -->
   {% load static %}
-  <link rel="stylesheet" href="{% static 'mdbench/css/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'mdbench/css/styles.css' %}">                                                                                                            
   <link rel="stylesheet" type="text/css" href="{% static 'mdbench/css/vs.css' %}">
 </head>
 <body>
 
-  <div class="container-fluid">
-    <form class="form-inline" action = "{% url 'filteredbenchmarks' %}" method="get">
-      <div class="input-group">
-      <input class="form-control" aria-label="Find" name="q" type="text" placeholder="Search benchmarks by the name of the executable program, e.g. pmemd">
-      <div class="input-group-append">
-      <button class="btn btn-primary" type="submit">Quick Find</button>
+  <nav class="navbar navbar-expand-sm navbar-light" style="background-color: #eeeeee;">
+    <div class="container-fluid">
+      <a class="navbar-brand h1 mb-0">MDBench</a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'about' %}">About</a>
+          </li>
+        </ul>
+        <form class="d-flex mx-2 my-auto d-inline w-50" action = "{% url 'filteredbenchmarks' %}" method="get">
+          <input class="form-control" name="q" type="text"  placeholder="Search by the program name, e.g. pmemd" aria-label="Search">
+          <button class="btn btn-outline-primary" type="submit">Submit</button>
+        </form>
       </div>
     </div>
-    </form>
+  </nav>
 
-    <div class="row">
+    <div class="row mx-2">
       <div class="col-sm-2">
       {% block sidebar %}
         <ul class="sidebar-nav">
           <li><a href="{% url 'index' %}">Home</a></li>
-          <li><a href="{% url 'benchmarks' %}">All Benchmarks</a></li>
+          <li><a href="{% url 'benchmarks' %}">Benchmarks</a></li>
           <li><a href="{% url 'softwares' %}">Software</a></li>
           <li><a href="{% url 'datasets' %}">Datasets</a></li>
           <li><a href="{% url 'searcher' %}">Advanced Search</a></li>
