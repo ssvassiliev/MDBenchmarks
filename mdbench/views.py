@@ -37,10 +37,6 @@ class BenchmarkListView(generic.ListView):
 class BenchmarkDetailView(generic.DetailView):
     model = BenchmarkInstance
 
-class NamdCudaBenchmarkListView(generic.ListView): 
-    qs1=BenchmarkInstance.objects.filter(software__name__icontains='NAMD')
-    qs2=BenchmarkInstance.objects.filter(software__name__icontains='cuda')
-    queryset=qs1.intersection(qs2).order_by('-rate_max')
 
 class SoftwareListView(generic.ListView):
     model = Software
@@ -62,8 +58,51 @@ class FilteredBenchmarksListView(generic.ListView):
         object_list = BenchmarkInstance.objects.filter(Q(software__name__icontains=query)).order_by('-rate_max')
         return object_list
 
+
 def filtered_benchmarks_list(request):
 	benchmarks = BenchmarkInstance.objects.all().order_by('-rate_max')
 	filter = BenchmarkInstanceFilter(request.GET, queryset = benchmarks)
 	return render(request, 'mdbench/benchmarkinstance_filter.html', {'filter' : filter})
 
+from plotly.offline import plot
+from plotly.graph_objs import Scatter
+import plotly.express as px 
+import pandas as pd        
+
+def filtered_benchmarks_plot(request):
+    benchmarks = BenchmarkInstance.objects.all().order_by('-rate_max')
+    filter = BenchmarkInstanceFilter(request.GET, queryset = benchmarks)
+    x_data=[]
+    y_data=[]
+    e_data=[]
+    lab=[]
+    ids=[]
+    h=200
+    for c,i in enumerate(filter.qs):
+        ids.append(str(i.id))
+        x_data.append(c)
+        y_data.append(i.rate_max)
+        e_data.append(i.cpu_efficiency)
+        lab.append(i.software.name+"("+i.software.module+"/"+i.software.module_version+")-("
+        +str(i.resource.ncpu)+"c-"+str(i.resource.ntasks)+"t-"+str(i.resource.nnodes)+"n-"
+        +str(i.resource.ngpu)+"g)-"+i.site.name)
+        h+=30
+    
+    df=pd.DataFrame({"ID":x_data, "Rate":y_data, "Efficiency":e_data, "Labels":lab})
+
+    fig = px.bar(df, y="ID", x="Rate", range_color=(0,100), text="Labels", orientation='h',
+        color_continuous_scale=px.colors.sequential.Sunset, color="Efficiency", height=h, width=900)
+    fig.update_layout(
+        yaxis = dict(autorange="reversed",
+        tickmode = 'array', tickvals=x_data, ticktext = ids,)
+)
+    plot_div = fig.to_html(full_html=True)
+    return render(request, 'mdbench/benchmarkinstance_filter_plot.html', {'filter' : filter, 'plot_div': plot_div})
+
+
+def plotly_example(request):
+    x_data = [0,1,2,3]
+    y_data = [x**2 for x in x_data]
+    plot_div = plot([Scatter(x=x_data, y=y_data, mode='lines', name='test',
+        opacity=0.8, marker_color='green',)], output_type='div',)
+    return render(request, "mdbench/plotly.html", context={'plot_div': plot_div})

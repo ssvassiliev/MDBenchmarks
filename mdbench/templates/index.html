@@ -1,15 +1,23 @@
 {% extends "base_generic.html" %}
+{% block sidebar %}
+<ul class="sidebar-nav">
+  <li><a href="{% url 'index' %}">Home</a></li>
+  <li><a href="{% url 'benchmarks' %}">Benchmarks</a></li>
+  <li><a href="{% url 'softwares' %}">Software</a></li>
+  <li><a href="{% url 'datasets' %}">Datasets</a></li>
+  <li><a href="{% url 'searcher' %}">Advanced Search</a></li>
+</ul>
+<ul class="sidebar-nav">
+  <li><strong>Benchmarks:</strong> {{ num_benchmarks }}</li>
+  <li><strong>Software:</strong> {{ num_software }}</li>
+  <li><strong>Datasets:</strong> {{ num_datasets }}</li>
+  <li><strong>CPU models:</strong> {{ num_cpu_types }}</li> 
+  <li><strong>GPU models:</strong> {{ num_gpu_types }}</li> 
+</ul>
+{% endblock %}
 
 {% block content %}
-
 <h1>Molecular Dynamics Benchmarks</h1>
 <p>Benchmarking is essential for finding the optimal job simulation and submission parameters. New users might be unaware of the hardware- and software-specific details required to run efficient simulations on Compute Canada HPC clusters.  A poor choice of parameters can increase the simulation speed only by a narrow margin or even degrade it leading to a waste of computing resources. Therefore, it is in the interest of every user to optimize their usage of hardware resources and, at the same time, keep their simulation time to a minimum. </p>
 
-  <ul>
-    <li><strong>Benchmarks:</strong> {{ num_benchmarks }}</li>
-    <li><strong>Software:</strong> {{ num_software }}</li>
-    <li><strong>Datasets:</strong> {{ num_datasets }}</li>
-    <li><strong>CPU models:</strong> {{ num_cpu_types }}</li> 
-    <li><strong>GPU models:</strong> {{ num_gpu_types }}</li> 
-  </ul>
 {% endblock %}

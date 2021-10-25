@@ -20,15 +20,9 @@
 </div></div>
 </form>
 
-    <h2>Search results</h2>
-    <table class="table table-sm table-hover">
-        <caption>List of benchmarks. Click on a link in the ID column for benchmark details.</caption>
-        {% include "mdbench/t_head.html" %}
-        {% for benchmark in filter.qs %}
-        <tr>
-       {% include "mdbench/t_data.html" %}
-       </tr>   
-        {% endfor %} 
-    </table>
 
-{% endblock %}
+{% autoescape off %}
+{{ plot_div }}
+{% endautoescape %}
+
+{% endblock content %}

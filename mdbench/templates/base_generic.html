@@ -24,6 +24,9 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'about' %}">About</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'plot' %}">Plot</a>
+          </li>
         </ul>
         <form class="d-flex mx-2 my-auto d-inline w-50" action = "{% url 'filteredbenchmarks' %}" method="get">
           <input class="form-control" name="q" type="text"  placeholder="Search by the program name, e.g. pmemd" aria-label="Search">
