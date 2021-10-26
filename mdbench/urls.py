@@ -6,11 +6,11 @@ from .filters import BenchmarkInstanceFilter
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('plotly/', views.plotly_example, name='plotly'),
     path('about/', views.about, name='about'),
     path('search/', views.filtered_benchmarks_list, name='searcher'),
     path('plot/', views.filtered_benchmarks_plot, name='plot'),
     path('filteredbenchmarks/', views.FilteredBenchmarksListView.as_view(), name='filteredbenchmarks'),
+    path('idbenchmark/', views.IDBenchmarksListView.as_view(), name='idbenchmark'),
     path('benchmarks/', views.BenchmarkListView.as_view(), name='benchmarks'),
     path('benchmark/<int:pk>', views.BenchmarkDetailView.as_view(), name='benchmark-detail'),
     path('softwares/', views.SoftwareListView.as_view(), name='softwares'),

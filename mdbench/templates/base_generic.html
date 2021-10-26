@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="https://cdn.plot.ly/plotly-2.4.2.min.js"></script>
   {% block title %}<title>MD Benchmarks</title>{% endblock %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,9 +30,13 @@
           </li>
         </ul>
         <form class="d-flex mx-2 my-auto d-inline w-50" action = "{% url 'filteredbenchmarks' %}" method="get">
-          <input class="form-control" name="q" type="text"  placeholder="Search by the program name, e.g. pmemd" aria-label="Search">
+          <input class="form-control" name="q" type="text"  placeholder="Module name contains" aria-label="Search">
           <button class="btn btn-outline-primary" type="submit">Submit</button>
         </form>
+        <form class="d-flex mx-2 my-auto d-inline w-50" action = "{% url 'idbenchmark' %}" method="get">
+          <input class="form-control" name="q" type="text"  placeholder="Benchmark ID" aria-label="Search">
+          <button class="btn btn-outline-primary" type="submit">Submit</button>
+        </form>      
       </div>
     </div>
   </nav>
