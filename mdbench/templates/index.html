@@ -19,5 +19,14 @@
 {% block content %}
 <h1>Molecular Dynamics Benchmarks</h1>
 <p>Benchmarking is essential for finding the optimal job simulation and submission parameters. New users might be unaware of the hardware- and software-specific details required to run efficient simulations on Compute Canada HPC clusters.  A poor choice of parameters can increase the simulation speed only by a narrow margin or even degrade it leading to a waste of computing resources. Therefore, it is in the interest of every user to optimize their usage of hardware resources and, at the same time, keep their simulation time to a minimum. </p>
+<div class="p-relative col-10 pd-5 border-box elevation-1 primary">
+  <div class="p-relative border-box w-full">
+      {{figure|safe}}
+  </div>
+</div>
+
+{% autoescape off %}
+{{ figure }}
+{% endautoescape %}
 
 {% endblock %}

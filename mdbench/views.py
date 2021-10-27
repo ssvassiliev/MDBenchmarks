@@ -2,9 +2,12 @@ from django.shortcuts import render
 from django.views import generic
 from django.db.models import Q
 from .filters import BenchmarkInstanceFilter
-import django_filters
+import plotly.express as px 
+import pandas as pd        
+import plotly.graph_objects as go
 
 from .models import Benchmark, Software, BenchmarkInstance, CPU, GPU
+import operator
 
 def index(request):
     """View function for home page of site."""
@@ -15,14 +18,76 @@ def index(request):
     num_datasets = Benchmark.objects.all().count()
     num_cpu_types = CPU.objects.all().count()
     num_gpu_types = GPU.objects.all().count()
+    bench=[]
+
+    for i in Software.objects.all():
+        t=BenchmarkInstance.objects.filter(software__id=i.id).order_by('rate_max').last()
+        if t is not None:
+            bench.append(t)
+    sorted_bench = sorted(bench, key=lambda BenchmarkInstance: BenchmarkInstance.rate_max, reverse=True)
+    x_data=[]
+    y_data=[]
+    e_data=[]
+    lab=[]
+    sub=[]
+    ids=[]
+    h=200
+    for c,i in enumerate(sorted_bench):
+        ids.append(str(i.id))
+        x_data.append(c)
+        y_data.append(i.rate_max)
+        e_data.append(i.cpu_efficiency)
+        lab.append(
+            i.software.name +"("+
+            i.software.module +"/"+
+            i.software.module_version +")-("+
+            str(i.resource.ncpu) +"c-"+
+            str(i.resource.ntasks) +
+            "t-"+str(i.resource.nnodes) +"n-"+
+            str(i.resource.ngpu)+"g)-"+i.site.name)
+        sub.append(i.software.example_submission.replace("\n", "<br>"))
+        h+=30
+    
+    df=pd.DataFrame({"ID":x_data, "Speed":y_data, "Efficiency":e_data, "Labels":lab})
+
+    fig = go.FigureWidget(layout = go.Layout(height = h, width = 900))
+    config = {'responsive': True}
+    fig.add_trace(
+        go.Bar(
+        x = y_data, 
+        y = x_data, 
+        text = lab,
+        hovertext=sub,
+        hovertemplate = "Speed=%{x}<br>Efficiency=%{marker.color}<extra></extra>",
+        orientation = 'h',
+        marker = dict(
+            cmin = 0,
+            cmax = 100,
+            color = e_data,
+            colorscale = 'Sunset', 
+            colorbar = dict(thickness = 20, title="Efficiency")))
+    )
+    fig.update_layout(
+        title="Top speed of all tested software modules",
+        yaxis_title="Database ID",
+        xaxis_title="Speed, ns/day",       
+        yaxis = dict(autorange="reversed",
+        tickmode = 'array', 
+        tickvals = x_data, 
+        ticktext = ids,
+        )
+        )
+
+    plot_div = fig.to_html(full_html=False, include_plotlyjs=False)
 
     context = {
         'num_software': num_software,
         'num_benchmarks': num_benchmarks,
         'num_datasets': num_datasets,   
         'num_cpu_types': num_cpu_types,   
-        'num_gpu_types': num_gpu_types,   
-
+        'num_gpu_types': num_gpu_types,  
+        'bench': sorted_bench, 
+        'figure': plot_div,
     }
 
     # Render the HTML template index.html with the data in the context variable
@@ -50,6 +115,7 @@ class DatasetListView(generic.ListView):
 class DatasetDetailView(generic.DetailView):
     model = Benchmark
 
+
 class IDBenchmarksListView(generic.ListView):
     template_name = 'mdbench/filteredbenchmarks.html'
     def get_queryset(self): 
@@ -72,13 +138,17 @@ def filtered_benchmarks_list(request):
 	filter = BenchmarkInstanceFilter(request.GET, queryset = benchmarks)
 	return render(request, 'mdbench/benchmarkinstance_filter.html', {'filter' : filter})
 
-import plotly.express as px 
-import pandas as pd        
-import plotly.graph_objects as go
+def Top10List(request):
+    soft_list = BenchmarkInstance.objects.filter(software__id=1).order_by('-rate_max')
+    context = {
+        'soft_list': soft_list,
+    }
+    return render(request, 'top10.html', context=context)
 
+#    return render(request, 'mdbench/benchmarkinstance_filter.html', {'filter' : top10})
 
 def filtered_benchmarks_plot(request):
-    benchmarks = BenchmarkInstance.objects.filter().order_by('-rate_max')
+    benchmarks = BenchmarkInstance.objects.all().order_by('-rate_max')
     filter = BenchmarkInstanceFilter(request.GET, queryset = benchmarks)
     x_data=[]
     y_data=[]
@@ -125,7 +195,7 @@ def filtered_benchmarks_plot(request):
                   )
     )
 
-
+# With plotly-express:
 #    fig = px.bar(
 #        df, 
 #        y = "ID", 

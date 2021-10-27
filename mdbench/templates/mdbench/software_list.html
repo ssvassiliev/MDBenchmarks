@@ -6,6 +6,7 @@
   <table class="table table-sm table-hover">
     <caption>List of tested software.</caption>
     <thead class="thead-dark">
+      <th>ID</th>     
       <th>Name</th> 
       <th>Module</th> 
       <th>Toolchain</th> 
@@ -13,6 +14,7 @@
   </thead> 
   {% for software in software_list %}
     <tr>
+      <td> {{ software.id }}</td>
        <td> <a href="{{ software.get_absolute_url }}">{{ software.name }}</a></td>
        <td> {{ software.module }}/{{ software.module_version }}</td> 
        <td> {{ software.toolchain }}-{{ software.toolchain_version }}</td> 
