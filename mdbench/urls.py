@@ -7,7 +7,7 @@ from .filters import BenchmarkInstanceFilter
 urlpatterns = [
     path('', views.index, name='index'),
     path('about/', views.about, name='about'),
-    path('search/', views.filtered_benchmarks_list, name='searcher'),
+    path('search/', views.filtered_benchmarks_plot, name='searcher'),
     path('plot/', views.filtered_benchmarks_plot, name='plot'),
     path('filteredbenchmarks/', views.FilteredBenchmarksListView.as_view(), name='filteredbenchmarks'),
     path('idbenchmark/', views.IDBenchmarksListView.as_view(), name='idbenchmark'),

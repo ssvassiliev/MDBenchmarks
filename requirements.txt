@@ -3,4 +3,5 @@ django-filter
 django-pygments     
 django-sslserver     
 django-widget-tweaks
+django-crispy-forms
 

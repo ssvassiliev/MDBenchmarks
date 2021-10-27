@@ -21,7 +21,7 @@ def index(request):
     bench=[]
 
     for i in Software.objects.all():
-        t=BenchmarkInstance.objects.filter(software__id=i.id).order_by('rate_max').last()
+        t=BenchmarkInstance.objects.filter(software__id=i.id).filter(benchmark__name="6n4o").order_by('rate_max').last()
         if t is not None:
             bench.append(t)
     sorted_bench = sorted(bench, key=lambda BenchmarkInstance: BenchmarkInstance.rate_max, reverse=True)
@@ -68,7 +68,8 @@ def index(request):
             colorbar = dict(thickness = 20, title="Efficiency")))
     )
     fig.update_layout(
-        title="Top speed of all tested software modules",
+        title='<span style="font-size: 24px;">Top speed of all tested software modules</span> <br> measured with 6n4o dataset',
+        title_x=0.5,
         yaxis_title="Database ID",
         xaxis_title="Speed, ns/day",       
         yaxis = dict(autorange="reversed",
@@ -86,7 +87,6 @@ def index(request):
         'num_datasets': num_datasets,   
         'num_cpu_types': num_cpu_types,   
         'num_gpu_types': num_gpu_types,  
-        'bench': sorted_bench, 
         'figure': plot_div,
     }
 
@@ -136,16 +136,7 @@ class FilteredBenchmarksListView(generic.ListView):
 def filtered_benchmarks_list(request):
 	benchmarks = BenchmarkInstance.objects.all().order_by('-rate_max')
 	filter = BenchmarkInstanceFilter(request.GET, queryset = benchmarks)
-	return render(request, 'mdbench/benchmarkinstance_filter.html', {'filter' : filter})
-
-def Top10List(request):
-    soft_list = BenchmarkInstance.objects.filter(software__id=1).order_by('-rate_max')
-    context = {
-        'soft_list': soft_list,
-    }
-    return render(request, 'top10.html', context=context)
-
-#    return render(request, 'mdbench/benchmarkinstance_filter.html', {'filter' : top10})
+	return render(request, 'mdbench/benchmarkinstance_filter.html', {'filter' : filter})\
 
 def filtered_benchmarks_plot(request):
     benchmarks = BenchmarkInstance.objects.all().order_by('-rate_max')
@@ -154,7 +145,6 @@ def filtered_benchmarks_plot(request):
     y_data=[]
     e_data=[]
     lab=[]
-    sub=[]
     ids=[]
     h=200
     for c,i in enumerate(filter.qs):
@@ -172,10 +162,9 @@ def filtered_benchmarks_plot(request):
             str(i.resource.ntasks) +
             "t-"+str(i.resource.nnodes) +"n-"+
             str(i.resource.ngpu)+"g)-"+i.site.name)
-        sub.append(i.software.example_submission.replace("\n", "<br>"))
         h+=30
     
-    df=pd.DataFrame({"ID":x_data, "Speed":y_data, "Efficiency":e_data, "Labels":lab})
+    layout = go.Layout(title='line1' + '<br>' +  '<span style="font-size: 12px;">line2</span>')
 
     fig = go.FigureWidget(layout = go.Layout(height = h, width = 900))
     fig.add_trace(
@@ -183,7 +172,6 @@ def filtered_benchmarks_plot(request):
         x = y_data, 
         y = x_data, 
         text = lab,
-        hovertext=sub,
         hovertemplate = "Speed=%{x}<br>Efficiency=%{marker.color}<extra></extra>",
         orientation = 'h',
         marker = dict(
@@ -191,11 +179,12 @@ def filtered_benchmarks_plot(request):
             cmax = 100,
             color = e_data,
             colorscale = 'Sunset', 
-            colorbar = dict(thickness = 12))
+            colorbar = dict(thickness = 20, title="Efficiency"))
                   )
     )
 
 # With plotly-express:
+# df=pd.DataFrame({"ID":x_data, "Speed":y_data, "Efficiency":e_data, "Labels":lab})
 #    fig = px.bar(
 #        df, 
 #        y = "ID", 
@@ -209,12 +198,15 @@ def filtered_benchmarks_plot(request):
 #        width = 900)
 
     fig.update_layout(
+        title='<span style="font-size: 24px;">Top 20 search results</span>',
+        title_x=0.5,
         yaxis_title="Database ID",
         xaxis_title="Speed, ns/day",       
         yaxis = dict(autorange="reversed",
         tickmode = 'array', 
         tickvals = x_data, 
-        ticktext = ids,)
+        ticktext = ids,
+                    )
         )
 
     plot_div = fig.to_html(full_html=False)
