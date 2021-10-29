@@ -1,20 +1,4 @@
 {% extends "base_generic.html" %}
-{% block sidebar %}
-<ul class="sidebar-nav">
-  <li><a href="{% url 'index' %}">Home</a></li>
-  <li><a href="{% url 'benchmarks' %}">Benchmarks</a></li>
-  <li><a href="{% url 'softwares' %}">Software</a></li>
-  <li><a href="{% url 'datasets' %}">Datasets</a></li>
-  <li><a href="{% url 'searcher' %}">Advanced Search</a></li>
-</ul>
-<ul class="sidebar-nav">
-  <li><strong>Benchmarks:</strong> {{ num_benchmarks }}</li>
-  <li><strong>Software:</strong> {{ num_software }}</li>
-  <li><strong>Datasets:</strong> {{ num_datasets }}</li>
-  <li><strong>CPU models:</strong> {{ num_cpu_types }}</li> 
-  <li><strong>GPU models:</strong> {{ num_gpu_types }}</li> 
-</ul>
-{% endblock %}
 
 {% block content %}
 <h1>Molecular Dynamics Benchmarks</h1>
@@ -28,5 +12,21 @@
 {% autoescape off %}
 {{ figure }}
 {% endautoescape %}
+
+{% autoescape off %}
+{{ plot_div }}
+{% endautoescape %}
+
+  <h2>Search results</h2>
+    <table class="table table-sm table-hover">
+        <caption>List of benchmarks. Click on a link in the ID column for benchmark details.</caption>
+        {% include "mdbench/t_head.html" %}
+        {% for benchmark in queryset %}
+        <tr>
+       {% include "mdbench/t_data.html" %}
+       </tr>   
+        {% endfor %} 
+    </table>
+
 
 {% endblock %}

@@ -3,58 +3,63 @@
 <head>
   <script src="https://cdn.plot.ly/plotly-2.4.2.min.js"></script>
   {% block title %}<title>MD Benchmarks</title>{% endblock %}
+  {% load widget_tweaks %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
   <!-- Add additional CSS in static file -->
   {% load static %}
   <link rel="stylesheet" href="{% static 'mdbench/css/styles.css' %}">                                                                                                            
   <link rel="stylesheet" type="text/css" href="{% static 'mdbench/css/vs.css' %}">
 </head>
-<body>
 
-  <nav class="navbar navbar-expand-sm navbar-light" style="background-color: #eeeeee;">
-    <div class="container-fluid">
-      <a class="navbar-brand h1 mb-0">MDBench</a>
+<body>
+<nav class="navbar navbar-expand-sm navbar-light" style="background-color: #eeeeee;">
+  <div class="container-fluid">
+    <a class="navbar-brand h1 mb-0">MDBench</a>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'about' %}">About</a>
+            <a class="nav-link active" aria-current="about" href="{% url 'about' %}">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'plot' %}">Search</a>
+            <a class="nav-link active text-nowrap" aria-current="search" href="{% url 'bootstrapfilter' %}">Advanced Search</a>
           </li>
         </ul>
-        <form class="d-flex mx-2 my-auto d-inline w-50" action = "{% url 'filteredbenchmarks' %}" method="get">
-          <input class="form-control" name="q" type="text"  placeholder="Module name contains" aria-label="Search">
-          <button class="btn btn-outline-primary" type="submit">Submit</button>
-        </form>
-        <form class="d-flex mx-2 my-auto d-inline w-50" action = "{% url 'idbenchmark' %}" method="get">
-          <input class="form-control" name="q" type="text"  placeholder="Benchmark ID" aria-label="Search">
-          <button class="btn btn-outline-primary" type="submit">Submit</button>
-        </form>      
-      </div>
-    </div>
-  </nav>
-
-    <div class="row mx-2">
-      <div class="col-sm-2">
-      {% block sidebar %}
-        <ul class="sidebar-nav">
-          <li><a href="{% url 'index' %}">Home</a></li>
-          <li><a href="{% url 'benchmarks' %}">Benchmarks</a></li>
-          <li><a href="{% url 'softwares' %}">Software</a></li>
-          <li><a href="{% url 'datasets' %}">Datasets</a></li>
-          <li><a href="{% url 'searcher' %}">Advanced Search</a></li>
-        </ul>
-      {% endblock %}
-       </div>
-      <div class="col-sm-10">{% block content %}{% endblock %}</div>
+      <form class="d-flex mx-2 my-auto d-inline w-40" action = "{% url 'filteredbenchmarks' %}" method="get">
+        <input class="form-control form-control-sm" name="q" type="text"  placeholder="Module name contains .." aria-label="Search">
+          <span class="input-group-addon">
+            <button class="btn btn-outline-white border-left-0 border bg-transparent" type="submit"><i class="fa fa-search"></i></button>
+          </span>   
+      </form>
+      <form class="d-flex mx-2 my-auto d-inline w-40" action = "{% url 'idbenchmark' %}" method="get">
+        <input class="form-control form-control-sm" name="q" type="text"  placeholder="Benchmark ID .." aria-label="Search">
+          <span class="input-group-addon">
+            <button class="btn btn-outline-white border-left-0 border bg-transparent" type="submit"><i class="fa fa-search"></i></button>
+          </span>   
+      </form>
     </div>
   </div>
+</nav>
+
+<div class="row mx-2">
+  <div class="col-sm-2">
+    {% block sidebar %}
+      <ul class="sidebar-nav">
+        <li class="text-primary"><a href="{% url 'index' %}">Home</a></li>
+        <li><a href="{% url 'benchmarks' %}">Benchmarks</a></li>
+        <li><a href="{% url 'softwares' %}">Software</a></li>
+        <li><a href="{% url 'datasets' %}">Datasets</a></li>
+      </ul>
+      {% endblock %}
+    </div>
+      <div class="col-sm-10">{% block content %}{% endblock %}</div>
+  </div>
+</div>
 </body>
 </html>

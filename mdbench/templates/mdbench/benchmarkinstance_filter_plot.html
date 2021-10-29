@@ -4,7 +4,8 @@
 {% block content %}
 <p></p>
 <h2>Advanced Search</h2>
-    <form action="" method="get">
+
+<form action="" method="get">
    
     {% for field in filter.form.visible_fields %}
     <div class="form-group">
@@ -14,7 +15,7 @@
           <small class="form-text text-muted">{{ field.help_text }}</small>
         {% endif %}
       </div>
-  {% endfor %}
+    {% endfor %}
   <div class="row"><div class="col-sm-12">
   <button type="submit" class="btn btn-outline-primary float-end">Submit</button>
 </div></div>

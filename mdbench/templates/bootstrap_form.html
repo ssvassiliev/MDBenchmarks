@@ -1,0 +1,83 @@
+{% extends "base_generic.html" %}
+
+{%block sidebar%}
+
+<ul class="sidebar-nav">
+    <li class="text-primary"><a href="{% url 'index' %}">Home</a></li>
+    <li><a href="{% url 'benchmarks' %}">Benchmarks</a></li>
+    <li><a href="{% url 'softwares' %}">Software</a></li>
+    <li><a href="{% url 'datasets' %}">Datasets</a></li>
+</ul>
+
+<form method='GET' action = '.'>
+<div>
+<h5>Search</h5>
+<div class="form-row">
+  <div class="form-group">
+      <div class="input-group">
+        <div class="input">
+            <input class="mb-1 form-control form-control-sm border-secondary rounded" type="search" name = "software_contains" placeholder="Software contains .."/>
+        </div>            
+      </div>
+    </div>
+ </div>
+<div class="form-row">
+  <div class="form-group">
+      <div class="input-group">
+        <div class="input">
+            <input class="mb-1 form-control form-control-sm border-secondary rounded" type="search" name = "site_contains" placeholder="Site contains .."/>
+        </div>            
+      </div>
+    </div>
+ </div>
+<div class="form-row">
+  <div class="form-group">
+      <div class="input-group">
+        <div class="input">
+            <input class="mb-1 form-control form-control-sm border-secondary rounded" type="search" name = "arch" placeholder="Arch exact .."/>
+        </div>            
+      </div>
+    </div>
+ </div>
+
+<div class="form-row">
+  <div class="form-group">
+      <div class="input-group">
+        <div class="input">
+            <input class="mb-1 form-control form-control-sm border-secondary rounded" type="search" name = "dataset" placeholder="Dataset exact .."/>
+        </div>            
+      </div>
+    </div>
+ </div>
+
+ <div class="form-row">
+        <span class="input-group-append">
+            <button class="float-end btn btn-outline-secondary btn-sm " type="submit">Submit<i class="fa fa-search p-1"></i>
+            </button>
+        </span>
+</div>    
+     </div>  
+ </form>
+
+{%endblock%}
+{% block content %}
+
+{% autoescape off %}
+{{ plot_div }}
+{% endautoescape %}
+
+  <h2>Search results</h2>
+    <table class="table table-sm table-hover">
+        <caption>List of benchmarks. Click on a link in the ID column for benchmark details.</caption>
+        {% include "mdbench/t_head.html" %}
+        {% for benchmark in queryset %}
+        <tr>
+       {% include "mdbench/t_data.html" %}
+       </tr>   
+        {% endfor %} 
+    </table>
+
+
+
+{% endblock %}
+

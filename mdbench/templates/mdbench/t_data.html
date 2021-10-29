@@ -4,11 +4,11 @@
 <td> {{ benchmark.software.toolchain }}</td>
 <td> {{ benchmark.software.instruction_set }}</td>
 <td> {{ benchmark.benchmark.name }}</td>
-<td style="font-weight: bold;"> {{ benchmark.rate_max }}</td> 
-<td style="font-weight: bold;"> {{ benchmark.cpu_efficiency }}%</a> </td>
+<td style="font-weight: bold;"> {{ benchmark.rate_max |stringformat:".2f"}}</td> 
+<td style="font-weight: bold;"> {{ benchmark.cpu_efficiency }}</a> </td>
 <td> {{ benchmark.resource.ntasks }}</td>
 <td> {{ benchmark.resource.ncpu }}</td>
 <td> {{ benchmark.resource.nnodes }}</td> 
 <td> {{ benchmark.resource.ngpu }}</td>
-<td> {{ benchmark.resource.nvlink }}</td>
+<td> {{ benchmark.resource.nvlink | yesno:"Yes,No"}}</td>
 <td> {{ benchmark.site }}</td>
