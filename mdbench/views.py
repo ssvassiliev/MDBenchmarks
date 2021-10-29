@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.views import generic
 from django.db.models import Q
 from .filters import BenchmarkInstanceFilter
-from .forms import BenchmarkInstanceSearchForm
 import plotly.express as px 
 import pandas as pd        
 import plotly.graph_objects as go
