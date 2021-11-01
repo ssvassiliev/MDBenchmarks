@@ -85,7 +85,7 @@ def BootstrapFilterView(request):
     if dataset_exact_query != '' and dataset_exact_query is not None:
         qs = qs.filter(benchmark__name__exact=dataset_exact_query)
 
-    caption='<span style="font-size: 24px;">Search results</span><br>ordered by simulation speed, limit 20'
+    caption='<span style="font-size: 24px;">Search results</span><br>ordered by simulation speed, limited to top 20'
     plot_div=QuerySetBarPlot(qs, caption, 20)
 
     context = {

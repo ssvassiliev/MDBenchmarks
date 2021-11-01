@@ -1,10 +1,8 @@
 {% extends "base_generic.html" %}
 {%block sidebar%}
-<div class="card" style="background-color: #FAFAFA">
-    <div class="card-body">
-    <h5><class="card-title">DB Tables</h5>
-        <nav class="navbar navbar-expand navbar-light">
+        <nav class="navbar navbar-expand navbar-dark">
             <ul class="navbar-nav flex-column">
+                <li class="navbar-text text-white"><span><h5>DB Tables</h5></span></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'benchmarks' %}">Benchmarks</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'softwares' %}">Software</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'datasets' %}">Datasets</a></li>
@@ -12,20 +10,15 @@
                 <li class="nav-item"><a class="nav-link" href="{% url 'gpus' %}">GPU models</a></li>
             </ul>
         </nav>
-    </div>
-</div>
 
-
-<div class="card text-white bg-secondary">
-  <div class="card-body border-none">
-   <h5><class="card-title">Search Form</h5>
 <form method='GET' action = '.'>
+<h5 class="text-white pt-3 pb-2">Search Form</h5>
 <div>
     <div class="form-row">
          <div class="form-group">
              <div class="input-group">
                 <div class="input" >
-                    <input class="mb-1 form-control form-control-sm" type="search" name = "software_contains" placeholder="Software .."/>
+                    <input class="mb-1 form-control form-control-sm" type="search" name = "software_contains" placeholder="Software_contains .."/>
                 </div>            
             </div>
         </div>
@@ -35,7 +28,7 @@
         <div class="form-group">
             <div class="input-group">
                 <div class="input" >
-                    <input class="mb-1 form-control form-control-sm" type="search" name = "module_contains" placeholder="Module .."/>
+                    <input class="mb-1 form-control form-control-sm" type="search" name = "module_contains" placeholder="Module_contains .."/>
                 </div>            
             </div>
         </div>
@@ -45,7 +38,7 @@
         <div class="form-group">
             <div class="input-group">
                 <div class="input" >
-                    <input class="mb-1 form-control form-control-sm" type="search" name = "module_version" placeholder="Version .."/>
+                    <input class="mb-1 form-control form-control-sm" type="search" name = "module_version" placeholder="Version_exact .."/>
                 </div>            
             </div>
         </div>
@@ -55,7 +48,7 @@
         <div class="form-group">
             <div class="input-group">
                 <div class="input">
-                <input class="mb-1 form-control form-control-sm" type="search" name = "site_contains" placeholder="Site .."/>
+                <input class="mb-1 form-control form-control-sm" type="search" name = "site_contains" placeholder="Site_exact .."/>
                 </div>            
             </div>
         </div>
@@ -65,7 +58,7 @@
          <div class="form-group">
              <div class="input-group">
                 <div class="input">
-                <input class="mb-1 form-control form-control-sm" type="search" name = "arch" placeholder="Arch .."/>
+                <input class="mb-1 form-control form-control-sm" type="search" name = "arch" placeholder="Arch_exact .."/>
                 </div>            
             </div>
         </div>
@@ -75,7 +68,7 @@
          <div class="form-group">
              <div class="input-group">
                 <div class="input">
-                <input class="mb-1 form-control form-control-sm" type="search" name = "dataset" placeholder="Dataset .."/>
+                <input class="mb-1 form-control form-control-sm" type="search" name = "dataset" placeholder="Dataset_exact .."/>
                 </div>            
             </div>
         </div>
@@ -90,8 +83,6 @@
 </div>  
 </form>
 
-  </div>
-</div>
 
 {%endblock%}
 {% block content %}

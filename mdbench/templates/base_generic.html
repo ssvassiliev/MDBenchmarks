@@ -45,11 +45,9 @@
   <div class="col-sm-2 bg-secondary">
     {% block sidebar %}
 
-<div class="card" style="background-color: #FAFAFA">
-    <div class="card-body">
-    <h5><class="card-title">DB Tables</h5>
-        <nav class="navbar navbar-expand navbar-light">
+        <nav class="navbar navbar-expand navbar-dark">
             <ul class="navbar-nav flex-column">
+                <li class="navbar-text text-white"><span><h5>DB Tables</h5></span></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'benchmarks' %}">Benchmarks</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'softwares' %}">Software</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'datasets' %}">Datasets</a></li>
@@ -57,8 +55,7 @@
                 <li class="nav-item"><a class="nav-link" href="{% url 'gpus' %}">GPU models</a></li>
             </ul>
         </nav>
-    </div>
-</div>    
+
       {% endblock %}
     </div>
       <div class="col-sm-10 ">{% block content %}{% endblock %}</div>
