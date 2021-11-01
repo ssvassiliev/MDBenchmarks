@@ -1,15 +1,15 @@
 {% extends "base_generic.html" %}
 {% block content %}
-  <h1>List of all benchmarks</h1>
+  <h2>Benchmarks</h2>
   {% if benchmarkinstance_list %} 
   <table class="table table-sm table-hover">
-    <caption>List of benchmarks. Click on a link in the ID column for benchmark details.</caption>
     {% include "mdbench/t_head.html" %}
     {% for benchmark in benchmarkinstance_list %}
     <tr>
    {% include "mdbench/t_data.html" %}
    </tr>   
     {% endfor %} 
+  </tbody>
   </table>
   {% else %}
         <p>There are no benchmarks in the database.</p>

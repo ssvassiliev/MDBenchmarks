@@ -1,0 +1,26 @@
+{% extends "base_generic.html" %}
+{% block content %}
+{% if cpu_list %}
+  <h2>CPU models</h2>
+  <table class="table table-sm table-hover">
+    <thead class="table-secondary">
+      <th>ID</th>     
+      <th>Name</th> 
+      <th>Model</th> 
+      <th>Codename</th> 
+      <th>Frequency</th> 
+  </thead> 
+  {% for cpu in cpu_list %}
+    <tr>
+       <td> {{ cpu.id }}</td>
+       <td> {{ cpu.name}}</td> 
+       <td> {{ cpu.model}}</td>       
+       <td> {{ cpu.codename }}</td> 
+       <td> {{ cpu.frequency }}</td> 
+  {% endfor %} 
+  </tr>
+  </table>
+{% else %}
+  <p>There are no CPUs in the database.</p>
+  {% endif %}
+{% endblock %}

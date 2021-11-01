@@ -1,5 +1,5 @@
-<td> <a href="{{ benchmark.get_absolute_url }}"> {{benchmark.id}}</a> </td>
-<td> <a href="{{ benchmark.software.get_absolute_url }}">{{ benchmark.software.name }}</a> </td>
+<td> <a class="link-secondary" href="{{ benchmark.get_absolute_url }}"> {{benchmark.id}}</a> </td>
+<td> <a class="link-secondary" href="{{ benchmark.software.get_absolute_url }}">{{ benchmark.software.name }}</a> </td>
 <td class="text-nowrap"> {{ benchmark.software.module }}/{{ benchmark.software.module_version }}</td>
 <td> {{ benchmark.software.toolchain }}</td>
 <td> {{ benchmark.software.instruction_set }}</td>

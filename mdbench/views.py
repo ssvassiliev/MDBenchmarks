@@ -7,32 +7,13 @@ import pandas as pd
 import plotly.graph_objects as go
 
 from .models import Benchmark, Software, BenchmarkInstance, CPU, GPU
-import operator
 
-def BootstrapFilterView(request):
-    qs = BenchmarkInstance.objects.all().order_by("-rate_max")
-    software_contains_query = request.GET.get('software_contains')
-    site_contains_query = request.GET.get('site_contains')
-    arch_exact_query = request.GET.get('arch')
-    dataset_exact_query = request.GET.get('dataset')   
-    if software_contains_query != '' and software_contains_query is not None:
-        qs = qs.filter(software__name__icontains=software_contains_query)
-    if site_contains_query != '' and site_contains_query is not None:
-        qs = qs.filter(site__name__icontains=site_contains_query)
-    if arch_exact_query != '' and arch_exact_query is not None:
-        qs = qs.filter(software__instruction_set__exact=arch_exact_query)
-    if dataset_exact_query != '' and dataset_exact_query is not None:
-        qs = qs.filter(benchmark__name__exact=dataset_exact_query)
-
-
-    x_data=[]
-    y_data=[]
-    e_data=[]
-    lab=[]
-    ids=[]
-    h=200
+def QuerySetBarPlot(qs, fig_title, n=1000):
+    figTitle=dict(text=fig_title,)
+    x_data, y_data, e_data, lab, ids = ([] for _ in range(5))
+    h=220
     for c,i in enumerate(qs):
-        if c >=20:
+        if c >=n:
             break
         ids.append(str(i.id))
         x_data.append(c)
@@ -46,10 +27,8 @@ def BootstrapFilterView(request):
             str(i.resource.ntasks) +
             "t-"+str(i.resource.nnodes) +"n-"+
             str(i.resource.ngpu)+"g)-"+i.site.name)
-        h+=30
+        h+=25
     
-    layout = go.Layout(title='line1' + '<br>' +  '<span style="font-size: 12px;">line2</span>')
-
     fig = go.FigureWidget(layout = go.Layout(height = h, width = 900))
     fig.add_trace(
         go.Bar(
@@ -67,22 +46,10 @@ def BootstrapFilterView(request):
                   )
     )
 
-# With plotly-express:
-# df=pd.DataFrame({"ID":x_data, "Speed":y_data, "Efficiency":e_data, "Labels":lab})
-#    fig = px.bar(
-#        df, 
-#        y = "ID", 
-#        x = "Speed", 
-#        range_color = (0,100), 
-#        text = "Labels", 
-#        orientation = 'h',
-#        color_continuous_scale = px.colors.sequential.Sunset, 
-#        color = "Efficiency", 
-#        height = h, 
-#        width = 900)
-
     fig.update_layout(
-        title='<span style="font-size: 24px;">Top 20 search results</span><br>sorted by simulation speed',
+        paper_bgcolor='#eeeeee',
+        template="ggplot2",
+        title=figTitle,
         title_x=0.5,
         yaxis_title="Benchmark ID",
         xaxis_title="Speed, ns/day",       
@@ -92,8 +59,34 @@ def BootstrapFilterView(request):
         ticktext = ids,
                     )
         )
-
+    
     plot_div = fig.to_html(full_html=False)
+    return(plot_div)
+
+
+def BootstrapFilterView(request):
+    qs = BenchmarkInstance.objects.all().order_by("-rate_max")
+    software_contains_query = request.GET.get('software_contains')
+    module_contains_query = request.GET.get('module_contains')
+    module_version_query = request.GET.get('module_version')
+    site_contains_query = request.GET.get('site_contains')
+    arch_exact_query = request.GET.get('arch')
+    dataset_exact_query = request.GET.get('dataset')   
+    if software_contains_query != '' and software_contains_query is not None:
+        qs = qs.filter(software__name__icontains=software_contains_query)
+    if module_contains_query != '' and module_contains_query is not None:
+        qs = qs.filter(software__module__icontains=module_contains_query)
+    if module_version_query != '' and module_version_query is not None:
+        qs = qs.filter(software__module_version__exact=module_version_query)
+    if site_contains_query != '' and site_contains_query is not None:
+        qs = qs.filter(site__name__icontains=site_contains_query)
+    if arch_exact_query != '' and arch_exact_query is not None:
+        qs = qs.filter(software__instruction_set__exact=arch_exact_query)
+    if dataset_exact_query != '' and dataset_exact_query is not None:
+        qs = qs.filter(benchmark__name__exact=dataset_exact_query)
+
+    caption='<span style="font-size: 24px;">Search results</span><br>ordered by simulation speed, limit 20'
+    plot_div=QuerySetBarPlot(qs, caption, 20)
 
     context = {
         'queryset' : qs,
@@ -103,7 +96,6 @@ def BootstrapFilterView(request):
 
 def index(request):
     """View function for home page of site."""
-
     # Generate counts of some of the main objects
     num_software = Software.objects.all().count()
     num_benchmarks = BenchmarkInstance.objects.all().count()
@@ -117,12 +109,7 @@ def index(request):
         if t is not None:
             bench.append(t)
     sorted_bench = sorted(bench, key=lambda BenchmarkInstance: BenchmarkInstance.rate_max, reverse=True)
-    x_data=[]
-    y_data=[]
-    e_data=[]
-    lab=[]
-    sub=[]
-    ids=[]
+    x_data=[]; y_data=[]; e_data=[]; lab=[]; sub=[]; ids=[]
     h=200
     for c,i in enumerate(sorted_bench):
         ids.append(str(i.id))
@@ -160,6 +147,8 @@ def index(request):
             colorbar = dict(thickness = 20, title="Efficiency")))
     )
     fig.update_layout(
+        template="ggplot2",
+        paper_bgcolor='#eeeeee',
         title='<span style="font-size: 24px;">Top speed of all tested software modules</span> <br> measured with 6n4o dataset',
         title_x=0.5,
         yaxis_title="Benchmark ID",
@@ -175,6 +164,7 @@ def index(request):
 
     benchmarks = BenchmarkInstance.objects.all().order_by('-rate_max')
     filter = BenchmarkInstanceFilter(request.GET, queryset = benchmarks)
+
     context = {
         'num_software': num_software,
         'num_benchmarks': num_benchmarks,
@@ -193,7 +183,15 @@ def about(request):
     num_datasets = Benchmark.objects.all().count()
     num_cpu_types = CPU.objects.all().count()
     num_gpu_types = GPU.objects.all().count()
-    return render(request, 'mdbench/about.html', )
+
+    context = {
+        'num_software': num_software,
+        'num_benchmarks': num_benchmarks,
+        'num_datasets': num_datasets,   
+        'num_cpu_types': num_cpu_types,   
+        'num_gpu_types': num_gpu_types,  
+    }
+    return render(request, 'mdbench/about.html', context)
 
 class BenchmarkListView(generic.ListView):
     queryset = BenchmarkInstance.objects.order_by('-rate_max')    
@@ -211,9 +209,16 @@ class SoftwareDetailView(generic.DetailView):
 class DatasetListView(generic.ListView):
     model = Benchmark
 
+class CPUListView(generic.ListView):
+    model = CPU
+    queryset = CPU.objects.order_by('name')   
+
+class GPUListView(generic.ListView):
+    model = GPU
+    queryset = GPU.objects.order_by('name')   
+
 class DatasetDetailView(generic.DetailView):
     model = Benchmark
-
 
 class IDBenchmarksListView(generic.ListView):
     template_name = 'mdbench/filteredbenchmarks.html'
@@ -241,11 +246,7 @@ def filtered_benchmarks_list(request):
 def filtered_benchmarks_plot(request):
     benchmarks = BenchmarkInstance.objects.all().order_by('-rate_max')
     filter = BenchmarkInstanceFilter(request.GET, queryset = benchmarks)
-    x_data=[]
-    y_data=[]
-    e_data=[]
-    lab=[]
-    ids=[]
+    x_data, y_data, e_data, lab, ids = ([] for _ in range(5))
     h=200
     for c,i in enumerate(filter.qs):
         if c >=20:
@@ -262,7 +263,7 @@ def filtered_benchmarks_plot(request):
             str(i.resource.ntasks) +
             "t-"+str(i.resource.nnodes) +"n-"+
             str(i.resource.ngpu)+"g)-"+i.site.name)
-        h+=30
+        h+=25
     
     layout = go.Layout(title='line1' + '<br>' +  '<span style="font-size: 12px;">line2</span>')
 
@@ -298,6 +299,7 @@ def filtered_benchmarks_plot(request):
 #        width = 900)
 
     fig.update_layout(
+        template="plotly_white",
         title='<span style="font-size: 24px;">Top 20 search results</span><br>sorted by simulation speed',
         title_x=0.5,
         yaxis_title="Benchmark ID",

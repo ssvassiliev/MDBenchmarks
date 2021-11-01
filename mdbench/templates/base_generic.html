@@ -16,31 +16,25 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-sm navbar-light" style="background-color: #eeeeee;">
+<nav class="navbar navbar-expand-sm navbar-dark my-2" style="background-color:#4527A0">
   <div class="container-fluid">
     <a class="navbar-brand h1 mb-0">MDBench</a>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
+            <a class="nav-link text-nowrap" aria-current="search" href="{% url 'bootstrapfilter' %}">Search</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="about" href="{% url 'about' %}">About</a>
+            <a class="nav-link" aria-current="page" href="{% url 'index' %}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active text-nowrap" aria-current="search" href="{% url 'bootstrapfilter' %}">Advanced Search</a>
+            <a class="nav-link" aria-current="about" href="{% url 'about' %}">About</a>
           </li>
         </ul>
-      <form class="d-flex mx-2 my-auto d-inline w-40" action = "{% url 'filteredbenchmarks' %}" method="get">
-        <input class="form-control form-control-sm" name="q" type="text"  placeholder="Module name contains .." aria-label="Search">
-          <span class="input-group-addon">
-            <button class="btn btn-outline-white border-left-0 border bg-transparent" type="submit"><i class="fa fa-search"></i></button>
-          </span>   
-      </form>
       <form class="d-flex mx-2 my-auto d-inline w-40" action = "{% url 'idbenchmark' %}" method="get">
         <input class="form-control form-control-sm" name="q" type="text"  placeholder="Benchmark ID .." aria-label="Search">
           <span class="input-group-addon">
-            <button class="btn btn-outline-white border-left-0 border bg-transparent" type="submit"><i class="fa fa-search"></i></button>
+            <button class="btn btn-outline-light border-left-0 border" type="submit"><i class="fa fa-search"></i></button>
           </span>   
       </form>
     </div>
@@ -48,17 +42,26 @@
 </nav>
 
 <div class="row mx-2">
-  <div class="col-sm-2">
+  <div class="col-sm-2 bg-secondary">
     {% block sidebar %}
-      <ul class="sidebar-nav">
-        <li class="text-primary"><a href="{% url 'index' %}">Home</a></li>
-        <li><a href="{% url 'benchmarks' %}">Benchmarks</a></li>
-        <li><a href="{% url 'softwares' %}">Software</a></li>
-        <li><a href="{% url 'datasets' %}">Datasets</a></li>
-      </ul>
+
+<div class="card" style="background-color: #FAFAFA">
+    <div class="card-body">
+    <h5><class="card-title">DB Tables</h5>
+        <nav class="navbar navbar-expand navbar-light">
+            <ul class="navbar-nav flex-column">
+                <li class="nav-item"><a class="nav-link" href="{% url 'benchmarks' %}">Benchmarks</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'softwares' %}">Software</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'datasets' %}">Datasets</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'cpus' %}">CPU models</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'gpus' %}">GPU models</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>    
       {% endblock %}
     </div>
-      <div class="col-sm-10">{% block content %}{% endblock %}</div>
+      <div class="col-sm-10 ">{% block content %}{% endblock %}</div>
   </div>
 </div>
 </body>
