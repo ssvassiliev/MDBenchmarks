@@ -1,8 +1,8 @@
 {% extends "base_generic.html" %}
 {%block sidebar%}
-        <nav class="navbar navbar-expand navbar-dark">
+        <nav class="navbar navbar-expand navbar-dark" style="background-color:#000000">
             <ul class="navbar-nav flex-column">
-                <li class="navbar-text text-white"><span><h5>DB Tables</h5></span></li>
+                <li class="navbar-text text-white"><span><h5 style="color:#85b737">DB Tables</h5></span></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'benchmarks' %}">Benchmarks</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'softwares' %}">Software</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'datasets' %}">Datasets</a></li>
@@ -12,7 +12,7 @@
         </nav>
 
 <form method='GET' action = '.'>
-<h5 class="text-white pt-3 pb-2">Search Form</h5>
+<h5 class="pt-3 pb-2" style="color:#85b737">Filter</h5>
 <div>
     <div class="form-row">
          <div class="form-group">

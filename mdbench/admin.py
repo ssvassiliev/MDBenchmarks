@@ -16,6 +16,8 @@ class SerialBenchmarkInstanceAdmin(admin.ModelAdmin):
 @admin.register(Resource)
 class ResourceAdmin(admin.ModelAdmin):
     search_fields=("ntasks__exact","ncpu__exact")
+    list_filter = ("ncpu","ntasks", "ngpu")
+
 
 @admin.register(Software)
 class SoftwareAdmin(admin.ModelAdmin):

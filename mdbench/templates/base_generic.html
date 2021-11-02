@@ -16,13 +16,13 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-sm navbar-dark my-2" style="background-color:#4527A0">
+<nav class="navbar navbar-expand-sm navbar-dark my-2" style="background-color:#000000">
   <div class="container-fluid">
-    <a class="navbar-brand h1 mb-0">MDBench</a>
+    <a class="navbar-brand h1 mb-0" style="color:#85b737">MDBench</a>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link text-nowrap" aria-current="search" href="{% url 'bootstrapfilter' %}">Search</a>
+            <a class="nav-link text-nowrap" aria-current="search" href="{% url 'bootstrapfilter' %}">Filter</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="{% url 'index' %}">Home</a>
@@ -42,12 +42,12 @@
 </nav>
 
 <div class="row mx-2">
-  <div class="col-sm-2 bg-secondary">
+  <div class="col-sm-2 bg-dark">
     {% block sidebar %}
 
-        <nav class="navbar navbar-expand navbar-dark">
+        <nav class="navbar navbar-expand navbar-dark" style="background-color:#000000">
             <ul class="navbar-nav flex-column">
-                <li class="navbar-text text-white"><span><h5>DB Tables</h5></span></li>
+                <li class="navbar-text"><span><h5 style="color:#85b737">DB Tables</h5></span></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'benchmarks' %}">Benchmarks</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'softwares' %}">Software</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'datasets' %}">Datasets</a></li>

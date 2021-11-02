@@ -41,7 +41,7 @@ def QuerySetBarPlot(qs, fig_title, n=1000):
             cmin = 0,
             cmax = 100,
             color = e_data,
-            colorscale = 'Sunset', 
+            colorscale = 'algae', 
             colorbar = dict(thickness = 20, title="Efficiency"))
                   )
     )
@@ -85,7 +85,7 @@ def BootstrapFilterView(request):
     if dataset_exact_query != '' and dataset_exact_query is not None:
         qs = qs.filter(benchmark__name__exact=dataset_exact_query)
 
-    caption='<span style="font-size: 24px;">Search results</span><br>ordered by simulation speed, limited to top 20'
+    caption='<span style="font-size: 24px;">Dataset 6n4o, 239131 atoms.</span><br>Figure shows top 20 results ordered by simulation speed' 
     plot_div=QuerySetBarPlot(qs, caption, 20)
 
     context = {
@@ -143,13 +143,13 @@ def index(request):
             cmin = 0,
             cmax = 100,
             color = e_data,
-            colorscale = 'Sunset', 
+            colorscale = 'algae', 
             colorbar = dict(thickness = 20, title="Efficiency")))
     )
     fig.update_layout(
         template="ggplot2",
         paper_bgcolor='#eeeeee',
-        title='<span style="font-size: 24px;">Top speed of all tested software modules</span> <br> measured with 6n4o dataset',
+        title='<span style="font-size: 24px;">Maximum speed of all tested software modules</span> <br> measured using 6n4o dataset (239,131 atoms)',
         title_x=0.5,
         yaxis_title="Benchmark ID",
         xaxis_title="Speed, ns/day",       
