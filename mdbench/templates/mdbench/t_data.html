@@ -4,11 +4,13 @@
 <td> {{ benchmark.software.toolchain }}</td>
 <td> {{ benchmark.software.instruction_set }}</td>
 <td> {{ benchmark.benchmark.name }}</td>
-<td style="font-weight: bold;"> {{ benchmark.rate_max |stringformat:".2f"}}</td> 
-<td style="font-weight: bold;"> {{ benchmark.cpu_efficiency }}</a> </td>
-<td> {{ benchmark.resource.ntasks }}</td>
-<td> {{ benchmark.resource.ncpu }}</td>
-<td> {{ benchmark.resource.nnodes }}</td> 
-<td> {{ benchmark.resource.ngpu }}</td>
+<td style="background-color:#6ead66; color:white"> {{ benchmark.rate_max | stringformat:".2f"}}</td> 
+<td style="background-color:#a3cc91"> {{ benchmark.cpu_efficiency }}</a> </td>
+<td style="background-color:#a3cc91"> {{ benchmark.core_year }}</td>
+<td style="background-color:#a3cc91"> {{ benchmark.gpu_year }}</td>
+<td style="background-color:#cdecc0"> {{ benchmark.resource.ntasks }}</td>
+<td style="background-color:#cdecc0"> {{ benchmark.resource.ncpu }}</td>
+<td style="background-color:#cdecc0"> {{ benchmark.resource.nnodes }}</td> 
+<td style="background-color:#a3cc91"> {{ benchmark.resource.ngpu }} {{ benchmark.gpu.model}}</td>
 <td> {{ benchmark.resource.nvlink | yesno:"Yes,No"}}</td>
 <td> {{ benchmark.site }}</td>

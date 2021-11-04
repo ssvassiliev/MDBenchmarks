@@ -63,8 +63,32 @@ class BenchmarkInstance(models.Model):
     rate_min = models.FloatField(help_text='Simulation speed, ns/day')
     rate_max = models.FloatField(help_text='Simulation speed, ns/day')
     serial = models.ForeignKey('SerialBenchmarkInstance', on_delete=models.RESTRICT, null=True)
-    cpu_efficiency = models.FloatField(help_text='Efficiency, %')
+    cpu_efficiency = models.FloatField(editable=False)
     site = models.ForeignKey('Site', on_delete=models.RESTRICT, null=True)
+    
+    @property
+    def computed_efficiency(self):
+        return round(100 * self.rate_max/\
+            (self.serial.rate_max * self.resource.ncpu * self.resource.ntasks),1) 
+    
+    @property
+    def core_year(self):
+        if self.resource.ngpu: 
+            return 0
+        else:
+            return round(1000 * self.resource.ncpu * self.resource.ntasks / (365 * self.rate_max),2) 
+    
+    @property
+    def gpu_year(self):
+        if self.resource.ngpu: 
+            return round(1000 * self.resource.ngpu / (365 * self.rate_max),3) 
+        else:
+            return 0
+
+    def save(self, *args, **kwargs):
+        self.cpu_efficiency = self.computed_efficiency
+        super(BenchmarkInstance, self).save(*args, **kwargs)
+
     def __str__(self):
         return f'{self.id}. {self.benchmark}; {self.resource}; {self.software}; {self.cpu}; {self.gpu}'
     def get_absolute_url(self):
@@ -88,7 +112,7 @@ class Resource(models.Model):
     nnodes = models.IntegerField()
     nvlink = models.BooleanField() 
     def __str__(self):
-        return f'tasks {self.ntasks} - threads {self.ncpu} - nodes {self.nnodes} - gpus {self.ngpu} - nvlink {self.nvlink}'
+        return f'T{self.ntasks}C{self.ncpu}N{self.nnodes}G{self.ngpu}NVL-{self.nvlink}'
 
 class CPU(models.Model):
     class Meta:
@@ -105,6 +129,8 @@ class GPU(models.Model):
         verbose_name_plural = "8. GPU Types"
     name = models.CharField(max_length=100, help_text='Enter a GPU name (e.g. Tesla)')
     model = models.CharField(max_length=100, help_text='Enter a GPU model (e.g. V100)') 
+    vram = models.IntegerField(help_text='Enter amount of VRAM') 
+    
     def __str__(self):
         return f'{self.name} {self.model}'
 

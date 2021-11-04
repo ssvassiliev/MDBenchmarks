@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views import generic
-from django.db.models import Q
+from django.db.models import Q, F
 from .filters import BenchmarkInstanceFilter
 import plotly.express as px 
 import pandas as pd        
@@ -19,14 +19,27 @@ def QuerySetBarPlot(qs, fig_title, n=1000):
         x_data.append(c)
         y_data.append(i.rate_max)
         e_data.append(i.cpu_efficiency)
-        lab.append(
-            i.software.name +"("+
-            i.software.module +"/"+
-            i.software.module_version +")-("+
-            str(i.resource.ncpu) +"c-"+
-            str(i.resource.ntasks) +
-            "t-"+str(i.resource.nnodes) +"n-"+
-            str(i.resource.ngpu)+"g)-"+i.site.name)
+        if i.gpu is not None:
+            lab.append(
+                i.software.name +"("+
+                i.software.module +"/"+
+                i.software.module_version +") "+
+                str(i.resource.ntasks)+"T_"+
+                str(i.resource.ncpu)+"C_"+
+                str(i.resource.nnodes)+"N_ "+
+                str(i.resource.ngpu)+
+                i.gpu.model[0:4]+" "+i.site.name
+                )
+        else:
+                lab.append(
+                i.software.name +"("+
+                i.software.module +"/"+
+                i.software.module_version +") "+
+                str(i.resource.ntasks)+"T"+
+                str(i.resource.ncpu)+"C"+
+                str(i.resource.nnodes)+"N "+
+                i.site.name
+                )
         h+=25
     
     fig = go.FigureWidget(layout = go.Layout(height = h, width = 900))
@@ -62,7 +75,6 @@ def QuerySetBarPlot(qs, fig_title, n=1000):
     
     plot_div = fig.to_html(full_html=False)
     return(plot_div)
-
 
 def BootstrapFilterView(request):
     qs = BenchmarkInstance.objects.all().order_by("-rate_max")
@@ -108,62 +120,10 @@ def index(request):
         t=BenchmarkInstance.objects.filter(software__id=i.id).filter(benchmark__name="6n4o").order_by('rate_max').last()
         if t is not None:
             bench.append(t)
+
     sorted_bench = sorted(bench, key=lambda BenchmarkInstance: BenchmarkInstance.rate_max, reverse=True)
-    x_data=[]; y_data=[]; e_data=[]; lab=[]; sub=[]; ids=[]
-    h=200
-    for c,i in enumerate(sorted_bench):
-        ids.append(str(i.id))
-        x_data.append(c)
-        y_data.append(i.rate_max)
-        e_data.append(i.cpu_efficiency)
-        lab.append(
-            i.software.name +"("+
-            i.software.module +"/"+
-            i.software.module_version +")-("+
-            str(i.resource.ncpu) +"c-"+
-            str(i.resource.ntasks) +
-            "t-"+str(i.resource.nnodes) +"n-"+
-            str(i.resource.ngpu)+"g)-"+i.site.name)
-        sub.append(i.software.example_submission.replace("\n", "<br>"))
-        h+=30
-    
-    df=pd.DataFrame({"ID":x_data, "Speed":y_data, "Efficiency":e_data, "Labels":lab})
-
-    fig = go.FigureWidget(layout = go.Layout(height = h, width = 900))
-    config = {'responsive': True}
-    fig.add_trace(
-        go.Bar(
-        x = y_data, 
-        y = x_data, 
-        text = lab,
-        hovertext=sub,
-        hovertemplate = "Speed=%{x}<br>Efficiency=%{marker.color}<extra></extra>",
-        orientation = 'h',
-        marker = dict(
-            cmin = 0,
-            cmax = 100,
-            color = e_data,
-            colorscale = 'algae', 
-            colorbar = dict(thickness = 20, title="Efficiency")))
-    )
-    fig.update_layout(
-        template="ggplot2",
-        paper_bgcolor='#eeeeee',
-        title='<span style="font-size: 24px;">Maximum speed of all tested software modules</span> <br> measured using 6n4o dataset (239,131 atoms)',
-        title_x=0.5,
-        yaxis_title="Benchmark ID",
-        xaxis_title="Speed, ns/day",       
-        yaxis = dict(autorange="reversed",
-        tickmode = 'array', 
-        tickvals = x_data, 
-        ticktext = ids,
-        )
-        )
-
-    plot_div = fig.to_html(full_html=False, include_plotlyjs=False)
-
-    benchmarks = BenchmarkInstance.objects.all().order_by('-rate_max')
-    filter = BenchmarkInstanceFilter(request.GET, queryset = benchmarks)
+    caption='<span style="font-size: 24px;">Maximum speed of all tested software modules</span> <br> measured using 6n4o dataset(239,131 atoms)'
+    plot_div=QuerySetBarPlot(sorted_bench, caption, 20)
 
     context = {
         'num_software': num_software,
@@ -172,9 +132,9 @@ def index(request):
         'num_cpu_types': num_cpu_types,   
         'num_gpu_types': num_gpu_types,  
         'figure': plot_div,
+        'benchmarks': sorted_bench,
     }
 
-    # Render the HTML template index.html with the data in the context variable
     return render(request, 'index.html', context=context)
 
 def about(request):
@@ -215,7 +175,7 @@ class CPUListView(generic.ListView):
 
 class GPUListView(generic.ListView):
     model = GPU
-    queryset = GPU.objects.order_by('name')   
+    queryset = GPU.objects.order_by('model')   
 
 class DatasetDetailView(generic.DetailView):
     model = Benchmark
