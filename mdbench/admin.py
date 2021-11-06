@@ -15,9 +15,8 @@ class SerialBenchmarkInstanceAdmin(admin.ModelAdmin):
 
 @admin.register(Resource)
 class ResourceAdmin(admin.ModelAdmin):
-    search_fields=("ntasks__exact","ncpu__exact")
+    search_fields=("label","nvlink")
     list_filter = ("ncpu","ntasks", "ngpu")
-
 
 @admin.register(Software)
 class SoftwareAdmin(admin.ModelAdmin):
@@ -27,6 +26,7 @@ class SoftwareAdmin(admin.ModelAdmin):
 
 @admin.register(BenchmarkInstance)
 class BenchmarkInstanceAdmin(admin.ModelAdmin):
+    list_display = ("benchmark", "software")
     list_filter = ("software__module","software__instruction_set")
     autocomplete_fields=("resource", "serial", "software")
-    search_fields=("resource",)
+    search_fields=("software_name",)

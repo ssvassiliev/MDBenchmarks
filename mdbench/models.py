@@ -106,11 +106,12 @@ class SimulationInput(models.Model):
 class Resource(models.Model):
     class Meta:
         verbose_name_plural = "6. Computing Resources"
-    ncpu = models.IntegerField()
     ntasks = models.IntegerField()
-    ngpu = models.IntegerField()
+    ncpu = models.IntegerField()
     nnodes = models.IntegerField()
+    ngpu = models.IntegerField()
     nvlink = models.BooleanField() 
+    label = models.CharField(max_length=100) 
     def __str__(self):
         return f'T{self.ntasks}C{self.ncpu}N{self.nnodes}G{self.ngpu}NVL-{self.nvlink}'
 
@@ -132,7 +133,7 @@ class GPU(models.Model):
     vram = models.IntegerField(help_text='Enter amount of VRAM') 
     
     def __str__(self):
-        return f'{self.name} {self.model}'
+        return f'{self.name}-{self.model}-{self.vram}GB'
 
 class Site(models.Model):
     class Meta:

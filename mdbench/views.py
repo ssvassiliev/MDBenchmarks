@@ -1,80 +1,12 @@
 from django.shortcuts import render
 from django.views import generic
-from django.db.models import Q, F
+from django.db.models import Q
 from .filters import BenchmarkInstanceFilter
+from .figures import  QuerySetBarPlot
 import plotly.express as px 
 import pandas as pd        
 import plotly.graph_objects as go
-
 from .models import Benchmark, Software, BenchmarkInstance, CPU, GPU
-
-def QuerySetBarPlot(qs, fig_title, n=1000):
-    figTitle=dict(text=fig_title,)
-    x_data, y_data, e_data, lab, ids = ([] for _ in range(5))
-    h=220
-    for c,i in enumerate(qs):
-        if c >=n:
-            break
-        ids.append(str(i.id))
-        x_data.append(c)
-        y_data.append(i.rate_max)
-        e_data.append(i.cpu_efficiency)
-        if i.gpu is not None:
-            lab.append(
-                i.software.name +"("+
-                i.software.module +"/"+
-                i.software.module_version +") "+
-                str(i.resource.ntasks)+"T_"+
-                str(i.resource.ncpu)+"C_"+
-                str(i.resource.nnodes)+"N_ "+
-                str(i.resource.ngpu)+
-                i.gpu.model[0:4]+" "+i.site.name
-                )
-        else:
-                lab.append(
-                i.software.name +"("+
-                i.software.module +"/"+
-                i.software.module_version +") "+
-                str(i.resource.ntasks)+"T"+
-                str(i.resource.ncpu)+"C"+
-                str(i.resource.nnodes)+"N "+
-                i.site.name
-                )
-        h+=25
-    
-    fig = go.FigureWidget(layout = go.Layout(height = h, width = 900))
-    fig.add_trace(
-        go.Bar(
-        x = y_data, 
-        y = x_data, 
-        text = lab,
-        hovertemplate = "Speed=%{x}<br>Efficiency=%{marker.color}<extra></extra>",
-        orientation = 'h',
-        marker = dict(
-            cmin = 0,
-            cmax = 100,
-            color = e_data,
-            colorscale = 'algae', 
-            colorbar = dict(thickness = 20, title="Efficiency"))
-                  )
-    )
-
-    fig.update_layout(
-        paper_bgcolor='#eeeeee',
-        template="ggplot2",
-        title=figTitle,
-        title_x=0.5,
-        yaxis_title="Benchmark ID",
-        xaxis_title="Speed, ns/day",       
-        yaxis = dict(autorange="reversed",
-        tickmode = 'array', 
-        tickvals = x_data, 
-        ticktext = ids,
-                    )
-        )
-    
-    plot_div = fig.to_html(full_html=False)
-    return(plot_div)
 
 def BootstrapFilterView(request):
     qs = BenchmarkInstance.objects.all().order_by("-rate_max")
@@ -138,6 +70,7 @@ def index(request):
     return render(request, 'index.html', context=context)
 
 def about(request):
+    template_name = 'base_generic.html'
     num_software = Software.objects.all().count()
     num_benchmarks = BenchmarkInstance.objects.all().count()
     num_datasets = Benchmark.objects.all().count()
@@ -151,7 +84,9 @@ def about(request):
         'num_cpu_types': num_cpu_types,   
         'num_gpu_types': num_gpu_types,  
     }
-    return render(request, 'mdbench/about.html', context)
+    return render(request, 'base_generic.html', context)
+
+
 
 class BenchmarkListView(generic.ListView):
     queryset = BenchmarkInstance.objects.order_by('-rate_max')    

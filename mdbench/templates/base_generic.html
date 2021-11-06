@@ -30,7 +30,7 @@
           <li class="nav-item">
             <a class="nav-link" aria-current="about" href="{% url 'about' %}">About</a>
           </li>
-        </ul>
+      </ul>
       <form class="d-flex mx-2 my-auto d-inline w-40" action = "{% url 'idbenchmark' %}" method="get">
         <input class="form-control form-control-sm" name="q" type="text"  placeholder="Benchmark ID .." aria-label="Search">
           <span class="input-group-addon">
@@ -48,11 +48,11 @@
         <nav class="navbar navbar-expand navbar-dark" style="background-color:#000000">
             <ul class="navbar-nav flex-column">
                 <li class="navbar-text"><span><h5 style="color:#85b737">DB Tables</h5></span></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'benchmarks' %}">Benchmarks</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'softwares' %}">Software</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'datasets' %}">Datasets</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'cpus' %}">CPU models</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'gpus' %}">GPU models</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'benchmarks' %}">Benchmarks: {{num_benchmarks}}</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'softwares' %}">Software:  {{num_software}}</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'datasets' %}">Datasets: {{num_datasets}}</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'cpus' %}">CPU models: {{num_cpu_types}} </a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'gpus' %}">GPU models: {{num_gpu_types}}</a></li>
             </ul>
         </nav>
 

@@ -7,12 +7,14 @@
       <th>ID</th>     
       <th>Name</th> 
       <th>Model</th> 
+      <th>VRAM</th>    
   </thead> 
   {% for gpu in gpu_list %}
     <tr>
        <td> {{ gpu.id }}</td>
        <td> {{ gpu.name}}</td> 
-       <td> {{ gpu.model}}</td>       
+       <td> {{ gpu.model}}</td>    
+       <td> {{ gpu.vram}} GB</td>           
   {% endfor %} 
   </tr>
   </table>

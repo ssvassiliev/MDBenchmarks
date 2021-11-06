@@ -11,6 +11,6 @@
 <td style="background-color:#cdecc0"> {{ benchmark.resource.ntasks }}</td>
 <td style="background-color:#cdecc0"> {{ benchmark.resource.ncpu }}</td>
 <td style="background-color:#cdecc0"> {{ benchmark.resource.nnodes }}</td> 
-<td style="background-color:#a3cc91"> {{ benchmark.resource.ngpu }} {{ benchmark.gpu.model}}</td>
+<td style="background-color:#a3cc91"> {{ benchmark.resource.ngpu }}<sub>{{ benchmark.gpu.model }}</sub></td>
 <td> {{ benchmark.resource.nvlink | yesno:"Yes,No"}}</td>
 <td> {{ benchmark.site }}</td>
