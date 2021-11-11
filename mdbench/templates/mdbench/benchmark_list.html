@@ -1,6 +1,7 @@
 {% extends "base_generic.html" %}
 {% block content %}
-  <h2>Datasets</h2>
+<div class="p-4">
+  <h3>Datasets</h3>
   <table class="table table-hover">
     <thead class="table-secondary">
       <th>ID</th>    
@@ -15,5 +16,6 @@
     <td> {{ benchmark.description }} </td>  
    {% endfor %} 
   </table>
+  </div>
 
 {% endblock %}

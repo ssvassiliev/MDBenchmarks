@@ -1,5 +1,6 @@
 {% extends "base_generic.html" %}
 {% block content %}
+<div class="px-2">
   <h2>Benchmarks</h2>
   {% if benchmarkinstance_list %} 
   <table class="table table-sm table-hover">
@@ -14,4 +15,5 @@
   {% else %}
         <p>There are no benchmarks in the database.</p>
   {% endif %}
+<div>
 {% endblock %}

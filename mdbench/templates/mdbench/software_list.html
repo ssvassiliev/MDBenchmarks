@@ -2,7 +2,8 @@
 
 {% block content %}
 {% if software_list %}
-  <h2>Software</h2>
+<div class="p-4">
+  <h3>Software</h3>
   <table class="table table-sm table-hover">
     <thead class="table-secondary">
       <th>ID</th>     
@@ -14,14 +15,16 @@
   {% for software in software_list %}
     <tr>
       <td> {{ software.id }}</td>
-       <td> <a class="link-secondary" href="{{ software.get_absolute_url }}">{{ software.name }}</a></td>
-       <td> {{ software.module }}/{{ software.module_version }}</td> 
-       <td> {{ software.toolchain }}-{{ software.toolchain_version }}</td> 
-       <td> {{ software.instruction_set }}</td> 
+      <td> <a class="link-secondary" href="{{ software.get_absolute_url }}">{{ software.name }}</a></td>
+      <td> {{ software.module }}/{{ software.module_version }}</td> 
+      <td> {{ software.toolchain }}-{{ software.toolchain_version }}</td> 
+      <td> {{ software.instruction_set }}</td> 
+    </tr>
   {% endfor %} 
-  </tr>
   </table>
+</div>
+
 {% else %}
   <p>There are no software in the database.</p>
-  {% endif %}
+{% endif %}
 {% endblock %}

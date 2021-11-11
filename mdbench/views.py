@@ -29,10 +29,21 @@ def BootstrapFilterView(request):
     if dataset_exact_query != '' and dataset_exact_query is not None:
         qs = qs.filter(benchmark__name__exact=dataset_exact_query)
 
-    caption='<span style="font-size: 24px;">Dataset 6n4o, 239131 atoms.</span><br>Figure shows top 20 results ordered by simulation speed' 
+    caption='Simulation Speed' 
     plot_div=QuerySetBarPlot(qs, caption, 20)
 
+    num_software = Software.objects.all().count()
+    num_benchmarks = BenchmarkInstance.objects.all().count()
+    num_datasets = Benchmark.objects.all().count()
+    num_cpu_types = CPU.objects.all().count()
+    num_gpu_types = GPU.objects.all().count()
+ 
     context = {
+        'num_software': num_software,
+        'num_benchmarks': num_benchmarks,
+        'num_datasets': num_datasets,   
+        'num_cpu_types': num_cpu_types,   
+        'num_gpu_types': num_gpu_types,  
         'queryset' : qs,
         'plot_div': plot_div
         }
@@ -54,7 +65,7 @@ def index(request):
             bench.append(t)
 
     sorted_bench = sorted(bench, key=lambda BenchmarkInstance: BenchmarkInstance.rate_max, reverse=True)
-    caption='<span style="font-size: 24px;">Maximum speed of all tested software modules</span> <br> measured using 6n4o dataset(239,131 atoms)'
+    caption='Maximum Simulation Speed'
     plot_div=QuerySetBarPlot(sorted_bench, caption, 20)
 
     context = {
@@ -70,7 +81,6 @@ def index(request):
     return render(request, 'index.html', context=context)
 
 def about(request):
-    template_name = 'base_generic.html'
     num_software = Software.objects.all().count()
     num_benchmarks = BenchmarkInstance.objects.all().count()
     num_datasets = Benchmark.objects.all().count()
@@ -84,8 +94,7 @@ def about(request):
         'num_cpu_types': num_cpu_types,   
         'num_gpu_types': num_gpu_types,  
     }
-    return render(request, 'base_generic.html', context)
-
+    return render(request, 'mdbench/about.html', context) 
 
 
 class BenchmarkListView(generic.ListView):
@@ -116,7 +125,6 @@ class DatasetDetailView(generic.DetailView):
     model = Benchmark
 
 class IDBenchmarksListView(generic.ListView):
-    template_name = 'mdbench/filteredbenchmarks.html'
     def get_queryset(self): 
         query = self.request.GET.get('q')
         try:
@@ -125,6 +133,15 @@ class IDBenchmarksListView(generic.ListView):
         except:
             return None
 
+class IDSoftwareListView(generic.ListView):
+    def get_queryset(self): 
+        query = self.request.GET.get('q')
+        try:
+            obj = Software.objects.filter(Q(id=query)) 
+            return obj          
+        except:
+            return None
+           
 class FilteredBenchmarksListView(generic.ListView):
     template_name = 'mdbench/filteredbenchmarks.html'
     def get_queryset(self): 
@@ -195,7 +212,7 @@ def filtered_benchmarks_plot(request):
 
     fig.update_layout(
         template="plotly_white",
-        title='<span style="font-size: 24px;">Top 20 search results</span><br>sorted by simulation speed',
+        title='Software performance',
         title_x=0.5,
         yaxis_title="Benchmark ID",
         xaxis_title="Speed, ns/day",       

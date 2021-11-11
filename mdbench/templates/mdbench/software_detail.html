@@ -3,15 +3,17 @@
 {% block content %}
 {% load pygmentify %}
 {% pygment %}
-<h2>Software details</h2>
+<div class="p-4">
+<h3>Software details</h3>
 <ul>
 <li><strong>Module/Version:</strong> {{ software.module}}/{{ software.module_version }}</li>
 <li><strong>Toolchain/Version:</strong> {{ software.toolchain}}/{{ software.toolchain_version }}</li>
 <li><strong>CPU instruction set:</strong> {{ software.instruction_set}}</li>
-<li><strong>Example job submission script:</strong><div class='p-3 mb-0 bg-light text-secondary'>
+<li><strong>Example job submission script:</strong><div class='p-3 mb-0 text-secondary'>
     <pre lang="bash">{{ software.example_submission | linebreaks}}</pre></div></li> 
-<li><strong>Benchmark submission script:</strong><div class='p-3 ml-5 mb-0 bg-light text-secondary'>
+<li><strong>Benchmark submission script:</strong><div class='p-3 ml-5 mb-0 text-secondary'>
     <pre lang="bash"> {% autoescape off %} {{ software.benchmark_submission  | linebreaks}}{% endautoescape %}</pre></div></li> 
 </ul>
+</div>
 {% endpygment %}
 {% endblock %}

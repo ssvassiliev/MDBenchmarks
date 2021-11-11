@@ -2,7 +2,15 @@
 <html lang="en">
 <head>
   <script src="https://cdn.plot.ly/plotly-2.4.2.min.js"></script>
-  {% block title %}<title>MD Benchmarks</title>{% endblock %}
+
+{% block title %}
+<div class="card border-0 text-center" style="background-color: #333" >
+  <div class="card-body">
+    <h3 class="card-title"> MOLECULAR DYNAMICS PERFORMANCE GUIDE</h3>
+  </div>
+</div>
+{% endblock %}
+
   {% load widget_tweaks %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,12 +19,12 @@
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
   <!-- Add additional CSS in static file -->
   {% load static %}
-  <link rel="stylesheet" href="{% static 'mdbench/css/styles.css' %}">                                                                                                            
+  <link rel="stylesheet" type="text/css" href="{% static 'mdbench/css/styles.css' %}">                                                                                                            
   <link rel="stylesheet" type="text/css" href="{% static 'mdbench/css/vs.css' %}">
 </head>
 
 <body>
-<nav class="navbar navbar-expand-sm navbar-dark my-2" style="background-color:#000000">
+<nav class="navbar navbar-expand-sm navbar-dark" style="background-color:#000000">
   <div class="container-fluid">
     <a class="navbar-brand h1 mb-0" style="color:#85b737">MDBench</a>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -31,6 +39,12 @@
             <a class="nav-link" aria-current="about" href="{% url 'about' %}">About</a>
           </li>
       </ul>
+      <form class="d-flex mx-2 my-auto d-inline w-40" action = "{% url 'idsoftware' %}" method="get">
+        <input class="form-control form-control-sm" name="q" type="text"  placeholder="Software ID .." aria-label="Search">
+          <span class="input-group-addon">
+            <button class="btn btn-outline-light border-left-0 border" type="submit"><i class="fa fa-search"></i></button>
+          </span>   
+      </form>
       <form class="d-flex mx-2 my-auto d-inline w-40" action = "{% url 'idbenchmark' %}" method="get">
         <input class="form-control form-control-sm" name="q" type="text"  placeholder="Benchmark ID .." aria-label="Search">
           <span class="input-group-addon">
@@ -41,25 +55,35 @@
   </div>
 </nav>
 
-<div class="row mx-2">
-  <div class="col-sm-2" style="background-color: #555;">
+<div class="g-0 row">
+  <div class=" p-4 col-sm-3" style="background-color: #e9e9e9;">
     {% block sidebar %}
-
-        <nav class="navbar navbar-expand navbar-dark" style="background-color:#000000">
+        <nav class="navbar navbar-expand navbar-light p-2 " style="background-color:#e9e9e9;">
             <ul class="navbar-nav flex-column">
                 <li class="navbar-text"><span><h5 style="color:#85b737">DB Tables</h5></span></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'benchmarks' %}">Benchmarks: {{num_benchmarks}}</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'softwares' %}">Software:  {{num_software}}</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'datasets' %}">Datasets: {{num_datasets}}</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'cpus' %}">CPU models: {{num_cpu_types}} </a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'gpus' %}">GPU models: {{num_gpu_types}}</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'softwares' %}">Software </a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'datasets' %}">Datasets  </a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'cpus' %}">CPU models </a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'gpus' %}">GPU models </a></li>
             </ul>
         </nav>
-
       {% endblock %}
-    </div>
-      <div class="col-sm-10 ">{% block content %}{% endblock %}</div>
+  </div> 
+  
+
+  <div class="col-sm-9">{% block content %}{% endblock %}</div>
+  <div class="col-sm-12">{% block content2 %}{% endblock %}</div>
+  <div> 
+        <nav class="navbar navbar-expand-sm navbar-light justify-content-center">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'softwares' %}">Software</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'datasets' %}">Datasets</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'cpus' %}">CPU models</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'gpus' %}">GPU models</a></li>
+            </ul>
+        </nav>
   </div>
-</div>
+</div>  
 </body>
 </html>

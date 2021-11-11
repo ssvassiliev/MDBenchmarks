@@ -1,16 +1,31 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<h1>Molecular Dynamics Benchmarks</h1>
-<p>Benchmarking is essential for finding the optimal job simulation and submission parameters. New users might be unaware of the hardware- and software-specific details required to run efficient simulations on Compute Canada HPC clusters.  A poor choice of parameters can increase the simulation speed only by a narrow margin or even degrade it leading to a waste of computing resources. Therefore, it is in the interest of every user to optimize their usage of hardware resources and, at the same time, keep their simulation time to a minimum. </p>
+<div class="p-4 border-0 text-center" style="background-color: #eee" >
+  <div>
+    <ul style="list-style-type:none;"><h3>
+      <li class="p-1">FIND THE BEST SIMULATION OPTIONS</li>    
+      <li class="p-1">TO MINIMIZE THE TIME AND COST OF SIMULATIONS</li>
+    </ul> </h3>
+  </div>
 
-<div class="p-relative col-10 pd-5 border-box elevation-1 primary">
-  <div class="p-relative border-box w-full">
-      {{figure|safe}}
+</div>
+{% endblock %}
+
+{% block content2 %}
+<div class="card border-0 text-center" style="background-color: #85b737;" >
+  <div class="card-body">
+    <h3 class="card-title" style="color: #fff">SOFTWARE PERFORMANCE</h3>
   </div>
 </div>
 
-<h2>Table</h2>
+<div class="card px-4 border-0" style="background-color: #eee">
+  <div class="py-2 card-img-top">
+    {{figure|safe}}
+  </div>
+</div>
+
+<div class="px-2">
 <table class="table table-sm table-hover">
     {% include "mdbench/t_head.html" %}
     {% for benchmark in benchmarks %}
@@ -19,6 +34,7 @@
    </tr>   
     {% endfor %} 
 </table>
+</div>
 
 
 {% endblock %}

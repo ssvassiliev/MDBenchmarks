@@ -5,14 +5,29 @@
 }
 
 body {
-    margin-top: 20px;
+    margin-top: 0px;
     color: rgb(0, 0, 0);
+    background-color: #eee; 
   }
 
   h1 {
-    color: rgb(0, 0, 0);
+    color: #85b737;
+    color:;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: 300;
   }
  
+  h3 {
+    color: #85b737;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: 300;
+  }
+
+  h5 {
+    font-weight: 300;
+  }
+
+
  ol, ul {
    list-style-position: outside;
    padding: 0;

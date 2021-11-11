@@ -1,7 +1,8 @@
 {% extends "base_generic.html" %}
 {% block content %}
 {% if gpu_list %}
-  <h2>GPU models</h2>
+<div class="p-4">
+  <h3>GPU models</h3>
   <table class="table table-sm table-hover">
     <thead class="table-secondary">
       <th>ID</th>     
@@ -18,6 +19,7 @@
   {% endfor %} 
   </tr>
   </table>
+</div>
 {% else %}
   <p>There are no CPUs in the database.</p>
   {% endif %}

@@ -1,19 +1,9 @@
 {% extends "base_generic.html" %}
 {%block sidebar%}
-        <nav class="navbar navbar-expand navbar-dark" style="background-color:#000000">
-            <ul class="navbar-nav flex-column">
-                <li class="navbar-text text-white"><span><h5 style="color:#85b737">DB Tables</h5></span></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'benchmarks' %}">Benchmarks</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'softwares' %}">Software</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'datasets' %}">Datasets</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'cpus' %}">CPU models</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'gpus' %}">GPU models</a></li>
-            </ul>
-        </nav>
 
 <form method='GET' action = '.'>
-<h5 class="pt-3 pb-2" style="color:#85b737">Filter</h5>
 <div>
+<h5 style="color:#85b737">Filter</h5>
     <div class="form-row">
          <div class="form-group">
              <div class="input-group">
@@ -82,17 +72,29 @@
     </div>
 </div>  
 </form>
-
-
 {%endblock%}
+
 {% block content %}
-<h1>Molecular Dynamics Benchmarks</h1>
+<div class="text-center p-4" style="background-color: #eee" >
+<h3>APPLY FILTERS TO SELECT BENCHMARKS</h3>
+</div>
+{%endblock%}
 
-{% autoescape off %}
-{{ plot_div }}
-{% endautoescape %}
+{% block content2 %}
+<div class="card border-0 text-center" style="background-color: #85b737;" >
+  <div class="card-body">
+    <h3 class="card-title" style="color: #fff">SOFTWARE PERFORMANCE</h3>
+  </div>
+</div>
 
-  <h2>Search results</h2>
+<div class="card p-4 border-0" style="background-color: #eee">
+  <div class="card-img-top">
+    {% autoescape off %}
+    {{ plot_div }}
+    {% endautoescape %}
+  </div>
+</div>
+<div class="px-4">
     <table class="table table-sm table-hover">
         {% include "mdbench/t_head.html" %}
         {% for benchmark in queryset %}
@@ -101,6 +103,7 @@
        </tr>   
         {% endfor %} 
     </table>
+</div>   
 
 {% endblock %}
 

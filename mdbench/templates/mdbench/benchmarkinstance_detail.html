@@ -1,7 +1,8 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<h2>Simulation details</h2>
+<div class="p-4">
+<h3>Simulation details</h3>
 <ul>
   <li><strong>Dataset:</strong></strong> {{ benchmarkinstance.benchmark }}</li> 
   <li><strong>Software:</strong> {{ benchmarkinstance.software }}</li>
@@ -12,6 +13,7 @@
   <li><strong>Efficiency:</strong> {{ benchmarkinstance.cpu_efficiency }} %</li> 
   <li><strong>Site:</strong> {{ benchmarkinstance.site }}</li>
   <li><strong>Date:</strong> {{ benchmarkinstance.updated_at }}</li>  
-  <li><strong>Simulation input file:</strong><div class='p-3 mb-0 bg-light text-secondary'>{{ benchmarkinstance.serial.simulation_input.input | linebreaks }}</div></li> 
+  <li><strong>Simulation input file:</strong><div class='p-3 mb-0 text-secondary'>{{ benchmarkinstance.serial.simulation_input.input | linebreaks }}</div></li> 
 </ul> 
+</div>
 {% endblock %}

@@ -3,5 +3,6 @@
 {% block content %}
 <h2>About</h2>
 <p>This portal provides researchers with detailed information about the performance and efficiency of MD simulations on heterogeneous Compute Canada clusters. Currently, it contains benchmarks for three major MD software packages: AMBER, GROMACS, and NAMD. This information should allow researchers to estimate the performance they can expect for similar simulations. All entries include example submission scripts and simulation input parameters to help new users to get started with MD simulations and optimize submission of their simulations. </p>
-
+  <h5 class="card-text pb-4" style="color: #666">Benchmarking is essential for designing optimal MD workflows. A poor choice of job submission or simulation parameters can degrade performance and waste computing resources. However, a systematic benchmarking of numerous MD engines in a complex Compute Canada environment with heterogeneous hardware is a daunting and time-consuming task.<br><br> 
+  The aim of this web portal is to help researchers to optimize usage of hardware resources and, at the same time, keep simulation time to a minimum. We provide an up-to-date performance comparison of all installed software packages and a searchable benchmark database with important details such as description of hardware, submission scripts and simulation input files. </h5>
 {% endblock content %}
