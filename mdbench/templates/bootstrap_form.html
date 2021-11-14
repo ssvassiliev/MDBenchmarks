@@ -1,89 +1,106 @@
 {% extends "base_generic.html" %}
-{%block sidebar%}
 
-<form method='GET' action = '.'>
-<div>
-<h5 style="color:#85b737">Filter</h5>
-    <div class="form-row">
-         <div class="form-group">
-             <div class="input-group">
-                <div class="input" >
-                    <input class="mb-1 form-control form-control-sm" type="search" name = "software_contains" placeholder="Software_contains .."/>
-                </div>            
+{%block content%}
+<div class="card border-0 text-left pt-4" style="background-image: url('/media/images/fig3.png');">
+    <div class="card-title">
+        <h3>FILTERS</h3>
+    </div>
+    <div class="card-body">
+    <form method='GET' action = '.'>
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input">
+                            <label for="software_contains" class="form-label">Software name</label>
+                            <input class="mb-1 form-control form-control-sm" style="background-color: #b7b796;" type="search" name = "software_contains" placeholder="namd2 .."/>
+                        </div>            
+                    </div>
+                </div>
+            </div>
+
+        <div class="col-sm-3">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input" >
+                        <label for="module_contains" class="form-label">Module name</label>
+                       <input class="mb-1 form-control form-control-sm" style="background-color: #b7b796;"  type="search" name = "module_contains" placeholder="namd-ucx .."/>
+                    </div>            
+                </div>
+            </div>
+        </div>
+
+       <div class="col-sm-3">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input" >
+                        <label for="module_version" class="form-label">Module version</label>
+                        <input class="mb-1 form-control form-control-sm" style="background-color: #b7b796;"  type="search" name = "module_version" placeholder="2.14 .."/>
+                    </div>            
+                </div>
+            </div>
+         </div>
+
+        <div class="col-sm-3">
+             <div class="form-group">
+                <div class="input-group">
+                    <div class="input">
+                    <label for="site_comtains" class="form-label">Cluster</label>
+                    <input class="mb-1 form-control form-control-sm" style="background-color: #b7b796;"  type="search" name = "site_contains" placeholder="Narval .."/>
+                    </div>            
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="form-row">
-        <div class="form-group">
-            <div class="input-group">
-                <div class="input" >
-                    <input class="mb-1 form-control form-control-sm" type="search" name = "module_contains" placeholder="Module_contains .."/>
-                </div>            
+    
+    <div class="row">
+            <div class="col-sm-3">
+             <div class="form-group">
+                 <div class="input-group">
+                    <div class="input">
+                       <label for="gpu_model" class="form-label">GPU model</label>
+                        <input class="mb-1 form-control form-control-sm" style="background-color: #b7b796;"  type="search" name = "gpu_model" placeholder="V100 .."/>
+                    </div>            
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="form-row">
-        <div class="form-group">
-            <div class="input-group">
-                <div class="input" >
-                    <input class="mb-1 form-control form-control-sm" type="search" name = "module_version" placeholder="Version_exact .."/>
-                </div>            
+        <div class="col-sm-3">
+             <div class="form-group">
+                 <div class="input-group">
+                    <div class="input">
+                       <label for="arch" class="form-label">CPU instruction set</label>
+                        <input class="mb-1 form-control form-control-sm" style="background-color: #b7b796;"  type="search" name = "arch" placeholder="avx2 .."/>
+                    </div>            
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="form-row">
-        <div class="form-group">
-            <div class="input-group">
-                <div class="input">
-                <input class="mb-1 form-control form-control-sm" type="search" name = "site_contains" placeholder="Site_exact .."/>
-                </div>            
+        <div class="col-sm-3">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input">
+                        <label for="dataset" class="form-label">Simulation system</label>
+                        <input class="mb-1 form-control form-control-sm" style="background-color: #b7b796;"  type="search" name = "dataset" placeholder="6n4o .."/>
+                    </div>            
+                </div>
             </div>
         </div>
-    </div>
-
-    <div class="form-row">
-         <div class="form-group">
-             <div class="input-group">
-                <div class="input">
-                <input class="mb-1 form-control form-control-sm" type="search" name = "arch" placeholder="Arch_exact .."/>
-                </div>            
-            </div>
+        <div class="col-sm-12 pt-4">
+            <span>
+            <button class="mx-auto d-block btn btn-light btn-sm" style="color: #666; background-color: #b7b796;"  type="submit">Apply <i class="fa fa-search"></i></button>
+            </span>
         </div>
+        </form>
     </div>
-
-    <div class="form-row">
-         <div class="form-group">
-             <div class="input-group">
-                <div class="input">
-                <input class="mb-1 form-control form-control-sm" type="search" name = "dataset" placeholder="Dataset_exact .."/>
-                </div>            
-            </div>
-        </div>
-    </div>
-
-    <div class="form-row">
-        <span>
-            <button class="mx-auto d-block btn btn-outline-light btn-sm" type="submit"><i class="fa fa-search"></i>
-            </button>
-        </span>
-    </div>
-</div>  
-</form>
-{%endblock%}
-
-{% block content %}
-<div class="text-center p-4" style="background-color: #eee" >
-<ul style="list-style-type:none;">
-    <li class="my-4 p-1" ><h3>FOCUS YOUR VIEW ON A SUBSET OF THE OVERALL DATA</h3></li>
-    <li class="my-4 p-1" ><h5 style="color: #666;">Narrow down search results to a specific software, cluster or dataset</h5></li>
-</ul>
+    <p> Query: {{querystr}}</p>
 </div>
-{%endblock%}
+</div>
 
-{% block content2 %}
+{% endblock content%}
+{% block content2%}
+
 <div class="card border-0 text-center" style="background-color: #85b737;" >
   <div class="card-body">
     <h3 class="card-title" style="color: #fff">SOFTWARE PERFORMANCE</h3>
@@ -97,6 +114,7 @@
     {% endautoescape %}
   </div>
 </div>
+
 <div class="px-4">
     <table class="table table-sm table-hover">
         {% include "mdbench/t_head.html" %}

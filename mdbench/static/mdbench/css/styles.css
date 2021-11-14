@@ -28,6 +28,11 @@ body {
     font-weight: 300;
   }
 
+  label {
+    color: #85b737;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: 300;
+  }
 
  ol, ul {
    list-style-position: outside;

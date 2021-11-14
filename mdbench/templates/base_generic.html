@@ -4,7 +4,7 @@
   <script src="https://cdn.plot.ly/plotly-2.4.2.min.js"></script>
 
 {% block title %}
-<div class="card border-0 text-center" style="background-color: #333" >
+<div class="card border-0 text-center" style="background-color: #2e3238" >
   <div class="card-body">
     <h3 class="card-title"> MOLECULAR DYNAMICS PERFORMANCE GUIDE</h3>
   </div>
@@ -30,7 +30,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link text-nowrap" aria-current="search" href="{% url 'bootstrapfilter' %}">Filter</a>
+            <a class="nav-link text-nowrap" aria-current="search" href="{% url 'bootstrapfilter' %}">Filters</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="{% url 'index' %}">Home</a>
@@ -39,39 +39,39 @@
             <a class="nav-link" aria-current="about" href="{% url 'about' %}">About</a>
           </li>
       </ul>
-      <form class="d-flex mx-2 my-auto d-inline w-40" action = "{% url 'idsoftware' %}" method="get">
-        <input class="form-control form-control-sm" name="q" type="text"  placeholder="Software ID .." aria-label="Search">
+      <form class="d-flex mx-2 d-inline w-25" action = "{% url 'idsoftware' %}" method="get">
+        <input class="form-control form-control-sm" style="background-color: #b7b796;" name="q" type="text" placeholder="Software ID .." aria-label="Search">
           <span class="input-group-addon">
-            <button class="btn btn-outline-light border-left-0 border" type="submit"><i class="fa fa-search"></i></button>
+            <button class="btn btn-sm btn-outline-light border-left-0 border" type="submit"><i class="fa fa-search"></i></button>
           </span>   
       </form>
-      <form class="d-flex mx-2 my-auto d-inline w-40" action = "{% url 'idbenchmark' %}" method="get">
-        <input class="form-control form-control-sm" name="q" type="text"  placeholder="Benchmark ID .." aria-label="Search">
+      <form class="d-flex mx-2 d-inline w-25" action = "{% url 'idbenchmark' %}" method="get">
+        <input class="form-control form-control-sm" style="background-color: #b7b796;" name="q" type="text"  placeholder="Benchmark ID .." aria-label="Search">
           <span class="input-group-addon">
-            <button class="btn btn-outline-light border-left-0 border" type="submit"><i class="fa fa-search"></i></button>
+            <button class="btn btn-sm btn-outline-light border-left-0 border" type="submit"><i class="fa fa-search"></i></button>
           </span>   
       </form>
-    </div>
+      </div>
   </div>
 </nav>
 
 <div class="g-0 row">
-  <div class=" p-4 col-sm-3" style="background-color: #e9e9e9;">
+  <div class=" col-sm-2" style="background-color: #000;">
     {% block sidebar %}
-        <nav class="navbar navbar-expand navbar-light p-2 " style="background-color:#e9e9e9;">
+        <nav class="navbar navbar-expand navbar-dark p-0 ">
             <ul class="navbar-nav flex-column">
-                <li class="navbar-text py-0"><span><h5 style="color:#85b737">Resources</h5></span></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'softwares' %}">Software </a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'datasets' %}">Datasets  </a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'cpus' %}">CPU models </a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'gpus' %}">GPU models </a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'cpus' %}">CPUs </a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'gpus' %}">GPUs </a></li>
             </ul>
         </nav>
-      {% endblock %}
-  </div> 
+     
   
+  {% endblock %} 
+</div> 
 
-  <div class="col-sm-9">{% block content %}{% endblock %}</div>
+  <div class="col-sm-10">{% block content %}{% endblock %}</div>
   <div class="col-sm-12">{% block content2 %}{% endblock %}</div>
   <div> 
         <nav class="navbar navbar-expand-sm navbar-light justify-content-center">

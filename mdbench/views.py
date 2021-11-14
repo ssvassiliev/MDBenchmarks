@@ -14,6 +14,7 @@ def BootstrapFilterView(request):
     module_contains_query = request.GET.get('module_contains')
     module_version_query = request.GET.get('module_version')
     site_contains_query = request.GET.get('site_contains')
+    gpu_model_query = request.GET.get('gpu_model')
     arch_exact_query = request.GET.get('arch')
     dataset_exact_query = request.GET.get('dataset')   
     if software_contains_query != '' and software_contains_query is not None:
@@ -24,10 +25,22 @@ def BootstrapFilterView(request):
         qs = qs.filter(software__module_version__exact=module_version_query)
     if site_contains_query != '' and site_contains_query is not None:
         qs = qs.filter(site__name__icontains=site_contains_query)
+    if gpu_model_query != '' and gpu_model_query is not None:
+        qs = qs.filter(gpu__model__icontains=gpu_model_query)
     if arch_exact_query != '' and arch_exact_query is not None:
         qs = qs.filter(software__instruction_set__exact=arch_exact_query)
     if dataset_exact_query != '' and dataset_exact_query is not None:
         qs = qs.filter(benchmark__name__exact=dataset_exact_query)
+
+    que=[]
+    que.append(software_contains_query or "_")
+    que.append(module_contains_query or "_")
+    que.append(module_version_query or "_")
+    que.append(site_contains_query or "_")
+    que.append(gpu_model_query or "_")
+    que.append(arch_exact_query or "_")
+    que.append(dataset_exact_query or "_")
+    query_string="_".join(que)
 
     caption='Simulation Speed' 
     plot_div=QuerySetBarPlot(qs, caption, 20)
@@ -45,6 +58,7 @@ def BootstrapFilterView(request):
         'num_cpu_types': num_cpu_types,   
         'num_gpu_types': num_gpu_types,  
         'queryset' : qs,
+        'querystr': query_string,
         'plot_div': plot_div
         }
     return render(request, 'bootstrap_form.html', context)

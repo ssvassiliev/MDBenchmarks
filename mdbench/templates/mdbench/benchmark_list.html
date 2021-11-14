@@ -8,14 +8,17 @@
       <th>Name</th> 
       <th>Size</th> 
       <th>Description</th> 
+       <th>Image</th>      
   </thead> 
     {% for benchmark in benchmark_list %}
     <td> {{ benchmark.id }}</td>   
     <td> {{ benchmark.name }}</td>
     <td> {{ benchmark.natoms }}</td>
-    <td> {{ benchmark.description }} </td>  
+    <td> {{ benchmark.description }} </td>   
+    <td><img src="{{ benchmark.image.url}}" style="height:200px;" alt="{{ benchmark.name }}"> </td>
    {% endfor %} 
   </table>
   </div>
+   
 
 {% endblock %}
