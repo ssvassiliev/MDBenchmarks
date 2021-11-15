@@ -40,9 +40,9 @@ def BootstrapFilterView(request):
     que.append(gpu_model_query or "_")
     que.append(arch_exact_query or "_")
     que.append(dataset_exact_query or "_")
-    query_string="_".join(que)
+    query_string=" ".join(que)
 
-    caption='Simulation Speed' 
+    caption='SIMULATION SPEED' 
     plot_div=QuerySetBarPlot(qs, caption, 20)
 
     num_software = Software.objects.all().count()
@@ -79,7 +79,7 @@ def index(request):
             bench.append(t)
 
     sorted_bench = sorted(bench, key=lambda BenchmarkInstance: BenchmarkInstance.rate_max, reverse=True)
-    caption='Maximum Simulation Speed'
+    caption='MAXIMUM SIMULATION SPEED'
     plot_div=QuerySetBarPlot(sorted_bench, caption, 20)
 
     context = {

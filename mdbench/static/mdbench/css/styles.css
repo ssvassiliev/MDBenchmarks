@@ -22,6 +22,12 @@ body {
     font-weight: 300;
   }
 
+  h4 {
+    color: #ccc;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: 300;
+  }
+
   h5 {
     color: #85b737;
     font-family: Helvetica, Arial, sans-serif;
@@ -39,3 +45,4 @@ body {
    padding: 0;
 }
 
+.div {border-radius: 0;}

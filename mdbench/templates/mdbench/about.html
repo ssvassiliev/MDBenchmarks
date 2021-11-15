@@ -1,10 +1,11 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<div class="p-4">
-<h3>About</h3>
-<p>Benchmarking is essential for designing optimal MD workflows. A poor choice of job submission or simulation parameters can degrade performance and waste computing resources. However, a systematic benchmarking of numerous MD engines in a complex Compute Canada environment with heterogeneous hardware is a daunting and time-consuming task.</p>
-
-<p>This web portal aims to help researchers to optimize usage of hardware resources and, at the same time, keep simulation time to a minimum. We provide an up-to-date performance comparison of all installed software packages and a searchable benchmark database. Each entry includes simulation details such as the hardware description, example submission scripts, and simulation input files. Currently, the database has benchmarks for three major MD software packages: AMBER, GROMACS, and NAMD. This data allows to estimate resources required for simulations and helps new users to get started with MD simulations.</p>
-<div>
+<div class="py-4" style="color: #fff; background-image: url('/media/images/fig3.png');">
+    <h3>ABOUT</h3>
+    <div class="text-center" style="background-color: #000; opacity: 0.5; margin: 15px; padding: 35px;">
+        Benchmarking is essential for designing optimal MD workflows. A poor choice of job submission or simulation parameters can degrade performance and waste computing resources. However, a systematic benchmarking of numerous MD engines in a complex HPC environment with heterogeneous hardware is a daunting and time-consuming task.<p></p>
+        This web portal aims to help researchers to optimize usage of hardware resources and, at the same time, keep simulation time to a minimum. We provide an up-to-date performance comparison of all installed software packages and a searchable benchmark database. Each entry includes simulation details such as the hardware description, example submission scripts, and simulation input files. Currently, the database has benchmarks for three major MD software packages: AMBER, GROMACS, and NAMD. This data allows to estimate resources required for simulations and helps new users to get started with MD simulations.
+    </div>
+</div>
 {% endblock content %}

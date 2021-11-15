@@ -53,7 +53,7 @@ def QuerySetBarPlot(qs, fig_title, n=1000):
     fig.update_layout(
         paper_bgcolor='#eee',
         template="ggplot2",
-        titlefont=dict(size=28, color='#85b737', family='Arial, sans-serif;'),
+        titlefont=dict(size=28, color='#3f8b64', family='Arial, sans-serif;'),
         title=figTitle,
         title_x=0.0,
         yaxis_title="Benchmark ID",

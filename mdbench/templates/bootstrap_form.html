@@ -1,7 +1,7 @@
 {% extends "base_generic.html" %}
 
 {%block content%}
-<div class="card border-0 text-left pt-4" style="background-image: url('/media/images/fig3.png');">
+<div class="card border-0 text-left pt-4" style="background-image: url('/media/images/fig3.png'); border-radius: 0;">
     <div class="card-title">
         <h3>FILTERS</h3>
     </div>
@@ -87,21 +87,21 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-12 pt-4">
+        <div class="col-sm-3 input-group-addon my-4">
             <span>
-            <button class="mx-auto d-block btn btn-light btn-sm" style="color: #666; background-color: #b7b796;"  type="submit">Apply <i class="fa fa-search"></i></button>
+                <button class="mt-2 btn btn-sm btn-outline-light border-left-0 border" type="submit"><i class="fa fa-search"></i></button>
             </span>
         </div>
         </form>
     </div>
-    <p> Query: {{querystr}}</p>
+    <p style="color: #fff;">Applied filters: {{querystr}}</p>
 </div>
 </div>
 
 {% endblock content%}
 {% block content2%}
 
-<div class="card border-0 text-center" style="background-color: #85b737;" >
+<div class="card border-0 text-center" style="background-color: #3f8b64;" >
   <div class="card-body">
     <h3 class="card-title" style="color: #fff">SOFTWARE PERFORMANCE</h3>
   </div>
