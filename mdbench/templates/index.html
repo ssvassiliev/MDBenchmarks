@@ -1,36 +1,51 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<div class="pt-4 border-0 text-left" style="background-image: url('/media/images/fig3.png'); height:200px;" >
-<h3>SUMMARY</h3>
- 
 
+<div class="pt-4 border-0 text-left" style="background-image: url('/media/images/fig3.png'); height:200px;" >
+  <h3>SUMMARY</h3>
 </div>
 {% endblock %}
 
 {% block content2 %}
-<div class="card border-0 text-center" style="background-color: #3f8b64;" >
-  <div class="card-body">
-    <h3 class="card-title" style="color: #fff">SOFTWARE PERFORMANCE</h3>
-  </div>
+<div style="background-color: #222529">
+    <div class="container-fluid pt-3">
+        <div class="row justify-content-center">
+            <div class="col-auto" >
+                  <div class="card" style="background-color: #35754c;" >
+                       <div class="card-body">
+                          <h3 class="card-title" style="color: #fff">MAXIMUM SIMULATION SPEED</h3>
+                           <div class="card-img-top">
+                              {{figure|safe}}
+                           </div>
+                       </div>
+                 </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="card px-4 border-0" style="background-color: #eee">
-  <div class="py-2 card-img-top">
-    {{figure|safe}}
-  </div>
+<div style="background-color: #222529">
+    <div class="container-fluid pt-3">
+        <div class="row justify-content-center">
+            <div class="col-auto" >
+                <div class="card" style="background-color: #35754c;" >
+                    <div class="card-body">
+                        <h3 class="card-title" style="color: #fff">BENCHMARK RESULTS</h3>
+                        <div style="background-color: #eee;">
+                            <table class="table table-hover">
+                                {% include "mdbench/t_head.html" %}
+                                {% for benchmark in benchmarks %}
+                                <tr>
+                                    {% include "mdbench/t_data.html" %}
+                                </tr>   
+                                {% endfor %}
+                            </table>
+                         </div>   
+                     </div>
+                 </div>
+            </div>
+        </div>
+    </div>
 </div>
-
-<div class="px-2">
-<table class="table table-sm table-hover">
-    {% include "mdbench/t_head.html" %}
-    {% for benchmark in benchmarks %}
-    <tr>
-   {% include "mdbench/t_data.html" %}
-   </tr>   
-    {% endfor %} 
-</table>
-</div>
-
-
 {% endblock %}

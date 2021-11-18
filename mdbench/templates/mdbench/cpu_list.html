@@ -1,9 +1,15 @@
 {% extends "base_generic.html" %}
 {% block content %}
+
+<div class="py-4" style="background-image: url('/media/images/fig3.png'); height: 200px;">
+  <h3>CPU MODELS</h3>
+</div>
+{% endblock content %}
+
+{% block content2 %}
 {% if cpu_list %}
-<div class="p-4">
-  <h3>CPU models</h3>
-  <table class="table table-sm table-hover">
+<div>
+  <table class="table table-sm table-hover table-compact">
     <thead class="table-secondary">
       <th>ID</th>     
       <th>Name</th> 

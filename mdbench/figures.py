@@ -2,9 +2,10 @@ import plotly.graph_objects as go
 
 def QuerySetBarPlot(qs, fig_title, n=1000):
     figTitle=dict(text=fig_title,)
-    x_data, y_data, e_data, lab, ids = ([] for _ in range(5))
+    x_data, y_data, e_data, lab, ids = ([] for _ in range(5)) 
     h=220
-    w=1000
+    w=1150
+
     for c,i in enumerate(qs):
         if c >=n:
             break
@@ -32,7 +33,7 @@ def QuerySetBarPlot(qs, fig_title, n=1000):
                 i.site.name
                 )
         h+=25
-    
+
     fig = go.FigureWidget(layout = go.Layout(height = h, width = w))
     fig.add_trace(
         go.Bar(
@@ -51,10 +52,17 @@ def QuerySetBarPlot(qs, fig_title, n=1000):
     )
 
     fig.update_layout(
+        autosize=False,  
+        margin=dict(
+        l=50,
+        r=50,
+        b=80,
+        t=40,
+        pad=4
+    ),    
         paper_bgcolor='#eee',
         template="ggplot2",
         titlefont=dict(size=28, color='#3f8b64', family='Arial, sans-serif;'),
-        title=figTitle,
         title_x=0.0,
         yaxis_title="Benchmark ID",
         xaxis_title="Speed, ns/day",       

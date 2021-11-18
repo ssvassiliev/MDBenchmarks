@@ -1,9 +1,13 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
+<div class="py-4" style="background-image: url('/media/images/fig3.png'); height: 200px">
+  <h3>SOFTWARE</h3>
+</div>
+{% endblock%}
+
+{% block content2 %}
 {% if software_list %}
-<div class="p-4">
-  <h3>Software</h3>
   <table class="table table-sm table-hover">
     <thead class="table-secondary">
       <th>ID</th>     
