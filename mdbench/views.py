@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views import generic
 from django.db.models import Q
 from .filters import BenchmarkInstanceFilter
-from .figures import  QuerySetBarPlot
+from .figures import QuerySetBarPlot, QuerySetBarPlotCostCPU, QuerySetBarPlotCostGPU 
 import plotly.express as px 
 import pandas as pd        
 import plotly.graph_objects as go
@@ -30,7 +30,7 @@ def BootstrapFilterView(request):
     if arch_exact_query != '' and arch_exact_query is not None:
         qs = qs.filter(software__instruction_set__exact=arch_exact_query)
     if dataset_exact_query != '' and dataset_exact_query is not None:
-        qs = qs.filter(benchmark__name__exact=dataset_exact_query)
+        qs = qs.filter(software__instruction_set__exact=arch_exact_query)
 
     que=[]
     que.append(software_contains_query or "_")
@@ -44,6 +44,8 @@ def BootstrapFilterView(request):
 
     caption='SIMULATION SPEED' 
     plot_div=QuerySetBarPlot(qs, caption, 20)
+    plot_div_cost_cpu=QuerySetBarPlotCostCPU(qs, caption, 20)
+    plot_div_cost_gpu=QuerySetBarPlotCostGPU(qs, caption, 20)
 
     num_software = Software.objects.all().count()
     num_benchmarks = BenchmarkInstance.objects.all().count()
@@ -59,7 +61,9 @@ def BootstrapFilterView(request):
         'num_gpu_types': num_gpu_types,  
         'queryset' : qs,
         'querystr': query_string,
-        'plot_div': plot_div
+        'plot_div': plot_div,
+        'plot_div_cost_cpu': plot_div_cost_cpu,     
+        'plot_div_cost_gpu': plot_div_cost_gpu        
         }
     return render(request, 'bootstrap_form.html', context)
 
@@ -81,6 +85,8 @@ def index(request):
     sorted_bench = sorted(bench, key=lambda BenchmarkInstance: BenchmarkInstance.rate_max, reverse=True)
     caption='MAXIMUM SIMULATION SPEED'
     plot_div=QuerySetBarPlot(sorted_bench, caption, 20)
+    plot_div_cost_cpu=QuerySetBarPlotCostCPU(sorted_bench, caption, 20)
+    plot_div_cost_gpu=QuerySetBarPlotCostGPU(sorted_bench, caption, 20)
 
     context = {
         'num_software': num_software,
@@ -89,6 +95,8 @@ def index(request):
         'num_cpu_types': num_cpu_types,   
         'num_gpu_types': num_gpu_types,  
         'figure': plot_div,
+        'figure_cost_cpu': plot_div_cost_cpu,
+        'figure_cost_gpu': plot_div_cost_gpu,        
         'benchmarks': sorted_bench,
     }
 

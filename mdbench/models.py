@@ -47,8 +47,9 @@ class SerialBenchmarkInstance(models.Model):
     rate_min = models.FloatField(help_text='Simulation speed, ns/day')
     rate_max = models.FloatField(help_text='Simulation speed, ns/day')
     site = models.ForeignKey('Site', on_delete=models.RESTRICT, null=True)
+    notes =  models.TextField(blank=True)
     def __str__(self):
-        return f'{self.id}. {self.benchmark}; {self.software}; {self.cpu}; {self.gpu}'
+        return f'{self.id}. {self.benchmark}; {self.software}; {self.cpu}; {self.gpu}; {self.site}'
     
 class BenchmarkInstance(models.Model):
     class Meta:
@@ -66,6 +67,7 @@ class BenchmarkInstance(models.Model):
     serial = models.ForeignKey('SerialBenchmarkInstance', on_delete=models.RESTRICT, null=True)
     cpu_efficiency = models.FloatField(editable=False)
     site = models.ForeignKey('Site', on_delete=models.RESTRICT, null=True)
+    notes =  models.TextField(blank=True)
     
     @property
     def computed_efficiency(self):
@@ -77,14 +79,26 @@ class BenchmarkInstance(models.Model):
         if self.resource.ngpu: 
             return 0
         else:
-            return round(1000 * self.resource.ncpu * self.resource.ntasks / (365 * self.rate_max),2) 
+            c_years=1000 * self.resource.ncpu * self.resource.ntasks / (365 * self.rate_max)
+            return round(c_years,2) 
     
     @property
     def gpu_year(self):
         if self.resource.ngpu: 
-            return round(1000 * self.resource.ngpu / (365 * self.rate_max),3) 
+            g_years=1000 * self.resource.ngpu / (365 * self.rate_max)
+            return round(g_years,3) 
         else:
             return 0
+
+    @property
+    def cpu_gpu_year(self):
+        if self.resource.ngpu: 
+            g_years=1000 * self.resource.ngpu / (365 * self.rate_max)
+            return round(g_years*32,4) 
+        else:
+            c_years=1000 * self.resource.ncpu * self.resource.ntasks / (365 * self.rate_max)
+            return round(c_years,4) 
+        
 
     def save(self, *args, **kwargs):
         self.cpu_efficiency = self.computed_efficiency
