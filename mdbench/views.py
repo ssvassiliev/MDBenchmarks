@@ -13,8 +13,9 @@ def download_csv(request):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="benchmarks.csv"' # your filename
     writer = csv.writer(response)
-    for i in range(len(csv_data)):
-        writer.writerow(csv_data[i])
+    writer.writerows(csv_data)
+    #for i in range(len(csv_data)):
+    #    writer.writerow(csv_data[i])
     return response
 
 def BootstrapFilterView(request):

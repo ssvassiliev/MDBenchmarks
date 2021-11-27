@@ -9,7 +9,7 @@ def QuerySetWriteCSV(qs):
     global csv_data
     csv_data.clear()
 
-    header=['ID','Date updated','Software','Module','Version','Toolchain','Arch','Data','Speed','CPU eff','Tasks','Cores','Nodes','GPUs','NVLink','Site']
+    csv_data.append(['ID','Date','Software','Module','Version','Toolchain','Arch','Data','Speed','CPU_eff','Tasks','Cores','Nodes','GPUs','NVLink','Site'])
 
     for i in qs:
         row=[]
@@ -29,8 +29,7 @@ def QuerySetWriteCSV(qs):
         row.append(str(i.resource.ngpu))    
         row.append(i.resource.nvlink)   
         row.append(i.site.name)        
-        header.append(row)
-    csv_data.append(header)
+        csv_data.append(row)
     return()
 
 
