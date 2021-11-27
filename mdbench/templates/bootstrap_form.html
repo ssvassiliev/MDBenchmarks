@@ -94,7 +94,15 @@
         </div>
         </form>
     </div>
-    <p style="color: #fff;">Applied filters: {{querystr}}</p>
+    <div class="row">
+        <div class="col-sm-6">
+            <p style="color: #85b737;">FILTERS: {{querystr}}</p>
+        </div>
+        <div class="col-sm-6">
+            <button class="btn btn-sm btn-outline-light"> <a style="color: #aaa" href="{% url 'export' %}">Download CSV</a> </button> </div>
+            {{ csv_file }}
+        </div>
+    </div>
 </div>
 </div>
 {% endblock content%}
@@ -107,7 +115,7 @@
             <div class="col-auto" >
                  <div class="card" style="background-color: #35754c;" >
                     <div class="card-body">
-                        <h3 class="card-title" style="color: #fff">SIMULATION SPEED</h3>
+                        <h3 class="card-title" style="color: #fff">SOFTWARE PERFORMANCE</h3>
                         <div class="card-img-top">
                             {% autoescape off %}
                             {{ plot_div }}
@@ -126,7 +134,7 @@
             <div class="col-auto" >
                  <div class="card" style="background-color: #35754c;" >
                     <div class="card-body">
-                        <h3 class="card-title" style="color: #fff">SIMULATION COST (CPU)</h3>
+                        <h3 class="card-title" style="color: #fff">COST OF SIMULATIONS USING CPU</h3>
                         <div class="card-img-top">
                             {% autoescape off %}
                             {{ plot_div_cost_cpu }}
@@ -145,7 +153,7 @@
             <div class="col-auto" >
                  <div class="card" style="background-color: #35754c;" >
                     <div class="card-body">
-                        <h3 class="card-title" style="color: #fff">SIMULATION COST (GPU)</h3>
+                        <h3 class="card-title" style="color: #fff">COST OF SIMULATIONS USING GPU</h3>
                         <div class="card-img-top">
                             {% autoescape off %}
                             {{ plot_div_cost_gpu }}
@@ -164,7 +172,9 @@
             <div class="col-auto" >
                 <div class="card" style="background-color: #35754c;">
                     <div class="card-body">
-                        <h3 class="card-title" style="color: #fff">BENCHMARK DETAILS</h3>
+                        <div class="card-title" style="color: #fff"> <h3>BENCHMARK DETAILS</h3>
+                        <button class="btn btn-sm btn-outline-light"> <a style="color: #aaa" href="{% url 'export' %}">Download CSV</a> </button> </div>
+                        {{ csv_file }}
                          <div style="background-color: #eee;">
                              <table class="table table-hover">
                                  {% include "mdbench/t_head.html" %}

@@ -3,8 +3,10 @@ from django.urls.conf import re_path
 from . import views
 from django_filters.views import FilterView
 from .filters import BenchmarkInstanceFilter
+from .views import download_csv
 
 urlpatterns = [
+    path('export/', download_csv, name='export'),
     path('bform/', views.BootstrapFilterView, name='bootstrapfilter'),
     path('search/', views.BootstrapFilterView, name='searcher'),
     path('', views.index, name='index'),

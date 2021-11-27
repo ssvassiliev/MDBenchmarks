@@ -1,4 +1,38 @@
 import plotly.graph_objects as go
+import csv
+from django.http import HttpResponse
+from django.contrib.auth.models import User
+
+csv_data = []
+
+def QuerySetWriteCSV(qs):
+    global csv_data
+    csv_data.clear()
+
+    header=['ID','Date updated','Software','Module','Version','Toolchain','Arch','Data','Speed','CPU eff','Tasks','Cores','Nodes','GPUs','NVLink','Site']
+
+    for i in qs:
+        row=[]
+        row.append(str(i.id))
+        row.append(str(i.updated_at.date()))
+        row.append(i.software.name)
+        row.append(i.software.module)
+        row.append(i.software.module_version)
+        row.append(i.software.toolchain)   
+        row.append(i.software.instruction_set)
+        row.append(i.benchmark.name)
+        row.append(str(i.rate_max))
+        row.append(str(i.cpu_efficiency))
+        row.append(str(i.resource.ntasks))
+        row.append(str(i.resource.ncpu))
+        row.append(str(i.resource.nnodes))
+        row.append(str(i.resource.ngpu))    
+        row.append(i.resource.nvlink)   
+        row.append(i.site.name)        
+        header.append(row)
+    csv_data.append(header)
+    return()
+
 
 def QuerySetBarPlot(qs, fig_title, n=1000):
     # Limit plot to first n benchmarks
@@ -105,12 +139,13 @@ def QuerySetBarPlotCostCPU(qs, fig_title, n=1000):
                 i.site.name
                 )            
             h+=25
-
+    bw=min((c1+3)*25/h, 0.8)
     fig = go.FigureWidget(layout = go.Layout(height = h, width = w))
     fig.add_trace(
         go.Bar(
         x = y_data, 
         y = x_data, 
+        width=bw,
         text = lab,
         hovertemplate = "Cost=%{x}<br>Speed=%{marker.color}<extra></extra>",
         orientation = 'h',
@@ -136,7 +171,7 @@ def QuerySetBarPlotCostCPU(qs, fig_title, n=1000):
         titlefont=dict(size=28, color='#3f8b64', family='Arial, sans-serif;'),
         title_x=0.0,
         yaxis_title="Benchmark ID",
-        xaxis_title="CPU years per 1000 ns",       
+        xaxis_title="Core years per 1000 ns",       
         yaxis = dict(autorange="reversed",
         tickmode = 'array', 
         tickvals = x_data, 
@@ -175,12 +210,13 @@ def QuerySetBarPlotCostGPU(qs, fig_title, n=1000):
                 "<sub>"+i.gpu.model+" </sub>"+i.site.name
                 )            
             h+=25
-
+    bw=min((c1+3)*25/h, 0.8)
     fig = go.FigureWidget(layout = go.Layout(height = h, width = w))
     fig.add_trace(
         go.Bar(
         x = y_data, 
-        y = x_data, 
+        y = x_data,
+        width=bw, 
         text = lab,
         hovertemplate = "Cost=%{x}<br>Speed=%{marker.color}<extra></extra>",
         orientation = 'h',

@@ -2,11 +2,20 @@ from django.shortcuts import render
 from django.views import generic
 from django.db.models import Q
 from .filters import BenchmarkInstanceFilter
-from .figures import QuerySetBarPlot, QuerySetBarPlotCostCPU, QuerySetBarPlotCostGPU 
+from .figures import * 
 import plotly.express as px 
 import pandas as pd        
 import plotly.graph_objects as go
 from .models import Benchmark, Software, BenchmarkInstance, CPU, GPU
+
+def download_csv(request):
+    global csv_data
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="benchmarks.csv"' # your filename
+    writer = csv.writer(response)
+    for i in range(len(csv_data)):
+        writer.writerow(csv_data[i])
+    return response
 
 def BootstrapFilterView(request):
     qs = BenchmarkInstance.objects.all().order_by("-rate_max")
@@ -43,9 +52,10 @@ def BootstrapFilterView(request):
     query_string=" ".join(que)
 
     caption='SIMULATION SPEED' 
-    plot_div=QuerySetBarPlot(qs, caption, 20)
-    plot_div_cost_cpu=QuerySetBarPlotCostCPU(qs, caption, 20)
-    plot_div_cost_gpu=QuerySetBarPlotCostGPU(qs, caption, 20)
+    plot_div=QuerySetBarPlot(qs, caption, 30)
+    plot_div_cost_cpu=QuerySetBarPlotCostCPU(qs, caption, 30)
+    plot_div_cost_gpu=QuerySetBarPlotCostGPU(qs, caption, 30)
+    QuerySetWriteCSV(qs)
 
     num_software = Software.objects.all().count()
     num_benchmarks = BenchmarkInstance.objects.all().count()
@@ -63,9 +73,10 @@ def BootstrapFilterView(request):
         'querystr': query_string,
         'plot_div': plot_div,
         'plot_div_cost_cpu': plot_div_cost_cpu,     
-        'plot_div_cost_gpu': plot_div_cost_gpu        
+        'plot_div_cost_gpu': plot_div_cost_gpu,  
         }
     return render(request, 'bootstrap_form.html', context)
+
 
 def index(request):
     """View function for home page of site."""
