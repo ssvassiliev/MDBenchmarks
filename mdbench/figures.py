@@ -1,4 +1,5 @@
 import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 import csv
 from django.http import HttpResponse
 from django.contrib.auth.models import User
@@ -38,7 +39,8 @@ def QuerySetBarPlot(qs, fig_title, n=1000):
     figTitle=dict(text=fig_title,)
     x_data, y_data, e_data, lab, ids = ([] for _ in range(5)) 
     h=220
-    w=1150
+    w=860
+    #w=1150
 
     for c,i in enumerate(qs):
         if c >=n:
@@ -117,12 +119,14 @@ def QuerySetBarPlotCostCPU(qs, fig_title, n=1000):
     figTitle=dict(text=fig_title,)
     x_data, y_data, e_data, lab, ids = ([] for _ in range(5)) 
     h=220
-    w=1150
+    w=550
 
     c1=0
+    max_speed=0
     for c,i in enumerate(qs):
         if c >=n:
             break
+        max_speed=max(max_speed, i.rate_max)
         if i.gpu is None:
             ids.append(str(i.id))
             x_data.append(c1)
@@ -139,6 +143,7 @@ def QuerySetBarPlotCostCPU(qs, fig_title, n=1000):
                 )            
             h+=25
     bw=min((c1+3)*25/h, 0.8)
+    
     fig = go.FigureWidget(layout = go.Layout(height = h, width = w))
     fig.add_trace(
         go.Bar(
@@ -150,6 +155,7 @@ def QuerySetBarPlotCostCPU(qs, fig_title, n=1000):
         orientation = 'h',
         marker = dict(
             cmin = 0,
+            cmax = max_speed,
             color = e_data,
             colorscale = 'algae', 
             colorbar = dict(thickness = 20, title="Speed"))
@@ -187,12 +193,14 @@ def QuerySetBarPlotCostGPU(qs, fig_title, n=1000):
     figTitle=dict(text=fig_title,)
     x_data, y_data, e_data, lab, ids = ([] for _ in range(5)) 
     h=220
-    w=1150
+    w=550
 
     c1=0
+    max_speed=0
     for c,i in enumerate(qs):
         if c >=n:
             break
+        max_speed=max(max_speed, i.rate_max)
         if i.gpu is not None:
             ids.append(str(i.id))
             x_data.append(c1)
@@ -221,6 +229,7 @@ def QuerySetBarPlotCostGPU(qs, fig_title, n=1000):
         orientation = 'h',
         marker = dict(
             cmin = 0,
+            cmax = max_speed,
             color = e_data,
             colorscale = 'algae', 
             colorbar = dict(thickness = 20, title="Speed"))

@@ -53,9 +53,9 @@ def BootstrapFilterView(request):
     query_string=" ".join(que)
 
     caption='SIMULATION SPEED' 
-    plot_div=QuerySetBarPlot(qs, caption, 30)
-    plot_div_cost_cpu=QuerySetBarPlotCostCPU(qs, caption, 30)
-    plot_div_cost_gpu=QuerySetBarPlotCostGPU(qs, caption, 30)
+    plot_div=QuerySetBarPlot(qs, caption, 20)
+    plot_div_cost_cpu=QuerySetBarPlotCostCPU(qs, caption, 20)
+    plot_div_cost_gpu=QuerySetBarPlotCostGPU(qs, caption, 20)
     QuerySetWriteCSV(qs)
 
     num_software = Software.objects.all().count()

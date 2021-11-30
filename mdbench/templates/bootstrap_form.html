@@ -115,7 +115,7 @@
             <div class="col-auto" >
                  <div class="card" style="background-color: #35754c;" >
                     <div class="card-body">
-                        <h3 class="card-title" style="color: #fff">SOFTWARE PERFORMANCE</h3>
+                        <h3 class="card-title">SIMULATION SPEED</h3>
                         <div class="card-img-top">
                             {% autoescape off %}
                             {{ plot_div }}
@@ -128,13 +128,15 @@
     </div>
 </div>
 
+<div class="row gx-0" style="background-color: #222529">
+<div class="col-sm-6">
 <div style="background-color: #222529">
     <div class="container-fluid pt-3">
         <div class="row justify-content-center">
             <div class="col-auto" >
                  <div class="card" style="background-color: #35754c;" >
                     <div class="card-body">
-                        <h3 class="card-title" style="color: #fff">COST OF SIMULATIONS USING CPU</h3>
+                        <h3 class="card-title">COST OF SIMULATIONS USING CPU</h3>
                         <div class="card-img-top">
                             {% autoescape off %}
                             {{ plot_div_cost_cpu }}
@@ -146,14 +148,16 @@
         </div>
     </div>
 </div>
+</div>
 
+<div class="col-sm-6">
 <div style="background-color: #222529">
     <div class="container-fluid pt-3">
         <div class="row justify-content-center">
             <div class="col-auto" >
                  <div class="card" style="background-color: #35754c;" >
                     <div class="card-body">
-                        <h3 class="card-title" style="color: #fff">COST OF SIMULATIONS USING GPU</h3>
+                        <h3 class="card-title">COST OF SIMULATIONS USING CPU</h3>
                         <div class="card-img-top">
                             {% autoescape off %}
                             {{ plot_div_cost_gpu }}
@@ -165,6 +169,9 @@
         </div>
     </div>
 </div>
+    </div>
+</div>
+
 
 <div style="background-color:  #222529">
     <div class="container-fluid pt-3">
@@ -172,7 +179,7 @@
             <div class="col-auto" >
                 <div class="card" style="background-color: #35754c;">
                     <div class="card-body">
-                        <div class="card-title" style="color: #fff"> <h3>BENCHMARK DETAILS</h3>
+                        <div class="card-title"><h3>BENCHMARK DETAILS</h3>
                         <button class="btn btn-sm btn-outline-light"> <a style="color: #aaa" href="{% url 'export' %}">Download CSV</a> </button> </div>
                         {{ csv_file }}
                          <div style="background-color: #eee;">

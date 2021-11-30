@@ -48,6 +48,7 @@ class SerialBenchmarkInstance(models.Model):
     rate_max = models.FloatField(help_text='Simulation speed, ns/day')
     site = models.ForeignKey('Site', on_delete=models.RESTRICT, null=True)
     notes =  models.TextField(blank=True)
+
     def __str__(self):
         return f'{self.id}. {self.benchmark}; {self.software}; {self.cpu}; {self.gpu}; {self.site}'
     
@@ -99,7 +100,6 @@ class BenchmarkInstance(models.Model):
             c_years=1000 * self.resource.ncpu * self.resource.ntasks / (365 * self.rate_max)
             return round(c_years,4) 
         
-
     def save(self, *args, **kwargs):
         self.cpu_efficiency = self.computed_efficiency
         super(BenchmarkInstance, self).save(*args, **kwargs)

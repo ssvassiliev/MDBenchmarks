@@ -2,8 +2,10 @@
 
 {% block content %}
 
-<div class="pt-4 border-0 text-left" style="background-image: url('/media/images/fig3.png'); height:200px;" >
+<div class="pt-4 border-0 text-left" style="background-image: url('/media/images/fig3.png'); height:360px;" >
+<div class="col-sm-10 pt-5">
   <h3>SUMMARY</h3>
+  <h5 class="mt-3">A poor choice of job submission or simulation parameters can lead to a poor performance and waste of computing resources. However, a systematic benchmarking of numerous MD engines in a complex HPC environment with heterogeneous hardware is a daunting and time-consuming task. <p class="mt-4">This web portal aims to help you to accelerate research and optimize the usage of hardware resources. To get a quick idea of what time you need for simulation, check out the figure below showing the maximum simulation speed of all tested MD executables attained on CC systems</p></div> 
 </div>
 {% endblock %}
 
@@ -13,9 +15,12 @@
     <div class="container-fluid pt-3">
         <div class="row justify-content-center">
             <div class="col-auto" >
-                  <div class="card" style="background-color: #35754c;" >
+                  <div class="card" style="background-color: #35754c; width: 900px;" >
                        <div class="card-body">
-                          <h3 class="card-title" style="color: #fff">THE BEST PERFORMANCE</h3>
+                           <h3 class="card-title">MAXIMUM SIMULATION SPEED OF ALL SOFTWARE MODULES</h3>
+                           <div class="card-text" style="color: #eee;">
+                              <p></p>
+                           </div>
                            <div class="card-img-top">
                               {{figure|safe}}
                            </div>
@@ -26,13 +31,16 @@
     </div>
 </div>
 
+
+<div class="row gx-0" style="background-color: #222529">
+<div class="col-sm-6">
 <div style="background-color: #222529">
     <div class="container-fluid pt-3">
         <div class="row justify-content-center">
             <div class="col-auto" >
                   <div class="card" style="background-color: #35754c;" >
                        <div class="card-body">
-                          <h3 class="card-title" style="color: #fff">COST OF SIMULATIONS USING CPU</h3>
+                          <h3 class="card-title">COST OF SIMULATIONS USING CPU</h3>
                            <div class="card-img-top">
                              {% autoescape off %}
                               {{ figure_cost_cpu }}
@@ -44,14 +52,16 @@
         </div>
     </div>
 </div>
+</div>
 
+<div class="col-sm-6">
 <div style="background-color: #222529">
     <div class="container-fluid pt-3">
         <div class="row justify-content-center">
             <div class="col-auto" >
                   <div class="card" style="background-color: #35754c;" >
                        <div class="card-body">
-                          <h3 class="card-title" style="color: #fff">COST OF SIMULATIONS USING GPU</h3>
+                          <h3 class="card-title">COST OF SIMULATIONS USING GPU</h3>
                            <div class="card-img-top">
                              {% autoescape off %}
                               {{ figure_cost_gpu }}
@@ -63,6 +73,10 @@
         </div>
     </div>
 </div>
+    </div>
+</div>
+
+
 
 <div style="background-color: #222529">
     <div class="container-fluid pt-3">
@@ -70,7 +84,7 @@
             <div class="col-auto" >
                 <div class="card" style="background-color: #35754c;" >
                     <div class="card-body">
-                        <h3 class="card-title" style="color: #fff">BENCHMARK DETAILS</h3>
+                        <h3 class="card-title">BENCHMARK DETAILS</h3>
                         <div style="background-color: #eee;">
                             <table class="table table-hover">
                                 {% include "mdbench/t_head.html" %}
