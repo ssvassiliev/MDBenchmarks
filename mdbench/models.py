@@ -67,6 +67,8 @@ class BenchmarkInstance(models.Model):
     rate_max = models.FloatField(help_text='Simulation speed, ns/day')
     serial = models.ForeignKey('SerialBenchmarkInstance', on_delete=models.RESTRICT, null=True)
     cpu_efficiency = models.FloatField(editable=False)
+    core_year = models.FloatField(editable=False)
+    gpu_year = models.FloatField(editable=False)   
     site = models.ForeignKey('Site', on_delete=models.RESTRICT, null=True)
     notes =  models.TextField(blank=True)
     
@@ -76,7 +78,7 @@ class BenchmarkInstance(models.Model):
             (self.serial.rate_max * self.resource.ncpu * self.resource.ntasks),1) 
     
     @property
-    def core_year(self):
+    def computed_core_year(self):
         if self.resource.ngpu: 
             return 0
         else:
@@ -84,7 +86,7 @@ class BenchmarkInstance(models.Model):
             return round(c_years,2) 
     
     @property
-    def gpu_year(self):
+    def computed_gpu_year(self):
         if self.resource.ngpu: 
             g_years=1000 * self.resource.ngpu / (365 * self.rate_max)
             return round(g_years,3) 
@@ -99,8 +101,13 @@ class BenchmarkInstance(models.Model):
         else:
             c_years=1000 * self.resource.ncpu * self.resource.ntasks / (365 * self.rate_max)
             return round(c_years,4) 
+
+
+
         
     def save(self, *args, **kwargs):
+        self.core_year = self.computed_core_year
+        self.gpu_year = self.computed_gpu_year      
         self.cpu_efficiency = self.computed_efficiency
         super(BenchmarkInstance, self).save(*args, **kwargs)
 

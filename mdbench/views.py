@@ -54,6 +54,7 @@ def BootstrapFilterView(request):
 
     caption='SIMULATION SPEED' 
     plot_div=QuerySetBarPlot(qs, caption, 20)
+    
     plot_div_cost_cpu=QuerySetBarPlotCostCPU(qs, caption, 20)
     plot_div_cost_gpu=QuerySetBarPlotCostGPU(qs, caption, 20)
     QuerySetWriteCSV(qs)

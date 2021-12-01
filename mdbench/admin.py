@@ -26,7 +26,8 @@ class SoftwareAdmin(admin.ModelAdmin):
 
 @admin.register(BenchmarkInstance)
 class BenchmarkInstanceAdmin(admin.ModelAdmin):
-    list_display = ("benchmark", "software")
+    readonly_fields = ('id',)
+    list_display = ("id", "benchmark", "software")
     list_filter = ("software__module","software__instruction_set")
     autocomplete_fields=("resource", "serial", "software")
     search_fields=("software_name",)

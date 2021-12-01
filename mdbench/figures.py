@@ -40,7 +40,6 @@ def QuerySetBarPlot(qs, fig_title, n=1000):
     x_data, y_data, e_data, lab, ids = ([] for _ in range(5)) 
     h=220
     w=860
-    #w=1150
 
     for c,i in enumerate(qs):
         if c >=n:
@@ -117,11 +116,12 @@ def QuerySetBarPlot(qs, fig_title, n=1000):
 def QuerySetBarPlotCostCPU(qs, fig_title, n=1000):
     # Limit plot to first n benchmarks
     figTitle=dict(text=fig_title,)
+    print(qs)
     x_data, y_data, e_data, lab, ids = ([] for _ in range(5)) 
     h=220
     w=550
 
-    c1=0
+    c=c1=0
     max_speed=0
     for c,i in enumerate(qs):
         if c >=n:
@@ -138,8 +138,7 @@ def QuerySetBarPlotCostCPU(qs, fig_title, n=1000):
                 str(i.software.id) +" </sup>"+
                 str(i.resource.ntasks)+"<sub>T </sub>"+":"+
                 str(i.resource.ncpu)+"<sub>C </sub>"+":"+
-                str(i.resource.nnodes)+"<sub>N </sub>"+":"+
-                i.site.name
+                str(i.resource.nnodes)+"<sub>N </sub>"+":"+                i.site.name
                 )            
             h+=25
     bw=min((c1+3)*25/h, 0.8)
@@ -195,7 +194,7 @@ def QuerySetBarPlotCostGPU(qs, fig_title, n=1000):
     h=220
     w=550
 
-    c1=0
+    c=c1=0
     max_speed=0
     for c,i in enumerate(qs):
         if c >=n:
@@ -203,7 +202,7 @@ def QuerySetBarPlotCostGPU(qs, fig_title, n=1000):
         max_speed=max(max_speed, i.rate_max)
         if i.gpu is not None:
             ids.append(str(i.id))
-            x_data.append(c1)
+            x_data.append(c1) 
             y_data.append(i.gpu_year)
             e_data.append(i.rate_max)
             c1+=1
