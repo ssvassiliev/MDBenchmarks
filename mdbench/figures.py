@@ -3,6 +3,7 @@ from plotly.subplots import make_subplots
 import csv
 from django.http import HttpResponse
 from django.contrib.auth.models import User
+import pandas as pd
 
 csv_data = []
 
@@ -39,7 +40,7 @@ def QuerySetBarPlot(qs, fig_title, n=1000):
     figTitle=dict(text=fig_title,)
     x_data, y_data, e_data, lab, ids = ([] for _ in range(5)) 
     h=220
-    w=860
+    w=600
 
     for c,i in enumerate(qs):
         if c >=n:
@@ -98,7 +99,8 @@ def QuerySetBarPlot(qs, fig_title, n=1000):
         paper_bgcolor='#eee',
         template="ggplot2",
         titlefont=dict(size=28, color='#3f8b64', family='Arial, sans-serif;'),
-        title_x=0.0,
+        title="Higher is better",
+        title_x=0.02,
         yaxis_title="Benchmark ID",
         xaxis_title="Speed, ns/day",       
         yaxis = dict(autorange="reversed",
@@ -107,7 +109,6 @@ def QuerySetBarPlot(qs, fig_title, n=1000):
         ticktext = ids,
                     )
         )
-    
     plot_div = fig.to_html(full_html=False)
     return(plot_div)
 
@@ -116,10 +117,9 @@ def QuerySetBarPlot(qs, fig_title, n=1000):
 def QuerySetBarPlotCostCPU(qs, fig_title, n=1000):
     # Limit plot to first n benchmarks
     figTitle=dict(text=fig_title,)
-    print(qs)
-    x_data, y_data, e_data, lab, ids = ([] for _ in range(5)) 
+    x_data, y_data, speed_data, lab, ids = ([] for _ in range(5)) 
     h=220
-    w=550
+    w=600
 
     c=c1=0
     max_speed=0
@@ -131,32 +131,37 @@ def QuerySetBarPlotCostCPU(qs, fig_title, n=1000):
             ids.append(str(i.id))
             x_data.append(c1)
             y_data.append(i.core_year)
-            e_data.append(i.rate_max)
+            speed_data.append(i.rate_max)
             c1+=1
             lab.append(
                 i.software.name +"<sup>"+
                 str(i.software.id) +" </sup>"+
                 str(i.resource.ntasks)+"<sub>T </sub>"+":"+
                 str(i.resource.ncpu)+"<sub>C </sub>"+":"+
-                str(i.resource.nnodes)+"<sub>N </sub>"+":"+                i.site.name
+                str(i.resource.nnodes)+"<sub>N </sub>"+":"+
+                i.site.name
                 )            
             h+=25
     bw=min((c1+3)*25/h, 0.8)
     
+    df=pd.DataFrame(list(zip(ids,x_data,y_data,speed_data,lab)), columns=["ids","x","y","speed","lab"])
+    df=df.sort_values(by=['y'])
+    df['id'] = range(len(df))
+    
     fig = go.FigureWidget(layout = go.Layout(height = h, width = w))
     fig.add_trace(
         go.Bar(
-        x = y_data, 
-        y = x_data, 
+        x = df["y"], 
+        y = df["id"], 
         width=bw,
-        text = lab,
+        text = df["lab"],
         hovertemplate = "Cost=%{x}<br>Speed=%{marker.color}<extra></extra>",
         orientation = 'h',
         marker = dict(
             cmin = 0,
             cmax = max_speed,
-            color = e_data,
-            colorscale = 'algae', 
+            color = df["speed"],
+            colorscale = 'turbid', 
             colorbar = dict(thickness = 20, title="Speed"))
                   )
     )
@@ -173,13 +178,14 @@ def QuerySetBarPlotCostCPU(qs, fig_title, n=1000):
         paper_bgcolor='#eee',
         template="ggplot2",
         titlefont=dict(size=28, color='#3f8b64', family='Arial, sans-serif;'),
-        title_x=0.0,
+        title="Lower is better",
+        title_x=0.02,
         yaxis_title="Benchmark ID",
         xaxis_title="Core years per 1000 ns",       
         yaxis = dict(autorange="reversed",
         tickmode = 'array', 
         tickvals = x_data, 
-        ticktext = ids,
+        ticktext = df["ids"],
                     )
         )
     
@@ -190,9 +196,9 @@ def QuerySetBarPlotCostCPU(qs, fig_title, n=1000):
 def QuerySetBarPlotCostGPU(qs, fig_title, n=1000):
     # Limit plot to first n benchmarks
     figTitle=dict(text=fig_title,)
-    x_data, y_data, e_data, lab, ids = ([] for _ in range(5)) 
+    x_data, y_data, speed_data, lab, ids = ([] for _ in range(5)) 
     h=220
-    w=550
+    w=600
 
     c=c1=0
     max_speed=0
@@ -204,7 +210,7 @@ def QuerySetBarPlotCostGPU(qs, fig_title, n=1000):
             ids.append(str(i.id))
             x_data.append(c1) 
             y_data.append(i.gpu_year)
-            e_data.append(i.rate_max)
+            speed_data.append(i.rate_max)
             c1+=1
             lab.append(
                 i.software.name +"<sup>"+
@@ -217,20 +223,26 @@ def QuerySetBarPlotCostGPU(qs, fig_title, n=1000):
                 )            
             h+=25
     bw=min((c1+3)*25/h, 0.8)
+
+    df=pd.DataFrame(list(zip(ids,x_data,y_data,speed_data,lab)), columns=["ids","x","y","speed","lab"])
+    df=df.sort_values(by=['y'])
+    df['id'] = range(len(df))
+    
+
     fig = go.FigureWidget(layout = go.Layout(height = h, width = w))
     fig.add_trace(
         go.Bar(
-        x = y_data, 
-        y = x_data,
+        x = df["y"], 
+        y = df["id"],
         width=bw, 
-        text = lab,
+        text = df["lab"],
         hovertemplate = "Cost=%{x}<br>Speed=%{marker.color}<extra></extra>",
         orientation = 'h',
         marker = dict(
             cmin = 0,
             cmax = max_speed,
-            color = e_data,
-            colorscale = 'algae', 
+            color = df["speed"],
+            colorscale = 'turbid', 
             colorbar = dict(thickness = 20, title="Speed"))
                   )
     )
@@ -247,13 +259,14 @@ def QuerySetBarPlotCostGPU(qs, fig_title, n=1000):
         paper_bgcolor='#eee',
         template="ggplot2",
         titlefont=dict(size=28, color='#3f8b64', family='Arial, sans-serif;'),
-        title_x=0.0,
+        title="Lower is better",
+        title_x=0.02,
         yaxis_title="Benchmark ID",
         xaxis_title="GPU years per 1000 ns",       
         yaxis = dict(autorange="reversed",
         tickmode = 'array', 
         tickvals = x_data, 
-        ticktext = ids,
+        ticktext = df["ids"],
                     )
         )
     
