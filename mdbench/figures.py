@@ -40,7 +40,7 @@ def QuerySetBarPlot(qs, fig_title, n=1000):
     figTitle=dict(text=fig_title,)
     x_data, y_data, e_data, lab, ids = ([] for _ in range(5)) 
     h=220
-    w=600
+    w=640
 
     for c,i in enumerate(qs):
         if c >=n:
@@ -119,7 +119,7 @@ def QuerySetBarPlotCostCPU(qs, fig_title, n=1000):
     figTitle=dict(text=fig_title,)
     x_data, y_data, speed_data, lab, ids = ([] for _ in range(5)) 
     h=220
-    w=600
+    w=640
 
     c=c1=0
     max_speed=0
@@ -198,7 +198,7 @@ def QuerySetBarPlotCostGPU(qs, fig_title, n=1000):
     figTitle=dict(text=fig_title,)
     x_data, y_data, speed_data, lab, ids = ([] for _ in range(5)) 
     h=220
-    w=600
+    w=640
 
     c=c1=0
     max_speed=0
