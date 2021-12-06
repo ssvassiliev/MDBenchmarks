@@ -14,14 +14,16 @@
       <th>ID</th>     
       <th>Name</th> 
       <th>Model</th> 
-      <th>VRAM</th>    
+      <th>VRAM</th>   
+      <th>Cores/GPU</th>         
   </thead> 
   {% for gpu in gpu_list %}
     <tr>
        <td> {{ gpu.id }}</td>
        <td> {{ gpu.name}}</td> 
        <td> {{ gpu.model}}</td>    
-       <td> {{ gpu.vram}} GB</td>           
+       <td> {{ gpu.vram}} GB</td>         
+       <td> {{ gpu.cores_per_gpu}}</td>             
   {% endfor %} 
   </tr>
   </table>

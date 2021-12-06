@@ -152,10 +152,11 @@ class GPU(models.Model):
         verbose_name_plural = "8. GPU Types"
     name = models.CharField(max_length=100, help_text='Enter a GPU name (e.g. Tesla)')
     model = models.CharField(max_length=100, help_text='Enter a GPU model (e.g. V100)') 
+    cores_per_gpu = models.IntegerField(help_text='Enter the number of cores/GPU') 
     vram = models.IntegerField(help_text='Enter amount of VRAM') 
     
     def __str__(self):
-        return f'{self.name}-{self.model}-{self.vram}GB'
+        return f'{self.name}-{self.model}-{self.vram}GB, {self.cores_per_gpu} cores/GPU'
 
 class Site(models.Model):
     class Meta:

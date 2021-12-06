@@ -40,7 +40,7 @@ def QuerySetBarPlot(qs, fig_title, n=1000):
     figTitle=dict(text=fig_title,)
     x_data, y_data, e_data, lab, ids = ([] for _ in range(5)) 
     h=220
-    w=640
+    w=680
 
     for c,i in enumerate(qs):
         if c >=n:
@@ -48,8 +48,9 @@ def QuerySetBarPlot(qs, fig_title, n=1000):
         ids.append(str(i.id))
         x_data.append(c)
         y_data.append(i.rate_max)
-        e_data.append(i.cpu_efficiency)
         if i.gpu is not None:
+            e_data.append(i.cpu_efficiency)
+            #e_data.append(100*i.rate_max/(i.serial.rate_max*i.resource.ngpu)) # assume maximum available number of cores per GPU was used
             lab.append(
                 i.software.name +"<sup>"+
                 str(i.software.id) +" </sup>"+
@@ -60,6 +61,7 @@ def QuerySetBarPlot(qs, fig_title, n=1000):
                 "<sub>"+i.gpu.model+" </sub>"+i.site.name
                 )
         else:
+                e_data.append(i.cpu_efficiency)
                 lab.append(
                 i.software.name +"<sup>"+
                 str(i.software.id) +" </sup>"+
@@ -119,7 +121,7 @@ def QuerySetBarPlotCostCPU(qs, fig_title, n=1000):
     figTitle=dict(text=fig_title,)
     x_data, y_data, speed_data, lab, ids = ([] for _ in range(5)) 
     h=220
-    w=640
+    w=680
 
     c=c1=0
     max_speed=0
@@ -198,7 +200,7 @@ def QuerySetBarPlotCostGPU(qs, fig_title, n=1000):
     figTitle=dict(text=fig_title,)
     x_data, y_data, speed_data, lab, ids = ([] for _ in range(5)) 
     h=220
-    w=640
+    w=680
 
     c=c1=0
     max_speed=0
@@ -256,8 +258,8 @@ def QuerySetBarPlotCostGPU(qs, fig_title, n=1000):
         t=40,
         pad=4
     ),    
-        paper_bgcolor='#eee',
-        template="ggplot2",
+        paper_bgcolor='#fff',
+        template="plotly_white",
         titlefont=dict(size=28, color='#3f8b64', family='Arial, sans-serif;'),
         title="Lower is better",
         title_x=0.02,
