@@ -22,10 +22,10 @@
               <div class="card-body">
                    <h3 class="card-title">ACCELERATE SIMULATIONS</h3>
                 <div class="card-text p-2" style="background-color: #eee;">
-                    <p class="pb-2"><br> A poor choice of job submission or simulation parameters leads to a poor performance and waste of computing resources. However, finding an optimal MD engines and submission parameters in a complex HPC environment with heterogeneous hardware is a daunting and time-consuming challenge. We developed this web portal to simplify this task.</p>
+                    <p class="pb-1"> A poor choice of job submission or simulation parameters leads to a poor performance and waste of computing resources. However, finding an optimal MD engines and submission parameters in a complex HPC environment with heterogeneous hardware is a daunting and time-consuming challenge. We developed this web portal to simplify this task.</p>
                     <p> Chart of the maximum simulation speed of all tested MD executables attained on CC systems provides a quick idea of how long a simulation will take. </p>
                     <p> The fastest simulations may be inefficient due to poor parallel scaling to many CPUs. Inefficient simulations consume more resources and impact priority, resulting in longer times in queue and less work done. Color-coded by efficiency chart allows choosing an optimal combination of speed and efficiency.</p>
-                    <p> Efficiency is computed as parallel_speed/(serial_speed * N) <p>
+                    <p> Efficiency is computed as PS/(SS * N) where PS is speed of the parallel program, SS is speed of the serial program, and N is the number of CPUs aor GPUs<p>
                 </div>
               </div>
             </div>
@@ -91,10 +91,10 @@
            <div class="col-auto" >
             <div class="card border-0" style="background-color: #fff;">
               <div class="card-body">
-                   <h3 class="card-title" style="color: #B79754;" >MINIMIZE GPU USAGE</h3>
+                   <h3 class="card-title" style="color: #B79754;" >REDUCE CPU/GPU USAGE</h3>
                 <div class="card-text p-2" style="background-color: #fff;">
-                    <p class="pb-2"> A detailed view of each benchmark accessed from the "Benchmark ID" form at the top-right provides essential details, such as simulation input and sbatch submission scripts.</p> 
-                    <p>All benchmarks are available from the "Database" tab, and a subset of interest can be selected using a custom chain of filters. Database entries can be downloaded as CSV files for further analysis.</p>
+                    <p class="pb-1"> Choosing the most efficient program does not guarantee that a simulation will use the minimal number of CPU/GPU cycles. Both speed and efficiency contribute to the total amount of consumed computing resources, the "cost" of a simulation.</p> 
+                    
                 </div>
               </div>
             </div>
@@ -106,10 +106,6 @@
 </div>
 
 <div class="row gx-0" style="background-color: #eee">
-
-
-
-
 
   <div class="col-sm-8" style="background-color: #eee">
     <div>
@@ -139,11 +135,12 @@
            <div class="col-auto" >
             <div class="card border-0" style="background-color: #eee;">
               <div class="card-body">
-                   <h3 class="card-title" style="color: #B79754;" >MINIMIZE CPU USAGE</h3>
-                <div class="card-text p-2" style="background-color: #eee;">
-                    <p class="pb-2"> A detailed view of each benchmark accessed from the "Benchmark ID" form at the top-right provides essential details, such as simulation input and sbatch submission scripts.</p> 
-                    <p>All benchmarks are available from the "Database" tab, and a subset of interest can be selected using a custom chain of filters. Database entries can be downloaded as CSV files for further analysis.</p>
-                </div>
+                   <h3 class="card-title" style="color: #B79754;" >ACCESS THE DATABASE</h3>
+                  <div class="card-text p-2" style="background-color: #eee;">
+                      <p class="pb-2"> A detailed view of each benchmark accessed from the "Benchmark ID" form at the top-right provides essential details, such as simulation input and sbatch submission scripts.</p> 
+                      <p>All benchmarks are available from the "Database" tab. When this page is visited for the first time no filters are applied, and the filter status is empty: "FILTERS: _ _ _ _ _ _ _"</p>   
+                      </p>A subset of interest can be selected using a custom chain of filters. Selected database entries can be then downloaded as CSV files for further analysis.</p>
+                  </div>                  
               </div>
             </div>
           </div>
@@ -153,8 +150,6 @@
   </div>
 
 </div>
-
-
 
 
 

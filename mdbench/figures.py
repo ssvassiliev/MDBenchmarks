@@ -6,6 +6,9 @@ from django.contrib.auth.models import User
 import pandas as pd
 
 csv_data = []
+config={'modeBarButtonsToRemove': ['zoom2d','pan2d','select2d','lasso2d','zoomIn2d','zoomOut2d','autoScale2d','resetScale2d'],
+'displaylogo': False,
+'responsive': True}
 
 def QuerySetWriteCSV(qs):
     global csv_data
@@ -111,7 +114,7 @@ def QuerySetBarPlot(qs, fig_title, n=1000):
         ticktext = ids,
                     )
         )
-    plot_div = fig.to_html(full_html=False)
+    plot_div = fig.to_html(full_html=False, config=config)
     return(plot_div)
 
 
@@ -191,7 +194,7 @@ def QuerySetBarPlotCostCPU(qs, fig_title, n=1000):
                     )
         )
     
-    plot_div = fig.to_html(full_html=False)
+    plot_div = fig.to_html(full_html=False, config=config)
     return(plot_div)
 
 
@@ -272,5 +275,5 @@ def QuerySetBarPlotCostGPU(qs, fig_title, n=1000):
                     )
         )
     
-    plot_div = fig.to_html(full_html=False)
+    plot_div = fig.to_html(full_html=False, config=config)
     return(plot_div)
