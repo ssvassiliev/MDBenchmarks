@@ -109,67 +109,126 @@
 
 {% block content2%}
 
-<div style="background-color: #222529">
+<div class="row gx-0" style="background-color: #eee;">
+  <div class="col-sm-4">
     <div class="container-fluid pt-3">
-        <div class="row justify-content-center">
-            <div class="col-auto" >
-                 <div class="card" style="background-color: #35754c;" >
-                    <div class="card-body">
-                        <h3 class="card-title">SIMULATION SPEED</h3>
-                        <div class="card-img-top">
-                            {% autoescape off %}
-                            {{ plot_div }}
-                            {% endautoescape %}
-                        </div>
-                    </div>
+      <div class="row justify-content-center">
+        <div class="col-auto" >
+          <div class="card border-0" style="background-color: #eee;">
+            <div class="card-body">
+                <h3 class="card-title" >ACCESSING THE DATABASE</h3>
+               <div class="card-text">
+                </p>When this page is viewwed no filters are initially applied. All benchmarks are selected and sorted by simulation speed. The chart on the right displays only top 20 benchmarks for clarity.</p>  
+                <p>A subset of benchmarks can be selected using a custom chain of filters. Search fields are case insensitive and can be abbreviated.</p>
+                <p> Selected database entries can be downloaded as CSV files for further analysis or viewed in the Table below.</p>
+                <p> Efficiency = PS/(SS * N) where PS is speed of the parallel program, SS is speed of the serial program, and N is the number of CPUs or GPUs<p>               
+               </div>   
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-8">
+    <div class="container-fluid pt-3">
+      <div class="row justify-content-center"
+        <div class="col-auto" >
+          <div class="card border-0" style="background-color: #eee;" >
+            <div class="card-body">
+              <h3 class="card-title">Simulation Speed</h3>
+                <div class="card-img-top">
+                  {% autoescape off %} {{ plot_div }} {% endautoescape %}
                 </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 
-<div class="row gx-0" style="background-color: #222529">
-<div class="col-sm-6">
-<div style="background-color: #222529">
-    <div class="container-fluid pt-3">
+<div class="row gx-0" style="background-color: #fff">
+
+  <div class="col-sm-8"> 
+    <div style="background-color: #fff">
+      <div class="container-fluid pt-3">
         <div class="row justify-content-center">
-            <div class="col-auto" >
-                 <div class="card" style="background-color: #35754c;" >
-                    <div class="card-body">
-                        <h3 class="card-title">COST OF SIMULATIONS USING CPU</h3>
-                        <div class="card-img-top">
-                            {% autoescape off %}
-                            {{ plot_div_cost_cpu }}
-                            {% endautoescape %}
-                        </div>
-                    </div>
-                </div>
+          <div class="col-auto" >
+            <div class="card border-0" style="background-color: #fff;" >
+              <div class="card-body">
+                <h3 class="card-title" style="color: #B79754;">Cost of Simulations Using GPUs</h3>
+                  <div class="card-img-top">
+                    {% autoescape off %} {{ plot_div_cost_gpu }} {% endautoescape %}
+                  </div>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-</div>
+      </div>
+   </div>
 </div>
 
-<div class="col-sm-6">
-<div style="background-color: #222529">
+  <div class="col-sm-4">
     <div class="container-fluid pt-3">
-        <div class="row justify-content-center">
-            <div class="col-auto" >
-                 <div class="card" style="background-color: #35754c;" >
-                    <div class="card-body">
-                        <h3 class="card-title">COST OF SIMULATIONS USING GPU</h3>
-                        <div class="card-img-top">
-                            {% autoescape off %}
-                            {{ plot_div_cost_gpu }}
-                            {% endautoescape %}
-                        </div>
-                    </div>
-                </div>
+      <div class="row justify-content-center">
+        <div class="col-auto" >
+          <div class="card border-0" style="background-color: #fff;">
+            <div class="card-body">
+                <h3 class="card-title" style="color: #B79754;">SIMULATIONS ON MULTIPLE GPUS</h3>
+               <div class="card-text">
+                </p>Parallel scaling to multiple GPUs strongly depends on the compibation of software, hardware and simulation parameters. Often simulations do not run faster even on two GPUs. For example, search for namd2.cuda in "Software name" and Cedar in "Cluster".</p>  
+                <p> Simulations on nodes with direct interconnect between GPUs (NVLink) may benefit from multiple GPUs, but efficiency decreases and cost goes up with the number of GPUs. Example: pmemd.cuda, narval</p>
+               </div>   
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
+
+<div class="row gx-0" style="background-color: #eee">
+
+  <div class="col-sm-4">
+    <div class="container-fluid pt-3">
+      <div class="row justify-content-center">
+        <div class="col-auto" >
+          <div class="card border-0" style="background-color: #eee;">
+            <div class="card-body">
+                <h4 class="card-title" style="color: #B79754;">SIMULATIONS ON MULTIPLE CPUS</h4>
+               <div class="card-text">
+                </p>Simulations using CPUs reach performance comparable to GPU only with hundreds of cores used. It is not uncommon for simulations to wait in the queue for up to several days for such a significant resource to be available.</p>  
+               </div>   
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
+
+  <div class="col-sm-8">
+    <div style="background-color: #eee">
+      <div class="container-fluid pt-3">
+        <div class="row justify-content-center">
+          <div class="col-auto" >
+            <div class="card border-0" style="background-color: #eee" >
+              <div class="card-body">
+                <h3 class="card-title" style="color: #B79754;">Cost of Simulations Using CPUs</h3>
+                  <div class="card-img-top">
+                    {% autoescape off %}
+                    {{ plot_div_cost_cpu }}
+                    {% endautoescape %}
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 </div>
 
 
