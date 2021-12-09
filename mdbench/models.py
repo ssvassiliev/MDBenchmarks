@@ -74,8 +74,12 @@ class BenchmarkInstance(models.Model):
     
     @property
     def computed_efficiency(self):
-        return round(100 * self.rate_max/\
-            (self.serial.rate_max * self.resource.ncpu * self.resource.ntasks),1) 
+        if self.resource.ngpu: 
+            return round(100 * self.rate_max/\
+                (self.serial.rate_max * self.resource.ngpu),1) 
+        else:
+            return round(100 * self.rate_max/\
+                (self.serial.rate_max * self.resource.ncpu * self.resource.ntasks),1) 
     
     @property
     def computed_core_year(self):

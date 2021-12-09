@@ -30,4 +30,4 @@ class BenchmarkInstanceAdmin(admin.ModelAdmin):
     list_display = ("id", "benchmark", "software")
     list_filter = ("software__module","software__instruction_set")
     autocomplete_fields=("resource", "serial", "software")
-    search_fields=("software_name",)
+    search_fields=("software__name",)
