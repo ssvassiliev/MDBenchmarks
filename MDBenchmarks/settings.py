@@ -22,12 +22,17 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-j5nvy)#r2oo6w3saco&huvt_w_d)jv7lh%kpzzz^7(4wcq+ypk'
+# SECRET_KEY = 'django-insecure-j5nvy)#r2oo6w3saco&huvt_w_d)jv7lh%kpzzz^7(4wcq+ypk'
+
+try:
+    SECRET_KEY = os.environ["SECRET_KEY"]
+except KeyError as e:
+    raise RuntimeError("Could not find a SECRET_KEY in environment") from e
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "206.167.180.103","mdbench.ace-net.ca"]
+ALLOWED_HOSTS = ["localhost", "206.167.180.103", "mdbench.ace-net.ca"]
 
 
 # Application definition
