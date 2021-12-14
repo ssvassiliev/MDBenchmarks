@@ -20,7 +20,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATIC_URL = "/static/"
 STATIC_ROOT = "/var/www/mdbench.ace-net.ca/static"
-STATICFILES_DIRS = [BASE_DIR / "static"]
+STATICFILES_DIRS = [BASE_DIR / "mdbench/static"]
 # STATIC_ROOT = os.path.join(os.getenv("HOME"),'MDBenchmarks/mdbench/static/')
 
 #STATIC_ROOT =  '/home/ubuntu/MDBenchmarks/mdbench/static/'
@@ -37,7 +37,7 @@ except KeyError as e:
     raise RuntimeError("Could not find a SECRET_KEY in environment") from e
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["localhost", "206.167.180.103", "mdbench.ace-net.ca"]
 
