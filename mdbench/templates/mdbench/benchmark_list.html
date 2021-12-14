@@ -1,6 +1,6 @@
 {% extends "base_generic.html" %}
 {% block content %}
-<div class="py-4" style="background-image: url('/media/images/fig3.png'); height: 200px;">
+<div class="py-4" style="background-image: url('https://mdbench.ace-net.ca/static/media/images/fig3.png'); height: 200px;">
   <h3>DATASETS</h3>
 </div>
 {% endblock %}
@@ -20,7 +20,7 @@
     <td> {{ benchmark.name }}</td>
     <td> {{ benchmark.natoms }}</td>
     <td> {{ benchmark.description | linebreaks }} </td>   
-    <td><img src="{{ benchmark.image.url}}" style="height:200px;" alt="{{ benchmark.name }}"> </td>
+    <td><img src="https://mdbench.ace-net.ca/static/media/images/6n4o.png" style="height:200px;" alt="{{ benchmark.name }}"> </td>
    {% endfor %} 
   </table>
   </div>
