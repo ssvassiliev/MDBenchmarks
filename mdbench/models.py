@@ -106,9 +106,6 @@ class BenchmarkInstance(models.Model):
             c_years=1000 * self.resource.ncpu * self.resource.ntasks / (365 * self.rate_max)
             return round(c_years,4) 
 
-
-
-        
     def save(self, *args, **kwargs):
         self.core_year = self.computed_core_year
         self.gpu_year = self.computed_gpu_year      

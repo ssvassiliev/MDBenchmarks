@@ -1,0 +1,44 @@
+
+https://realpython.com/django-nginx-gunicorn/
+
+- set up DJANGO SECRET_KEY: 
+echo "export SECRET_KEY='$(openssl rand -hex 40)'" > .DJANGO_SECRET_KEY
+add export SECRET_KEY to .bashrc
+edit settings.py 
+
+- Testing connection (-I only headers):  curl -Ik https://mdbench.ace-net.ca:8443/mdbench/ 
+
+- Install gunicorn and make folders for log and PID files as specified in the config/gunicorn/dev.py
+
+sudo mkdir -pv /var/{log,run}/gunicorn/
+sudo chown -cR ubuntu:ubuntu /var/{log,run}/gunicorn/
+
+- set STATIC_ROOT:
+STATIC_ROOT =  '/home/ubuntu/MDBenchmarks/mdbench/static/'
+
+- Start gunicorn:
+gunicorn -c config/gunicorn/dev.py
+
+- Install nginx
+- Configure app:
+/etc/nginx/sites-available/mdbench
+-------8><---------><8---------
+server_tokens               off;
+access_log                  /var/log/nginx/mdbench.access.log;
+error_log                   /var/log/nginx/mdbench.error.log;
+
+# This configuration will be changed to redirect to HTTPS later
+server {
+  server_name               mdbench.ace-net.ca
+  listen                    80;
+  location / {
+    proxy_pass              http://localhost:8000;
+    proxy_set_header        Host $host;
+  }
+}
+
+- Create link to sites-available in sites-enabled:
+cd /etc/nginx/sites-enabled
+sudo ln -s ../sites-available/mdbench .
+sudo systemctl restart nginx
+
