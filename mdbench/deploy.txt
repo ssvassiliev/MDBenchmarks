@@ -1,3 +1,12 @@
+921860 bey242  + 967933 svassili both using gmx
+[svassili@ng20303 ~]$ 
+3148110 svassili  20   0 7117284 682268 188784 S  1114   0.1 136:52.69 gmx     
+2211233 akalan2   20   0   72.0g  60.7g 133688 R 797.4  12.1  13010:16 python  
+2191054 akalan2   20   0   72.8g  61.8g 132976 R 796.0  12.3  17010:24 python  
+3625481 bey242    20   0   12.0g   4.6g 535020 R 577.2   0.9  30614:48 gmx  
+This job had very poor performance: 42.426 
+
+
 
 https://realpython.com/django-nginx-gunicorn/
 
@@ -6,7 +15,7 @@ echo "export SECRET_KEY='$(openssl rand -hex 40)'" > .DJANGO_SECRET_KEY
 add export SECRET_KEY to .bashrc
 edit settings.py 
 
-- Testing connection (-I only headers):  curl -Ik https://mdbench.ace-net.ca:8443/mdbench/ 
+- Testing connection (-I only headers):  curl -Ik https://mdbench.ace-net.ca/mdbench/ 
 
 - Install gunicorn and make folders for log and PID files as specified in the config/gunicorn/dev.py
 
@@ -40,5 +49,26 @@ server {
 - Create link to sites-available in sites-enabled:
 cd /etc/nginx/sites-enabled
 sudo ln -s ../sites-available/mdbench .
+sudo systemctl restart nginx
+
+# SETUP STATIC FILES
+sudo mkdir -pv /var/www/mdbench.ace-net.ca/static/
+sudo chown -cR ubuntu:ubuntu /var/www/mdbench.ace-net.ca/
+
+# settings.py
+STATIC_URL = "/static/"
+STATIC_ROOT = "/var/www/mdbench.ace-net.ca/static"
+STATICFILES_DIRS = [BASE_DIR / "static"]
+
+python manage.py collectstatic
+
+# /etc/nginx/sites-available/mdbench 
+  location /static {
+    autoindex on;
+    alias /var/www/mdbench.ace-net.ca/static/;
+  }
+}
+
+# turn off debug
 sudo systemctl restart nginx
 
