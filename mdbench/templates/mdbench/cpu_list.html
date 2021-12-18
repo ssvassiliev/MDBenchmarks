@@ -14,6 +14,7 @@
       <th>ID</th>     
       <th>Name</th> 
       <th>Model</th> 
+      <th>Cores</th>     
       <th>Codename</th> 
       <th>Frequency</th> 
   </thead> 
@@ -21,7 +22,8 @@
     <tr>
        <td> {{ cpu.id }}</td>
        <td> {{ cpu.name}}</td> 
-       <td> {{ cpu.model}}</td>       
+       <td> {{ cpu.model}}</td> 
+       <td> {{ cpu.ncores}}</td>             
        <td> {{ cpu.codename }}</td> 
        <td> {{ cpu.frequency }}</td> 
   {% endfor %} 

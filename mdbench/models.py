@@ -47,6 +47,7 @@ class SerialBenchmarkInstance(models.Model):
     rate_min = models.FloatField(help_text='Simulation speed, ns/day')
     rate_max = models.FloatField(help_text='Simulation speed, ns/day')
     site = models.ForeignKey('Site', on_delete=models.RESTRICT, null=True)
+    sbatch_script = models.TextField(blank=True)
     notes =  models.TextField(blank=True)
 
     def __str__(self):
@@ -70,6 +71,7 @@ class BenchmarkInstance(models.Model):
     core_year = models.FloatField(editable=False)
     gpu_year = models.FloatField(editable=False)   
     site = models.ForeignKey('Site', on_delete=models.RESTRICT, null=True)
+    sbatch_script = models.TextField(blank=True)
     notes =  models.TextField(blank=True)
     
     @property
@@ -145,6 +147,8 @@ class CPU(models.Model):
     model = models.CharField(max_length=100, help_text='Enter a CPU model (e.g. E5-2683 v4)')
     codename = models.CharField(max_length=100, help_text='Enter a CPU codename (e.g. Broadwell)')
     frequency = models.FloatField()
+    ncores = models.IntegerField()
+
     def __str__(self):
         return f'{self.name} {self.model} ({self.codename}), {self.frequency} GHz'
 

@@ -1,6 +1,8 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
+{% load pygmentify %}
+{% pygment %}
 <div class="p-4">
 <h3>Simulation details</h3>
 <ul>
@@ -13,8 +15,10 @@
   <li><strong>Efficiency:</strong> {{ benchmarkinstance.cpu_efficiency }} %</li> 
   <li><strong>Site:</strong> {{ benchmarkinstance.site }}</li>
   <li><strong>Date:</strong> {{ benchmarkinstance.updated_at }}</li>  
+  <li><strong>Submission script:</strong><pre lang="bash">{{ benchmarkinstance.sbatch_script |linebreaks }}</pre></li>   
   <li><strong>Notes:</strong> {{ benchmarkinstance.notes |linebreaks }}</li>   
   <li><strong>Simulation input file:</strong><div class='p-3 mb-0 text-secondary'>{{ benchmarkinstance.serial.simulation_input.input | linebreaks }}</div></li> 
 </ul> 
 </div>
+{% endpygment %}
 {% endblock %}
