@@ -53,7 +53,6 @@
         </div>
     </div>
 
-    
     <div class="row">
             <div class="col-sm-3">
              <div class="form-group">
@@ -66,11 +65,22 @@
             </div>
         </div>
 
+            <div class="col-sm-3">
+             <div class="form-group">
+                 <div class="input-group">
+                    <div class="input">
+                       <label for="gpu_model" class="form-label">CPU model</label>
+                        <input class="mb-1 form-control form-control-sm" style="background-color: #b7b796;"  type="search" name = "cpu_model" placeholder="6148 .."/>
+                    </div>            
+                </div>
+            </div>
+        </div>
+
         <div class="col-sm-3">
              <div class="form-group">
                  <div class="input-group">
                     <div class="input">
-                       <label for="arch" class="form-label">CPU instruction set</label>
+                       <label for="arch" class="form-label">Instruction set</label>
                         <input class="mb-1 form-control form-control-sm" style="background-color: #b7b796;"  type="search" name = "arch" placeholder="avx2 .."/>
                     </div>            
                 </div>
@@ -81,30 +91,36 @@
             <div class="form-group">
                 <div class="input-group">
                     <div class="input">
-                        <label for="dataset" class="form-label">Simulation system</label>
+                        <label for="dataset" class="form-label">Dataset</label>
                         <input class="mb-1 form-control form-control-sm" style="background-color: #b7b796;"  type="search" name = "dataset" placeholder="6n4o .."/>
                     </div>            
                 </div>
             </div>
         </div>
-        <div class="col-sm-3 input-group-addon my-4">
-            <span>
-                <button class="mt-2 btn btn-sm btn-outline-light border-left-0 border" type="submit"><i class="fa fa-search"></i></button>
-            </span>
-        </div>
-        </form>
-    </div>
-    <div class="row">
-        <div class="col-sm-6">
-            <p style="color: #85b737;">FILTERS: {{querystr}}</p>
-        </div>
-        <div class="col-sm-6">
-            <button class="btn btn-sm btn-outline-light"> <a style="color: #aaa" href="{% url 'export' %}">Download CSV</a> </button> </div>
+
+
+        <div class="row my-2">
+          <div class="col-sm-4 py-1">
+            <p style="color: #85b737;">Applied Filters: {{querystr}}</p>
+          </div>
+          <div class="col-sm-1 px-4">
+          </div>     
+          <div class="col-sm-1 px-4">
+            <button class="btn btn-sm btn-outline-light" type="submit"><i class="fa fa-search"></i></button>
+          </div>
+          <div class="col-sm-5 px-4">
+          </div>  
+          <div class="col-sm-1">
+            <button class="btn btn-sm btn-outline-light px-2"> <a style="color: #ccc" href="{% url 'export' %}">csv</a> </button> 
             {{ csv_file }}
+          </div>
+         </div>
         </div>
+      </form>
     </div>
+  </div>
 </div>
-</div>
+
 {% endblock content%}
 
 {% block content2%}

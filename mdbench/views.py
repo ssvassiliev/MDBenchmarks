@@ -25,6 +25,7 @@ def BootstrapFilterView(request):
     module_version_query = request.GET.get('module_version')
     site_contains_query = request.GET.get('site_contains')
     gpu_model_query = request.GET.get('gpu_model')
+    cpu_model_query = request.GET.get('cpu_model')   
     arch_exact_query = request.GET.get('arch')
     dataset_exact_query = request.GET.get('dataset')   
     if software_contains_query != '' and software_contains_query is not None:
@@ -37,6 +38,8 @@ def BootstrapFilterView(request):
         qs = qs.filter(site__name__icontains=site_contains_query)
     if gpu_model_query != '' and gpu_model_query is not None:
         qs = qs.filter(gpu__model__icontains=gpu_model_query)
+    if cpu_model_query != '' and cpu_model_query is not None:
+        qs = qs.filter(cpu__model__icontains=cpu_model_query)
     if arch_exact_query != '' and arch_exact_query is not None:
         qs = qs.filter(software__instruction_set__exact=arch_exact_query)
     if dataset_exact_query != '' and dataset_exact_query is not None:
@@ -48,6 +51,7 @@ def BootstrapFilterView(request):
     que.append(module_version_query or "_")
     que.append(site_contains_query or "_")
     que.append(gpu_model_query or "_")
+    que.append(cpu_model_query or "_")   
     que.append(arch_exact_query or "_")
     que.append(dataset_exact_query or "_")
     query_string=" ".join(que)
