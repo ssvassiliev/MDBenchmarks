@@ -58,9 +58,9 @@ def QuerySetBarPlot(qs, fig_title, n=1000):
             lab.append(
                 i.software.name +"<sup>"+
                 str(i.software.id) +" </sup>"+
-                str(i.resource.ntasks)+"<sub>T </sub>"+":"+
-                str(i.resource.ncpu)+"<sub>C </sub>"+":"+
-                str(i.resource.nnodes)+"<sub>N </sub>"+":"+
+                str(i.resource.ntasks)+"<sub>T </sub>"+
+                str(i.resource.ncpu)+"<sub>C </sub>"+
+                str(i.resource.nnodes)+"<sub>N </sub>"+
                 str(i.resource.ngpu)+
                 "<sub>"+i.gpu.model+" </sub>"+i.site.name
                 )
@@ -69,9 +69,9 @@ def QuerySetBarPlot(qs, fig_title, n=1000):
                 lab.append(
                 i.software.name +"<sup>"+
                 str(i.software.id) +" </sup>"+
-                str(i.resource.ntasks)+"<sub>T </sub>"+":"+
-                str(i.resource.ncpu)+"<sub>C </sub>"+":"+
-                str(i.resource.nnodes)+"<sub>N </sub>"+":"+
+                str(i.resource.ntasks)+"<sub>T </sub>"+
+                str(i.resource.ncpu)+"<sub>C </sub>"+
+                str(i.resource.nnodes)+"<sub>N </sub>"+
                 i.site.name
                 )
         h+=25
@@ -144,9 +144,9 @@ def QuerySetBarPlotCostCPU(qs, fig_title, n=1000):
             lab.append(
                 i.software.name +"<sup>"+
                 str(i.software.id) +" </sup>"+
-                str(i.resource.ntasks)+"<sub>T </sub>"+":"+
-                str(i.resource.ncpu)+"<sub>C </sub>"+":"+
-                str(i.resource.nnodes)+"<sub>N </sub>"+":"+
+                str(i.resource.ntasks)+"<sub>T </sub>"+
+                str(i.resource.ncpu)+"<sub>C </sub>"+
+                str(i.resource.nnodes)+"<sub>N </sub>"+
                 i.site.name
                 )            
             h+=25
@@ -223,9 +223,9 @@ def QuerySetBarPlotCostGPU(qs, fig_title, n=1000):
             lab.append(
                 i.software.name +"<sup>"+
                 str(i.software.id) +" </sup>"+
-                str(i.resource.ntasks)+"<sub>T </sub>"+":"+
-                str(i.resource.ncpu)+"<sub>C </sub>"+":"+
-                str(i.resource.nnodes)+"<sub>N </sub>"+":"+
+                str(i.resource.ntasks)+"<sub>T </sub>"+
+                str(i.resource.ncpu)+"<sub>C </sub>"+
+                str(i.resource.nnodes)+"<sub>N </sub>"+
                 str(i.resource.ngpu)+
                 "<sub>"+i.gpu.model+" </sub>"+i.site.name
                 )            
