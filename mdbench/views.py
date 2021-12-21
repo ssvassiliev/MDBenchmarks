@@ -43,7 +43,7 @@ def BootstrapFilterView(request):
     if arch_exact_query != '' and arch_exact_query is not None:
         qs = qs.filter(software__instruction_set__exact=arch_exact_query)
     if dataset_exact_query != '' and dataset_exact_query is not None:
-        qs = qs.filter(software__instruction_set__exact=arch_exact_query)
+        qs = qs.filter(benchmark__name__exact=dataset_exact_query)
 
     que=[]
     que.append(software_contains_query or "_____")

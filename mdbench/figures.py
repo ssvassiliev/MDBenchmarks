@@ -44,13 +44,14 @@ def QuerySetBarPlot(qs, fig_title, n=1000):
     x_data, y_data, e_data, lab, ids = ([] for _ in range(5)) 
     h=220
     w=680
-
+    c=c1=0
     for c,i in enumerate(qs):
         if c >=n:
             break
         ids.append(str(i.id))
         x_data.append(c)
         y_data.append(i.rate_max)
+        c1+=1
         if i.gpu is not None:
             e_data.append(i.cpu_efficiency)
             #e_data.append(100*i.rate_max/(i.serial.rate_max*i.resource.ngpu)) # assume maximum available number of cores per GPU was used
@@ -74,12 +75,14 @@ def QuerySetBarPlot(qs, fig_title, n=1000):
                 i.site.name
                 )
         h+=25
+    bw=min((c1+3)*25/h, 0.8)
 
     fig = go.FigureWidget(layout = go.Layout(height = h, width = w))
     fig.add_trace(
         go.Bar(
         x = y_data, 
         y = x_data, 
+        width=bw,
         text = lab,
         hovertemplate = "Speed=%{x}<br>Efficiency=%{marker.color}<extra></extra>",
         orientation = 'h',
