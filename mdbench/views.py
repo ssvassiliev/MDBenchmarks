@@ -46,14 +46,14 @@ def BootstrapFilterView(request):
         qs = qs.filter(software__instruction_set__exact=arch_exact_query)
 
     que=[]
-    que.append(software_contains_query or "_")
-    que.append(module_contains_query or "_")
-    que.append(module_version_query or "_")
-    que.append(site_contains_query or "_")
-    que.append(gpu_model_query or "_")
-    que.append(cpu_model_query or "_")   
-    que.append(arch_exact_query or "_")
-    que.append(dataset_exact_query or "_")
+    que.append(software_contains_query or "_____")
+    que.append(module_contains_query or "_____")
+    que.append(module_version_query or "_____")
+    que.append(site_contains_query or "_____")
+    que.append(gpu_model_query or "_____")
+    que.append(cpu_model_query or "_____")   
+    que.append(arch_exact_query or "_____")
+    que.append(dataset_exact_query or "_____")
     query_string=" ".join(que)
 
     caption='SIMULATION SPEED' 
@@ -165,10 +165,14 @@ class DatasetDetailView(generic.DetailView):
 
 class IDBenchmarksListView(generic.ListView):
     def get_queryset(self): 
-        query = self.request.GET.get('q')
         try:
-            obj = BenchmarkInstance.objects.filter(Q(id=query)) 
-            return obj          
+            query = self.request.GET.get('q')
+            print(query)
+            try:
+                obj = BenchmarkInstance.objects.filter(Q(id=query)) 
+                return obj          
+            except:
+                return None
         except:
             return None
 

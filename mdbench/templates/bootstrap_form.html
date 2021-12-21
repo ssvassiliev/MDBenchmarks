@@ -13,7 +13,7 @@
                     <div class="input-group">
                         <div class="input">
                             <label for="software_contains" class="form-label">Software name</label>
-                            <input class="mb-1 form-control form-control-sm" style="background-color: #b7b796;" type="search" name = "software_contains" placeholder="namd2 .."/>
+                            <input class="mb-1 form-control form-control-sm" spellcheck="false" style="background-color: #b7b796;" type="search" name = "software_contains" placeholder="namd2 .."/>
                         </div>            
                     </div>
                 </div>
@@ -24,7 +24,7 @@
                 <div class="input-group">
                     <div class="input" >
                         <label for="module_contains" class="form-label">Module name</label>
-                       <input class="mb-1 form-control form-control-sm" style="background-color: #b7b796;"  type="search" name = "module_contains" placeholder="namd-ucx .."/>
+                       <input class="mb-1 form-control form-control-sm" spellcheck="false" style="background-color: #b7b796;"  type="search" name = "module_contains" placeholder="namd-ucx .."/>
                     </div>            
                 </div>
             </div>
@@ -35,7 +35,7 @@
                 <div class="input-group">
                     <div class="input" >
                         <label for="module_version" class="form-label">Module version</label>
-                        <input class="mb-1 form-control form-control-sm" style="background-color: #b7b796;"  type="search" name = "module_version" placeholder="2.14 .."/>
+                        <input class="mb-1 form-control form-control-sm" spellcheck="false" style="background-color: #b7b796;"  type="search" name = "module_version" placeholder="2.14 .."/>
                     </div>            
                 </div>
             </div>
@@ -46,7 +46,7 @@
                 <div class="input-group">
                     <div class="input">
                     <label for="site_comtains" class="form-label">Cluster</label>
-                    <input class="mb-1 form-control form-control-sm" style="background-color: #b7b796;"  type="search" name = "site_contains" placeholder="Narval .."/>
+                    <input class="mb-1 form-control form-control-sm" spellcheck="false" style="background-color: #b7b796;"  type="search" name = "site_contains" placeholder="Narval .."/>
                     </div>            
                 </div>
             </div>
@@ -59,7 +59,7 @@
                  <div class="input-group">
                     <div class="input">
                        <label for="gpu_model" class="form-label">GPU model</label>
-                        <input class="mb-1 form-control form-control-sm" style="background-color: #b7b796;"  type="search" name = "gpu_model" placeholder="V100 .."/>
+                        <input class="mb-1 form-control form-control-sm" spellcheck="false" style="background-color: #b7b796;"  type="search" name = "gpu_model" placeholder="V100 .."/>
                     </div>            
                 </div>
             </div>
@@ -70,7 +70,7 @@
                  <div class="input-group">
                     <div class="input">
                        <label for="gpu_model" class="form-label">CPU model</label>
-                        <input class="mb-1 form-control form-control-sm" style="background-color: #b7b796;"  type="search" name = "cpu_model" placeholder="6148 .."/>
+                        <input class="mb-1 form-control form-control-sm" spellcheck="false" style="background-color: #b7b796;"  type="search" name = "cpu_model" placeholder="6148 .."/>
                     </div>            
                 </div>
             </div>
@@ -81,7 +81,7 @@
                  <div class="input-group">
                     <div class="input">
                        <label for="arch" class="form-label">Instruction set</label>
-                        <input class="mb-1 form-control form-control-sm" style="background-color: #b7b796;"  type="search" name = "arch" placeholder="avx2 .."/>
+                        <input class="mb-1 form-control form-control-sm" spellcheck="false" style="background-color: #b7b796;"  type="search" name = "arch" placeholder="avx2 .."/>
                     </div>            
                 </div>
             </div>
@@ -92,7 +92,7 @@
                 <div class="input-group">
                     <div class="input">
                         <label for="dataset" class="form-label">Dataset</label>
-                        <input class="mb-1 form-control form-control-sm" style="background-color: #b7b796;"  type="search" name = "dataset" placeholder="6n4o .."/>
+                        <input class="mb-1 form-control form-control-sm" spellcheck="false" style="background-color: #b7b796;"  type="search" name = "dataset" placeholder="6n4o .."/>
                     </div>            
                 </div>
             </div>
@@ -100,18 +100,15 @@
 
 
         <div class="row my-2">
-          <div class="col-sm-4 py-1">
-            <p style="color: #85b737;">Applied Filters: {{querystr}}</p>
-          </div>
-          <div class="col-sm-1 px-4">
-          </div>     
-          <div class="col-sm-1 px-4">
+          <div class="col-sm-1">
             <button class="btn btn-sm btn-outline-light" type="submit"><i class="fa fa-search"></i></button>
           </div>
-          <div class="col-sm-5 px-4">
-          </div>  
-          <div class="col-sm-1">
-            <button class="btn btn-sm btn-outline-light px-2"> <a style="color: #ccc" href="{% url 'export' %}">csv</a> </button> 
+          <div class="col-sm-9 py-1">
+           <p style="color: #85b737;">APPLIED FILTERS: {{querystr}}</p>
+          </div>
+          
+          <div class="col-sm-2">
+            <button class="btn btn-sm btn-outline-light px-2"> <a style="color: #ccc" href="{% url 'export' %}">Download.csv</a> </button> 
             {{ csv_file }}
           </div>
          </div>
