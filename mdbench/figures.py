@@ -74,8 +74,8 @@ def QuerySetBarPlot(qs, fig_title, n=1000):
                 str(i.resource.nnodes)+"<sub>N </sub>"+
                 i.site.name
                 )
-        h+=25
-    bw=min((c1+3)*25/h, 0.8)
+        h+=28
+    bw=min((c1+3)*28/h, 0.8)
 
     fig = go.FigureWidget(layout = go.Layout(height = h, width = w))
     fig.add_trace(
@@ -91,10 +91,17 @@ def QuerySetBarPlot(qs, fig_title, n=1000):
             cmax = 100,
             color = e_data,
             colorscale = 'algae', 
-            colorbar = dict(thickness = 20, title="Efficiency"))
+            colorbar = dict(
+            thickness = 18, 
+            title="Efficiency",
+            lenmode="pixels", 
+            len=200,
+            orientation='h',
+            x=0.7,
+            ))
                   )
     )
-
+    
     fig.update_layout(
         autosize=False,  
         margin=dict(
@@ -103,11 +110,11 @@ def QuerySetBarPlot(qs, fig_title, n=1000):
         b=80,
         t=40,
         pad=4
-    ),    
+        ),    
         paper_bgcolor='#eee',
         template="ggplot2",
         titlefont=dict(size=28, color='#3f8b64', family='Arial, sans-serif;'),
-        title="Higher is better",
+        title="Higher is better (faster), darker is more efficient",
         title_x=0.02,
         yaxis_title="Benchmark ID",
         xaxis_title="Speed, ns/day",       
@@ -153,8 +160,8 @@ def QuerySetBarPlotCostCPU(qs, fig_title, n=1000):
                 str(i.resource.nnodes)+"<sub>N </sub>"+
                 i.site.name
                 )            
-            h+=25
-    bw=min((c1+3)*25/h, 0.8)
+            h+=28
+    bw=min((c1+3)*28/h, 0.8)
     
     df=pd.DataFrame(list(zip(ids,x_data,y_data,speed_data,lab)), columns=["ids","x","y","speed","lab"])
     df=df.sort_values(by=['y'])
@@ -174,7 +181,14 @@ def QuerySetBarPlotCostCPU(qs, fig_title, n=1000):
             cmax = max_speed,
             color = df["speed"],
             colorscale = 'turbid', 
-            colorbar = dict(thickness = 20, title="Speed"))
+            colorbar = dict(
+            thickness = 18, 
+            title="Speed",
+            lenmode="pixels", 
+            len=200,
+            orientation='h',
+            x=0.7,
+            ))
                   )
     )
 
@@ -190,7 +204,7 @@ def QuerySetBarPlotCostCPU(qs, fig_title, n=1000):
         paper_bgcolor='#eee',
         template="ggplot2",
         titlefont=dict(size=28, color='#3f8b64', family='Arial, sans-serif;'),
-        title="Lower is better",
+        title="Lower is better (cheaper), darker is faster",
         title_x=0.02,
         yaxis_title="Benchmark ID",
         xaxis_title="Core-years per 1000 ns",       
@@ -236,8 +250,8 @@ def QuerySetBarPlotCostGPU(qs, fig_title, n=1000):
                 str(i.resource.ngpu)+
                 "<sub>"+i.gpu.model+" </sub>"+i.site.name
                 )            
-            h+=25
-    bw=min((c1+3)*25/h, 0.8)
+            h+=28
+    bw=min((c1+3)*28/h, 0.8)
 
     df=pd.DataFrame(list(zip(ids,x_data,y_data,speed_data,lab)), columns=["ids","x","y","speed","lab"])
     df=df.sort_values(by=['y'])
@@ -257,7 +271,14 @@ def QuerySetBarPlotCostGPU(qs, fig_title, n=1000):
             cmax = max_speed,
             color = df["speed"],
             colorscale = 'turbid', 
-            colorbar = dict(thickness = 20, title="Speed"))
+            colorbar = dict(
+            thickness = 18, 
+            title="Speed",
+            lenmode="pixels", 
+            len=200,
+            orientation='h',
+            x=0.7,           
+            ))
                   )
     )
 
@@ -273,7 +294,7 @@ def QuerySetBarPlotCostGPU(qs, fig_title, n=1000):
         paper_bgcolor='#fff',
         template="plotly_white",
         titlefont=dict(size=28, color='#3f8b64', family='Arial, sans-serif;'),
-        title="Lower is better",
+        title="Lower is better (cheaper), darker is faster",
         title_x=0.02,
         yaxis_title="Benchmark ID",
         xaxis_title="GPU-years per 1000 ns",       

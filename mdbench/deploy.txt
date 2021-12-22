@@ -63,3 +63,9 @@ python manage.py collectstatic
 # turn off debug
 sudo systemctl restart nginx
 
+# LOADING DATA WITH FIXTURES
+# Creating a fixture:
+
+python3 manage.py dumpdata mdbench.BenchmarkInstance --pks 1 --format yaml
+
+
