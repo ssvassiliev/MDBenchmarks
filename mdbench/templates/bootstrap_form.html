@@ -155,80 +155,63 @@
             </div>
         </div>
 
-
- 
-
-       <div class="row my-4">
+        <div class="row my-4">
               <div class="d-flex justify-content-center">
-              <button class="btn btn-sm btn-outline-light mx-2" type="submit">Search <i class="fa fa-search"></i></button>
-            {{ csv_file }}
-             </div>
-
-  
+                     <button class="btn btn-sm btn-outline-light mx-2" type="submit">Search <i class="fa fa-search"></i></button>
+              {{ csv_file }}
+              </div>
 
         <div class="row mt-4">
-             <div class="d-flex justify-content-center">
-           <div style="color: #85b737;" >APPLIED FILTERS: {{querystr}}</div>
-          <button class="btn btn-sm btn-outline-light px-2 mx-4"> <a style="color: #ccc" href="{% url 'export' %}">Download.csv</a> </button> 
-
+              <div class="d-flex justify-content-center">
+                 <div style="color: #85b737;" >APPLIED FILTERS: {{querystr}}</div>
+                 <button class="btn btn-sm btn-outline-light px-2 mx-4"> <a style="color: #ccc" href="{% url 'export' %}">Download.csv</a> </button> 
+              </div>
         </div>
+      </div>
 
-         </div>
-        </div>
       </form>
     </div>
   </div>
 </div>
 
 {% endblock content%}
-
 {% block content2%}
 
 <div class="row gx-0" style="background-color: #eee;">
   <div class="col-sm-4">
-    <div class="container-fluid pt-3">
-      <div class="row justify-content-center">
-        <div class="col-auto" >
-          <div class="card border-0" style="background-color: #eee;">
-            <div class="card-body">
-                <h3 class="card-title" >ACCESSING THE DATABASE</h3>
-               <div class="card-text">
+    <div class="d-flex justify-content-center pt-3">
+      <div class="card border-0" style="background-color: #eee;">
+        <div class="card-body">
+            <h3 class="card-title">ACCESSING THE DATABASE</h3>
+              <div class="card-text">
                 </p>When this page is viewed no filters are initially applied. All benchmarks are selected and sorted by simulation speed. The chart on the right displays only top 20 benchmarks for clarity.</p>  
                 <p>A subset of benchmarks can be selected using a custom chain of filters. Search fields are case insensitive and can be abbreviated.</p>
                 <p> Selected database entries can be downloaded as CSV files for further analysis or viewed in the Table below.</p>
                 <p> Efficiency = PS/(SS * N) where PS is speed of the parallel program, SS is speed of the serial program, and N is the number of CPUs or GPUs<p>               
-               </div>   
-            </div>
-          </div>
-        </div>
+             </div>   
+         </div>
       </div>
     </div>
   </div>
 
   <div class="col-sm-8">
-    <div class="container-fluid pt-3">
-      <div class="row justify-content-center"
-        <div class="col-auto" >
-          <div class="card border-0" style="background-color: #eee;" >
-            <div class="card-body">
-              <h3 class="card-title">Simulation Speed</h3>
-                <div class="card-img-top">
-                  {% autoescape off %} {{ plot_div }} {% endautoescape %}
-                </div>
+    <div class="d-flex justify-content-center pt-3">
+      <div class="card border-0" style="background-color: #eee;" >
+        <div class="card-body">
+          <h3 class="card-title">Simulation Speed</h3>
+            <div class="card-img-top">
+              {% autoescape off %} {{ plot_div }} {% endautoescape %}
             </div>
-          </div>
         </div>
       </div>
-    </div>
+    </div>  
   </div>
 </div>
 
 <div class="row gx-0" style="background-color: #fff">
   <div class="col-sm-8"> 
     <div style="background-color: #fff">
-      <div class="container-fluid pt-3">
-        <div class="row justify-content-center">
-          <div class="col-auto" >
+        <div class="d-flex justify-content-center pt-3">
             <div class="card border-0" style="background-color: #fff;" >
               <div class="card-body">
                 <h3 class="card-title" style="color: #B79754;">Cost of Simulations Using GPUs</h3>
@@ -237,9 +220,7 @@
                   </div>
               </div>
             </div>
-          </div>
         </div>
-      </div>
    </div>
 </div>
 
@@ -264,9 +245,7 @@
 
 <div class="row gx-0" style="background-color: #eee">
   <div class="col-sm-4">
-    <div class="container-fluid pt-3">
-      <div class="row justify-content-center">
-        <div class="col-auto" >
+      <div class="d-flex justify-content-center pt-3">
           <div class="card border-0" style="background-color: #eee;">
             <div class="card-body">
                 <h4 class="card-title" style="color: #B79754;">SIMULATIONS ON MULTIPLE CPUS</h4>
@@ -275,16 +254,12 @@
                </div>   
             </div>
           </div>
-        </div>
       </div>
-    </div>
   </div>
 
   <div class="col-sm-8">
     <div style="background-color: #eee">
-      <div class="container-fluid pt-3">
-        <div class="row justify-content-center">
-          <div class="col-auto" >
+        <div class="d-flex justify-content-center pt-3">
             <div class="card border-0" style="background-color: #eee" >
               <div class="card-body">
                 <h3 class="card-title" style="color: #B79754;">Cost of Simulations Using CPUs</h3>
@@ -295,39 +270,32 @@
                   </div>
               </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
   </div>
-
 </div>
 
-
 <div style="background-color:  #222529">
-    <div class="container-fluid pt-3">
-        <div class="row justify-content-center">
-            <div class="col-auto" >
-                <div class="card" style="background-color: #35754c;">
-                    <div class="card-body">
-                        <div class="card-title"><h3>BENCHMARK DETAILS</h3>
-                        <button class="btn btn-sm btn-outline-light"> <a style="color: #aaa" href="{% url 'export' %}">Download CSV</a> </button> </div>
-                        {{ csv_file }}
-                         <div style="background-color: #eee;">
-                             <table class="table table-hover">
-                                 {% include "mdbench/t_head.html" %}
-                                 {% for benchmark in queryset %}
-                                 <tr>
-                                     {% include "mdbench/t_data.html" %}
-                                 </tr>   
-                                 {% endfor %} 
-                             </table>
-                         </div>   
-                   </div>
-               </div>
-            </div>
-        </div>
-    </div>
+  <div class="d-flex justify-content-center pt-3">
+      <div class="card" style="background-color: #35754c;">
+          <div class="card-body">
+              <div class="card-title"><h3>BENCHMARK DETAILS</h3>
+                    <button class="btn btn-sm btn-outline-light"><a style="color: #aaa" href="{% url 'export' %}">Download CSV</a></button>
+              </div>
+              {{ csv_file }}
+              <div style="background-color: #eee;">
+                <table class="table table-hover">
+                  {% include "mdbench/t_head.html" %}
+                  {% for benchmark in queryset %}
+                    <tr>
+                      {% include "mdbench/t_data.html" %}
+                    </tr>   
+                  {% endfor %} 
+                  </table>
+              </div>   
+          </div>
+      </div>
+  </div>
 </div>
 
 {% endblock %}

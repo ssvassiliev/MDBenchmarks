@@ -1,19 +1,40 @@
 {% extends "base_generic.html" %}
+
 {% block content %}
+<div class="py-4" style="background-image: url('https://mdbench.ace-net.ca/static/media/images/fig3.png'); height: 200px">
+  <h3>BENCHMARK DETAILS</h3>
+</div>
+{% endblock%}
+
+{% block content2 %}
+
 <div class="px-2">
-  <h2>Benchmarks</h2>
   {% if benchmarkinstance_list %} 
-  <table class="table table-sm table-hover">
-    {% include "mdbench/t_head.html" %}
-    {% for benchmark in benchmarkinstance_list %}
-   <tr>
-      {% include "mdbench/t_data.html" %}
-   </tr>   
-    {% endfor %} 
-  </tbody>
-  </table>
+    <table class="table table-sm table-hover">
+      <tbody>
+      {% include "mdbench/t_head.html" %}
+      {% for benchmark in benchmarkinstance_list %}
+        <tr>
+            {% include "mdbench/t_data.html" %}
+        </tr>   
+      {% endfor %} 
+      </tbody>
+    </table>
+  {% if benchmarkinstance_list.count == 1 %}
+      {% load pygmentify %}
+      {% pygment %}
+  {% for benchmarkinstance in benchmarkinstance_list%}
+    <ul>
+      <li><strong>Submission script:</strong><div class="p-3"><pre lang="bash">{{ benchmarkinstance.sbatch_script|linebreaks }}</pre></div></li>   
+      <li><strong>Simulation input file:</strong><div class='p-3 text-secondary'>{{ benchmarkinstance.serial.simulation_input.input | linebreaks }}</div></li> 
+    </ul> 
+  {% endfor %}
+      {% endpygment %}
+  {% endif %} 
+
   {% else %}
         <p>There are no benchmarks in the database.</p>
   {% endif %}
 <div>
+
 {% endblock %}

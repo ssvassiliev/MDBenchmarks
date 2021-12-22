@@ -1,10 +1,14 @@
 {% extends "base_generic.html" %}
-
 {% block content %}
+<div class="py-4" style="background-image: url('https://mdbench.ace-net.ca/static/media/images/fig3.png'); height: 200px;">
+  <h3>SOFTWARE DETAILS</h3>
+</div>
+{% endblock %}
+{% block content2 %}
 {% load pygmentify %}
 {% pygment %}
 <div class="p-4">
-<h3>Software details</h3>
+<h3>ID={{software.id}}, {{software.name}}</h3>
 <ul>
 <li><strong>Module/Version:</strong> {{ software.module}}/{{ software.module_version }}</li>
 <li><strong>Toolchain/Version:</strong> {{ software.toolchain}}/{{ software.toolchain_version }}</li>

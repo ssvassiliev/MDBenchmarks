@@ -117,7 +117,11 @@ def QuerySetBarPlot(qs, fig_title, n=1000):
         ticktext = ids,
                     )
         )
-    plot_div = fig.to_html(full_html=False, config=config)
+    
+    if c1:
+        plot_div = fig.to_html(full_html=False, config=config)
+    else:
+         plot_div=('<div class="d-flex justify-content-center p-4"><h4 style="color:#bbb;">NO BENCHMARKS SELECTED</h4></div>')      
     return(plot_div)
 
 
@@ -197,7 +201,10 @@ def QuerySetBarPlotCostCPU(qs, fig_title, n=1000):
                     )
         )
     
-    plot_div = fig.to_html(full_html=False, config=config)
+    if c1:
+        plot_div = fig.to_html(full_html=False, config=config)
+    else:
+         plot_div=('<div class="d-flex justify-content-center p-4"><h4 style="color:#bbb;">NO CPU BENCHMARKS SELECTED</h4></div>')      
     return(plot_div)
 
 
@@ -236,7 +243,6 @@ def QuerySetBarPlotCostGPU(qs, fig_title, n=1000):
     df=df.sort_values(by=['y'])
     df['id'] = range(len(df))
     
-
     fig = go.FigureWidget(layout = go.Layout(height = h, width = w))
     fig.add_trace(
         go.Bar(
@@ -277,6 +283,9 @@ def QuerySetBarPlotCostGPU(qs, fig_title, n=1000):
         ticktext = df["ids"],
                     )
         )
-    
-    plot_div = fig.to_html(full_html=False, config=config)
+
+    if c1:
+        plot_div = fig.to_html(full_html=False, config=config)
+    else:
+         plot_div=('<div class="d-flex justify-content-center p-4"><h4 style="color:#bbb;">NO GPU BENCHMARKS SELECTED</h4></div>')      
     return(plot_div)
