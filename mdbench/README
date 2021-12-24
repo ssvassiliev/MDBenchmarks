@@ -1,0 +1,102 @@
+# 1. DEPLOYING THE APPLICATION
+# 2. LOADING DATA USING FIXTURES
+
+https://realpython.com/django-nginx-gunicorn/
+
+# Set up DJANGO SECRET_KEY: 
+echo "export SECRET_KEY='$(openssl rand -hex 40)'" > .DJANGO_SECRET_KEY
+# Add "export SECRET_KEY" to .bashrc
+# Edit settings.py to use SECRET_KEY variable
+
+# Testing http connection (-I only headers):  
+curl -Ik https://mdbench.ace-net.ca/mdbench/ 
+
+# Install gunicorn and make folders for log and PID files as specified in the config/gunicorn/dev.py
+
+sudo mkdir -pv /var/{log,run}/gunicorn/
+sudo chown -cR ubuntu:ubuntu /var/{log,run}/gunicorn/
+
+# Set STATIC_ROOT:
+STATIC_ROOT =  '/home/ubuntu/MDBenchmarks/mdbench/static/'
+
+# Start gunicorn:
+gunicorn -c config/gunicorn/dev.py
+
+# Install nginx and configure mdbench app
+# Create conf file /etc/nginx/sites-available/mdbench
+-------8><---------><8---------
+server_tokens               off;
+access_log                  /var/log/nginx/mdbench.access.log;
+error_log                   /var/log/nginx/mdbench.error.log;
+# This configuration will be changed to redirect to HTTPS later
+server {
+  server_name               mdbench.ace-net.ca
+  listen                    80;
+  location / {
+    proxy_pass              http://localhost:8000;
+    proxy_set_header        Host $host;
+  }
+}
+-------8><---------><8---------
+
+# Create link to 'sites-available/mdbench' in 'sites-enabled':
+
+cd /etc/nginx/sites-enabled
+sudo ln -s ../sites-available/mdbench .
+sudo systemctl restart nginx
+
+# Setup directory for static files
+sudo mkdir -pv /var/www/mdbench.ace-net.ca/static/
+sudo chown -cR ubuntu:ubuntu /var/www/mdbench.ace-net.ca/
+
+# Edit settings.py:
+STATIC_URL = "/static/"
+STATIC_ROOT = "/var/www/mdbench.ace-net.ca/static"
+STATICFILES_DIRS = [BASE_DIR / "static"]
+
+# Collect static files
+python manage.py collectstatic
+
+# Add location of static files to the nginx conf
+# /etc/nginx/sites-available/mdbench 
+  location /static {
+    autoindex on;
+    alias /var/www/mdbench.ace-net.ca/static/;
+  }
+}
+
+# Turn off debug and restart nginx
+sudo systemctl restart nginx
+
+
+# 2. LOADING DATA WITH FIXTURES
+
+# Creating a fixture:
+ID=3. PMEMD.cuda-amber-20.9-20.15-avx512
+python3 manage.py dumpdata mdbench.SerialBenchmarkInstance --pks 4 --format yaml > mdbench/fixtures/PMEMD.cuda-s-amber-20.9-20.15-avx512.yaml
+python3 manage.py dumpdata mdbench.BenchmarkInstance --pks 9 --format yaml > mdbench/fixtures/PMEMD.cuda-p-amber-20.9-20.15-avx512.yaml
+
+# Loading a fixture
+python3 manage.py loaddata PMEMD.cuda-p-amber-20.9-20.15-avx512.yaml
+
+# Script to duplicate a benchmark with a specifik PK into a new record. 
+# Useful for entering data.
+
+#Usage: duplicate_benchmarks.sh serial 102
+-------8><---------><8---------
+if  [ $1 = serial ]; then
+python3 manage.py dumpdata mdbench.SerialBenchmarkInstance \
+--pks $2 --format yaml > mdbench/fixtures/tmp.yaml
+elif  [ $1 = parallel ]; then
+python3 manage.py dumpdata mdbench.BenchmarkInstance \
+--pks $2 --format yaml > mdbench/fixtures/tmp.yaml
+else
+echo 'argument #1 should be "serial" or "parallel"'
+rm mdbench/fixtures/tmp.yaml
+exit(1) 
+fi
+# Replace pk with null
+sed '2s/.*/  pk: null/' mdbench/fixtures/tmp.yaml > mdbench/fixtures/tmp2.yaml
+python3 manage.py loaddata mdbench/fixtures/tmp2.yaml
+rm mdbench/fixtures/tmp?.yaml
+-------8><---------><8---------
