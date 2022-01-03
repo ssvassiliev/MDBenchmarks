@@ -37,10 +37,41 @@ def QuerySetWriteCSV(qs):
         csv_data.append(row)
     return()
 
+def Check_QS(qs):
+    # Check if only the number of CPUs is changing
+    ss=True
+    for i in qs:
+        if i.software.name != qs[0].software.name:
+            ss=False; break
+        elif i.software.module != qs[0].software.module:
+            ss=False; break
+        elif i.software.module_version != qs[0].software.module_version:
+            ss=False; break       
+        elif i.software.toolchain != qs[0].software.toolchain:
+            ss=False; break
+        elif i.software.toolchain_version != qs[0].software.toolchain_version:
+            ss=False; break    
+        elif i.software.instruction_set != qs[0].software.instruction_set:
+            ss=False; break
+        elif i.site.name != qs[0].site.name:
+            ss=False; break
+        elif i.benchmark.name != qs[0].benchmark.name:
+            ss=False; break
+        elif i.cpu.model != qs[0].cpu.model:
+            ss=False; break      
+        else:
+            continue
+    return(ss)    
+
 
 def QuerySetBarPlot(qs, fig_title, n=1000):
     # Limit plot to first n benchmarks
     figTitle=dict(text=fig_title,)
+
+    # Check if only the number of CPUs is changing
+    print(Check_QS(qs))
+
+
     x_data, y_data, e_data, lab, ids = ([] for _ in range(5)) 
     h=220
     w=680
@@ -131,6 +162,146 @@ def QuerySetBarPlot(qs, fig_title, n=1000):
          plot_div=('<div class="d-flex justify-content-center p-4"><h4 style="color:#bbb;">NO BENCHMARKS SELECTED</h4></div>')      
     return(plot_div)
 
+
+def QuerySetScatterPlot(qs, fig_title, n=1000):
+    # Limit plot to first n benchmarks
+    figTitle=dict(text=fig_title,)
+
+    x_data, y_data, e_data, lin_sc, lab, ids = ([] for _ in range(6)) 
+    h=480
+    w=680
+    c=c1=0
+    x_data.append(1)
+    y_data.append(qs[0].serial.rate_max) 
+    lin_sc.append(qs[0].serial.rate_max)
+    e_data.append(100.0)
+
+    fig_title="Parallel scaling of "+\
+        qs[0].software.name+"-"+\
+        qs[0].software.module+"/"+\
+        qs[0].software.module_version+" (ID="+\
+        str(qs[0].software.id)+"} on "+\
+        qs[0].site.name
+    
+
+
+    for c,i in enumerate(qs):
+        if c >=n:
+            break
+        ids.append(str(i.id))
+
+        x_data.append(i.resource.ntasks * i.resource.ncpu)
+        y_data.append(i.rate_max)
+        lin_sc.append(i.resource.ntasks * i.resource.ncpu * i.serial.rate_max)
+        c1+=1
+        if i.gpu is not None:
+            e_data.append(i.cpu_efficiency)
+            #e_data.append(100*i.rate_max/(i.serial.rate_max*i.resource.ngpu)) # assume maximum available number of cores per GPU was used
+            lab.append(
+                i.software.name +"<sup>"+
+                str(i.software.id) +" </sup>"+
+                str(i.resource.ntasks)+"<sub>T </sub>"+
+                str(i.resource.ncpu)+"<sub>C </sub>"+
+                str(i.resource.nnodes)+"<sub>N </sub>"+
+                str(i.resource.ngpu)+
+                "<sub>"+i.gpu.model+" </sub>"+i.site.name
+                )
+        else:
+                e_data.append(i.cpu_efficiency)
+                lab.append(
+                i.software.name +"<sup>"+
+                str(i.software.id) +" </sup>"+
+                str(i.resource.ntasks)+"<sub>T </sub>"+
+                str(i.resource.ncpu)+"<sub>C </sub>"+
+                str(i.resource.nnodes)+"<sub>N </sub>"+
+                i.site.name
+                )
+ 
+
+    df=pd.DataFrame(list(zip(ids,x_data,y_data,e_data,lin_sc,lab)), columns=["ids","x","y","eff","lin","lab"])
+    df=df.sort_values(by=['x'])
+    df['id'] = range(len(df))
+     
+    fig = make_subplots(specs=[[{"secondary_y": True}]])
+
+    fig.add_trace(
+        go.Scatter(
+            name="Performance",
+            x = df["x"], 
+            y = df["y"], 
+            marker = dict(
+                size = 10,
+                color = "#0a0",        
+                )
+            ),
+        secondary_y=False,       
+    )
+
+    fig.add_trace(
+        go.Scatter(
+            mode='lines',
+            line = dict(color="#0a0", width=1, dash='dash'),
+            name="Linear scaling",
+            x = df["x"], 
+            y = df["lin"], 
+            ),
+        secondary_y=False,       
+    )
+   
+    
+    fig.add_trace(
+        go.Scatter(
+            name="Efficiency",
+            x = df["x"], 
+            y = df["eff"], 
+            marker = dict(
+                symbol="square",                
+                size = 10,
+                color = "#B79754",        
+                )
+        ),
+        secondary_y=True,     
+    )
+
+    fig.update_yaxes(title_text="Performance, ns/day", secondary_y=False)
+    fig.update_yaxes(title_text="Efficiency, %",secondary_y=True, range = [0,105])
+
+
+    fig.update_layout(
+        autosize=False,  
+        margin=dict(
+        l=50,
+        r=50,
+        b=80,
+        t=40,
+        pad=4
+        ),    
+        paper_bgcolor='#eee',
+        template="ggplot2",
+        titlefont=dict(size=28, color='#3f8b64', family='Arial, sans-serif;'),
+        title=fig_title,
+        title_x=0.02,
+        xaxis_title="Number of cores",       
+     
+        )
+    
+    if c1:
+        plot_div = fig.to_html(full_html=False, config=config)
+    else:
+         plot_div=('<div class="d-flex justify-content-center p-4"><h4 style="color:#bbb;">NO BENCHMARKS SELECTED</h4></div>')      
+    return(plot_div)
+
+
+
+def QuerySetPlot(qs, fig_title, n=1000):
+    # Limit plot to first n benchmarks
+    figTitle=dict(text=fig_title,)
+
+    # Check if only the number of CPUs is changing
+    if not Check_QS(qs):
+        return(QuerySetBarPlot(qs, fig_title, n=1000))
+    else:
+        return(QuerySetScatterPlot(qs, fig_title, n=1000))   
 
 
 def QuerySetBarPlotCostCPU(qs, fig_title, n=1000):

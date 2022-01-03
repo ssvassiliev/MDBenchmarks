@@ -57,7 +57,7 @@ def BootstrapFilterView(request):
     query_string=" ".join(que)
 
     caption='SIMULATION SPEED' 
-    plot_div=QuerySetBarPlot(qs, caption, 20)
+    plot_div=QuerySetPlot(qs, caption, 20)
     
     plot_div_cost_cpu=QuerySetBarPlotCostCPU(qs, caption, 20)
     plot_div_cost_gpu=QuerySetBarPlotCostGPU(qs, caption, 20)
@@ -101,7 +101,7 @@ def index(request):
 
     sorted_bench = sorted(bench, key=lambda BenchmarkInstance: BenchmarkInstance.rate_max, reverse=True)
     caption='MAXIMUM SIMULATION SPEED'
-    plot_div=QuerySetBarPlot(sorted_bench, caption, 20)
+    plot_div=QuerySetPlot(sorted_bench, caption, 20)
     plot_div_cost_cpu=QuerySetBarPlotCostCPU(sorted_bench, caption, 20)
     plot_div_cost_gpu=QuerySetBarPlotCostGPU(sorted_bench, caption, 20)
 
