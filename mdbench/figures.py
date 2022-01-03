@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 import pandas as pd
 
 csv_data = []
-config={'modeBarButtonsToRemove': ['zoom2d','pan2d','select2d','lasso2d','zoomIn2d','zoomOut2d','autoScale2d','resetScale2d'],
+config={'modeBarButtonsToRemove': ['zoom2d','pan2d','select2d','lasso2d','zoomIn2d','zoomOut2d','autoScale2d'],
 'displaylogo': False,
 'responsive': True}
 
@@ -40,8 +40,12 @@ def QuerySetWriteCSV(qs):
 def Check_QS(qs):
     # Check if only the number of CPUs is changing
     ss=True
+    cs=True
+    gs=True
     for i in qs:
-        if i.software.name != qs[0].software.name:
+        if len(qs) == 1:
+            ss=False; break               
+        elif i.software.name != qs[0].software.name:
             ss=False; break
         elif i.software.module != qs[0].software.module:
             ss=False; break
@@ -58,9 +62,16 @@ def Check_QS(qs):
         elif i.benchmark.name != qs[0].benchmark.name:
             ss=False; break
         elif i.cpu.model != qs[0].cpu.model:
-            ss=False; break      
+            ss=False; break  
+        elif i.resource.ncpu != qs[0].resource.ncpu:
+            cs=False 
+        elif i.resource.ngpu != qs[0].resource.ngpu:
+            gs=False                           
         else:
             continue
+        if cs == False and gs == False:
+            ss=False 
+        
     return(ss)    
 
 
@@ -70,7 +81,6 @@ def QuerySetBarPlot(qs, fig_title, n=1000):
 
     # Check if only the number of CPUs is changing
     print(Check_QS(qs))
-
 
     x_data, y_data, e_data, lab, ids = ([] for _ in range(5)) 
     h=220
@@ -176,6 +186,11 @@ def QuerySetScatterPlot(qs, fig_title, n=1000):
     lin_sc.append(qs[0].serial.rate_max)
     e_data.append(100.0)
 
+    if qs[0].resource.ngpu > 0:
+        xaxisTitle="Number of GPU equivalents"
+    else:
+        xaxisTitle="Number of core equivalents"        
+
     fig_title="Parallel scaling of "+\
         qs[0].software.name+"-"+\
         qs[0].software.module+"/"+\
@@ -183,18 +198,15 @@ def QuerySetScatterPlot(qs, fig_title, n=1000):
         str(qs[0].software.id)+"} on "+\
         qs[0].site.name
     
-
-
     for c,i in enumerate(qs):
         if c >=n:
             break
         ids.append(str(i.id))
-
-        x_data.append(i.resource.ntasks * i.resource.ncpu)
         y_data.append(i.rate_max)
-        lin_sc.append(i.resource.ntasks * i.resource.ncpu * i.serial.rate_max)
         c1+=1
         if i.gpu is not None:
+            x_data.append(i.resource.ngpu)
+            lin_sc.append(i.resource.ngpu * i.serial.rate_max)
             e_data.append(i.cpu_efficiency)
             #e_data.append(100*i.rate_max/(i.serial.rate_max*i.resource.ngpu)) # assume maximum available number of cores per GPU was used
             lab.append(
@@ -207,6 +219,8 @@ def QuerySetScatterPlot(qs, fig_title, n=1000):
                 "<sub>"+i.gpu.model+" </sub>"+i.site.name
                 )
         else:
+                x_data.append(i.resource.ntasks * i.resource.ncpu)
+                lin_sc.append(i.resource.ntasks * i.resource.ncpu * i.serial.rate_max)
                 e_data.append(i.cpu_efficiency)
                 lab.append(
                 i.software.name +"<sup>"+
@@ -263,8 +277,8 @@ def QuerySetScatterPlot(qs, fig_title, n=1000):
         secondary_y=True,     
     )
 
-    fig.update_yaxes(title_text="Performance, ns/day", secondary_y=False)
-    fig.update_yaxes(title_text="Efficiency, %",secondary_y=True, range = [0,105])
+    fig.update_yaxes(title_text="Performance, ns/day", secondary_y=False, range = [-max(lin_sc)*0.05,max(lin_sc)])
+    fig.update_yaxes(title_text="Efficiency, %",secondary_y=True, range = [-max(lin_sc)*0.05,105])
 
 
     fig.update_layout(
@@ -281,7 +295,7 @@ def QuerySetScatterPlot(qs, fig_title, n=1000):
         titlefont=dict(size=28, color='#3f8b64', family='Arial, sans-serif;'),
         title=fig_title,
         title_x=0.02,
-        xaxis_title="Number of cores",       
+        xaxis_title=xaxisTitle,       
      
         )
     
@@ -296,12 +310,15 @@ def QuerySetScatterPlot(qs, fig_title, n=1000):
 def QuerySetPlot(qs, fig_title, n=1000):
     # Limit plot to first n benchmarks
     figTitle=dict(text=fig_title,)
-
+    if len(qs) == 0:
+        plot_div=('<div class="d-flex justify-content-center p-4"><h4 style="color:#bbb;">NO BENCHMARKS SELECTED</h4></div>')      
+        return(plot_div)
+    
     # Check if only the number of CPUs is changing
     if not Check_QS(qs):
         return(QuerySetBarPlot(qs, fig_title, n=1000))
     else:
-        return(QuerySetScatterPlot(qs, fig_title, n=1000))   
+        return(QuerySetScatterPlot(qs, fig_title, n=1000))    
 
 
 def QuerySetBarPlotCostCPU(qs, fig_title, n=1000):
@@ -389,7 +406,7 @@ def QuerySetBarPlotCostCPU(qs, fig_title, n=1000):
     if c1:
         plot_div = fig.to_html(full_html=False, config=config)
     else:
-         plot_div=('<div class="d-flex justify-content-center p-4"><h4 style="color:#bbb;">NO CPU BENCHMARKS SELECTED</h4></div>')      
+        plot_div=('<div class="d-flex justify-content-center p-4"><h4 style="color:#bbb;">NO CPU BENCHMARKS SELECTED</h4></div>')      
     return(plot_div)
 
 
