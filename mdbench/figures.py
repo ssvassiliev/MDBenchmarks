@@ -91,9 +91,9 @@ def QuerySetPlot(qs, fig_title, n=1000):
     
     # Check if only the number of CPUs is changing
     if not Check_QS(qs):
-        return(QuerySetBarPlot(qs, fig_title, n=1000))
+        return(QuerySetBarPlot(qs, fig_title, n=20))
     else:
-        return(QuerySetScatterPlot(qs, fig_title, n=1000))    
+        return(QuerySetScatterPlot(qs, fig_title, n=20))    
 
 
 def QuerySetScatterPlot(qs, fig_title, n=1000):
@@ -110,7 +110,7 @@ def QuerySetScatterPlot(qs, fig_title, n=1000):
     y_data.append(qs[0].serial.rate_max) 
     e_data.append(100.0)
     lin_sc.append(qs[0].serial.rate_max)
-    lab.append("0")  # Fix it
+    lab.append("Serial")
 
     c1=1
 
@@ -131,34 +131,21 @@ def QuerySetScatterPlot(qs, fig_title, n=1000):
         ids.append(str(i.id))
         y_data.append(i.rate_max)
         c1+=1
+        lab.append(
+            "ID="+
+            str(i.id)
+            )        
         if i.gpu is not None:
             x_data.append(i.resource.ngpu)
             lin_sc.append(i.resource.ngpu * i.serial.rate_max)
             e_data.append(i.cpu_efficiency)
             #e_data.append(100*i.rate_max/(i.serial.rate_max*i.resource.ngpu)) # assume maximum available number of cores per GPU was used
-            lab.append(
-                i.software.name +"<sup>"+
-                str(i.software.id) +" </sup>"+
-                str(i.resource.ntasks)+"<sub>T </sub>"+
-                str(i.resource.ncpu)+"<sub>C </sub>"+
-                str(i.resource.nnodes)+"<sub>N </sub>"+
-                str(i.resource.ngpu)+
-                "<sub>"+i.gpu.model+" </sub>"+i.site.name
-                )
         else:
-                x_data.append(i.resource.ntasks * i.resource.ncpu)
-                lin_sc.append(i.resource.ntasks * i.resource.ncpu * i.serial.rate_max)
-                e_data.append(i.cpu_efficiency)
-                lab.append(
-                i.software.name +"<sup>"+
-                str(i.software.id) +" </sup>"+
-                str(i.resource.ntasks)+"<sub>T </sub>"+
-                str(i.resource.ncpu)+"<sub>C </sub>"+
-                str(i.resource.nnodes)+"<sub>N </sub>"+
-                i.site.name
-                )
- 
+            x_data.append(i.resource.ntasks * i.resource.ncpu)
+            lin_sc.append(i.resource.ntasks * i.resource.ncpu * i.serial.rate_max)
+            e_data.append(i.cpu_efficiency)
 
+ 
     df=pd.DataFrame(list(zip(ids,x_data,y_data,e_data,lin_sc,lab)), columns=["ids","x","y","eff","lin","lab"])
     df=df.sort_values(by=['x'])
     df['id'] = range(len(df))
@@ -167,6 +154,7 @@ def QuerySetScatterPlot(qs, fig_title, n=1000):
 
     fig.add_trace(
         go.Scatter(
+            text = lab,
             name="Performance",
             x = df["x"], 
             y = df["y"], 
@@ -192,6 +180,7 @@ def QuerySetScatterPlot(qs, fig_title, n=1000):
     
     fig.add_trace(
         go.Scatter(
+            text = lab,
             name="Efficiency",
             x = df["x"], 
             y = df["eff"], 
@@ -231,8 +220,6 @@ def QuerySetScatterPlot(qs, fig_title, n=1000):
     else:
          plot_div=('<div class="d-flex justify-content-center p-4"><h4 style="color:#bbb;">NO BENCHMARKS SELECTED</h4></div>')      
     return(plot_div)
-
-
 
 
 def QuerySetBarPlot(qs, fig_title, n=1000):
