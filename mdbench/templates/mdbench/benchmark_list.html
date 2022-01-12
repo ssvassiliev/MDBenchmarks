@@ -15,15 +15,22 @@
       <th>Image</th> 
       <th></th>      
   </thead> 
-    {% for benchmark in benchmark_list %}
     <tr>
-    <td> {{ benchmark.id }}</td>   
-    <td> {{ benchmark.name }}</td>
-    <td> {{ benchmark.natoms }}</td>
-    <td> {{ benchmark.description | linebreaks }} </td>   
-    <td><img src="{{ benchmark.image.url }}" style="height:200px;" alt="{{ benchmark.name }}"> </td>
+    <td> {{ benchmark_list.0.id }}</td>   
+      <td> {{ benchmark_list.0.name }}</td>
+      <td> {{ benchmark_list.0.natoms }}</td>
+      <td> {{ benchmark_list.0.description | linebreaks }} </td>   
+      <td><img src="https://mdbench.ace-net.ca/static/media/images/6n4o.png" style="height:200px;" alt="{{ benchmark.name }}"> </td>
     </tr>
-   {% endfor %} 
+
+    <tr>
+    <td> {{ benchmark_list.1.id }}</td>   
+      <td> {{ benchmark_list.1.name }}</td>
+      <td> {{ benchmark_list.1.natoms }}</td>
+      <td> {{ benchmark_list.1.description | linebreaks }} </td>   
+      <td><img src="https://mdbench.ace-net.ca/static/media/images/4cg1.png" style="height:200px;" alt="{{ benchmark.name }}"> </td>
+     </tr>
+
   </table>
   </div>
    

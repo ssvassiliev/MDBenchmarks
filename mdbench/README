@@ -22,6 +22,8 @@ STATIC_ROOT =  '/home/ubuntu/MDBenchmarks/mdbench/static/'
 # Start gunicorn:
 gunicorn -c config/gunicorn/dev.py
 
+*** After reboot /var/{log,run}/gunicorn/ were gone! Recreated them. ***
+
 # Install nginx and configure mdbench app
 # Create conf file /etc/nginx/sites-available/mdbench
 -------8><---------><8---------
@@ -68,6 +70,9 @@ python manage.py collectstatic
 # Turn off debug and restart nginx
 sudo systemctl restart nginx
 
+# Image directory is wrong on VM after reboot, OK on local:
+# https://mdbench.ace-net.ca/media/images/6n4o.png
+# Shouod be: https://mdbench.ace-net.ca/static/media/images/6n4o.png
 
 # 2. LOADING DATA WITH FIXTURES
 
