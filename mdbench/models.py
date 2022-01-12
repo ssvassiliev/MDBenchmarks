@@ -12,7 +12,7 @@ class Benchmark(models.Model):
     name = models.CharField(max_length=100, help_text='Enter a benchmark name')
     natoms = models.IntegerField()
     description = models.TextField()
-    image = models.ImageField(upload_to='images/')
+    image = models.ImageField(upload_to='images/', null=True)
     def get_absolute_url(self):
         return reverse('dataset-detail', args=[str(self.id)])
     def __str__(self):

@@ -21,6 +21,7 @@ def download_csv(request):
 def BootstrapFilterView(request):
     qs = BenchmarkInstance.objects.all().order_by("-rate_max")
     software_contains_query = request.GET.get('software_contains')
+    software_id_query = request.GET.get('software_id')   
     module_contains_query = request.GET.get('module_contains')
     module_version_query = request.GET.get('module_version')
     site_contains_query = request.GET.get('site_contains')
@@ -30,6 +31,8 @@ def BootstrapFilterView(request):
     dataset_exact_query = request.GET.get('dataset')   
     if software_contains_query != '' and software_contains_query is not None:
         qs = qs.filter(software__name__icontains=software_contains_query)
+    if software_id_query != '' and software_id_query is not None:
+        qs = qs.filter(software__id__exact=software_id_query)
     if module_contains_query != '' and module_contains_query is not None:
         qs = qs.filter(software__module__icontains=module_contains_query)
     if module_version_query != '' and module_version_query is not None:
@@ -47,6 +50,7 @@ def BootstrapFilterView(request):
 
     que=[]
     que.append(software_contains_query or "_____")
+    que.append(software_id_query or "_____") 
     que.append(module_contains_query or "_____")
     que.append(module_version_query or "_____")
     que.append(site_contains_query or "_____")
