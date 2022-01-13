@@ -121,7 +121,7 @@ def QuerySetScatterPlot(qs, fig_title, n=1000):
 
     fig_title="Parallel scaling of "+\
         qs[0].software.module+"/"+\
-        qs[0].software.module_version+" (ID="+\
+        qs[0].software.module_version+" (Software_ID="+\
         str(qs[0].software.id)+") on "+\
         qs[0].site.name
     
@@ -132,7 +132,7 @@ def QuerySetScatterPlot(qs, fig_title, n=1000):
         y_data.append(i.rate_max)
         c1+=1
         lab.append(
-            "ID="+
+            "Benchmark_ID="+
             str(i.id)
             )        
         if i.gpu is not None:
@@ -148,13 +148,11 @@ def QuerySetScatterPlot(qs, fig_title, n=1000):
  
     df=pd.DataFrame(list(zip(ids,x_data,y_data,e_data,lin_sc,lab)), columns=["ids","x","y","eff","lin","lab"])
     df=df.sort_values(by=['x'])
-    df['id'] = range(len(df))
-     
+    
     fig = make_subplots(specs=[[{"secondary_y": True}]])
-
     fig.add_trace(
         go.Scatter(
-            text = lab,
+         text = df["lab"],
             name="Performance",
             x = df["x"], 
             y = df["y"], 
@@ -180,7 +178,7 @@ def QuerySetScatterPlot(qs, fig_title, n=1000):
     
     fig.add_trace(
         go.Scatter(
-            text = lab,
+            text = df["lab"],
             name="Efficiency",
             x = df["x"], 
             y = df["eff"], 
@@ -224,8 +222,8 @@ def QuerySetScatterPlot(qs, fig_title, n=1000):
 
 def QuerySetBarPlot(qs, fig_title, n=1000):
     # Limit plot to first n benchmarks
-    figTitle=dict(text=fig_title,)
 
+    figTitle=dict(text=fig_title)
     x_data, y_data, e_data, lab, ids = ([] for _ in range(5)) 
     h=220
     w=680
@@ -298,8 +296,8 @@ def QuerySetBarPlot(qs, fig_title, n=1000):
         ),    
         paper_bgcolor='#eee',
         template="ggplot2",
-        titlefont=dict(size=28, color='#3f8b64', family='Arial, sans-serif;'),
-        title="Higher is better (faster), darker is more efficient",
+        titlefont=dict(size=16, color='#666', family='Arial, sans-serif;'),
+        title=figTitle,
         title_x=0.02,
         yaxis_title="Benchmark ID",
         xaxis_title="Speed, ns/day",       

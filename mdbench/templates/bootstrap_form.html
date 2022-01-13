@@ -13,7 +13,7 @@
                     <div class="input-group">
                         <div class="input">
                             <label for="software_contains" class="form-label">Software name</label>
-                            <select class="form-select mb-1 form-select-sm" style="background-color: #b7b796;"  type="search" name = "software_contains"/>
+                            <select class="form-select mb-1 form-select-sm"  type="search" name = "software_contains"/>
                             <option value="">All</option>
                             <option value="GROMACS">GROMACS</option>                   
                             <option value="GROMACS.cuda">GROMACS.cuda</option>  
@@ -42,7 +42,7 @@
                   <div class="input-group">
                      <div class="input">
                         <label for="arch" class="form-label">Software ID</label>
-                        <input class="mb-1 form-control form-control-sm" spellcheck="false" style="background-color: #b7b796;" type="number" min="1" name = "software_id" placeholder="Enter ID .."/>    
+                        <input class="mb-1 form-control form-control-sm" spellcheck="false" type="number" min="1" name = "software_id" placeholder="Enter ID .."/>    
                         </select>                     
                      </div>            
                   </div>
@@ -75,7 +75,7 @@
                     <div class="input-group">
                         <div class="input" >
                               <label for="module_version" class="form-label">Module version</label>
-                              <input class="mb-1 form-control form-control-sm" spellcheck="false" style="background-color: #b7b796;"  type="search" name = "module_version" placeholder="Enter version .."/>
+                              <input class="mb-1 form-control form-control-sm w-50" spellcheck="false" style="background-color: #b7b796;"  type="search" name = "module_version" placeholder="Enter version .."/>
                         </div>            
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                   <div class="input-group">
                       <div class="input">
                       <label for="site_comtains" class="form-label">Cluster</label>
-                      <select class="form-select mb-1 form-select-sm" style="background-color: #b7b796;"  type="search" name = "site_contains" placeholder="Narval .."/>
+                      <select class="form-select mb-1 form-select-sm" type="search" name = "site_contains" placeholder="Narval .."/>
                       <option value="">All</option>
                       <option value="Beluga">Beluga</option>                   
                       <option value="Cedar">Cedar</option>  
@@ -100,7 +100,7 @@
                 </div>
               </div>
 
-    <div class="row">
+    <div class="row py-4">
             <div class="col-sm-3">
              <div class="form-group">
                  <div class="input-group">
@@ -147,11 +147,11 @@
            <div class="form-group">
               <div class="input-group">
                  <div class="input">
-                    <label for="arch" class="form-label">AVX</label>
+                    <label for="arch" class="form-label">AVX capability</label>
                     <select class="form-select mb-1 form-select-sm" style="background-color: #b7b796;" name = "arch" placeholder="avx2 .."/>
                     <option value="">All</option>
-                    <option value="avx2">AVX2</option>
-                    <option value="avx512">AVX512</option>       
+                    <option value="avx2">AVX-2</option>
+                    <option value="avx512">AVX-512</option>       
                     </select>                     
                  </div>            
               </div>
@@ -162,10 +162,10 @@
             <div class="form-group">
                 <div class="input-group">
                     <div class="input">
-                        <label for="dataset" class="form-label">Dataset</label>
+                        <label for="dataset" class="form-label">Simulation system</label>
                         <select class="form-select mb-1 form-select-sm" style="background-color: #b7b796;" name = "dataset" placeholder="6n4o .."/>
-                        <option value="6n4o">6n4o</option>
-                        <option value="4cg1">4cg1</option>                        
+                        <option value="6n4o">PDB ID: 6n4o</option>
+                        <option value="4cg1">PDB ID: 4cg1</option>                        
                         </select>
                     </div>            
                 </div>
@@ -192,10 +192,10 @@
     </div>
   </div>
 </div>
-
+</div>
 {% endblock content%}
-{% block content2%}
 
+{% block content2%}
 <div class="row gx-0" style="background-color: #eee;">
   <div class="col-sm-4">
     <div class="d-flex justify-content-center pt-3">

@@ -18,14 +18,14 @@
           <div class="card border-0" style="background-color: #eee;">
             <div class="card-body">
                   <h3 class="card-title">ACCELERATE SIMULATIONS</h3>
-              <div class="card-text p-2" style="background-color: #eee;">
-                  <p class="pb-1"> A poor choice of job submission or simulation parameters leads to a poor performance and waste of computing resources. However, finding an optimal MD engines and submission parameters in a complex HPC environment with heterogeneous hardware is a daunting and time-consuming challenge. We developed this web portal to simplify this task.</p>
-                  <p> Chart of the maximum simulation speed of all tested MD executables attained on CC systems provides a quick idea of how long a simulation will take. </p>
-                  <p>The Explore menu offers tools for querying, filtering, and viewing benchmark data. 
-                  <p> The fastest simulations may be inefficient due to poor parallel scaling to many CPUs. Inefficient simulations consume more resources and impact priority, resulting in longer times in queue and less work done.</p>
-                  <p> Color-coded by efficiency chart allows choosing an optimal combination of speed and efficiency.</p>
-                  <p> Detailed views include submission commands and simulation input files required to reproduce the results and benchmark users' simulations. </p>
-              </div>
+                  <ul class="list-group list-group-flush">
+                  <li class="list-group-item" style="background-color: #eee;">
+                    <h5 class="card-subtitle pt-4 pb-2">Finding optimal resources</h5>A poor choice of job submission or simulation parameters leads to a poor performance and waste of computing resources. However, finding an optimal MD engines and submission parameters in a complex HPC environment with heterogeneous hardware is a daunting and time-consuming challenge. We developed this web portal to simplify this task.</li>
+                  <li class="list-group-item" style="background-color: #eee;">
+                    <h5 class="card-subtitle pt-4 pb-2">How fast will a simulation run?</h5> Chart of the maximum simulation speed of all tested MD executables attained on CC systems provides a quick idea of how long a simulation will take. </li>
+                  <li class="list-group-item" style="background-color: #eee;">
+                    <h5 class="card-subtitle pt-4 pb-2">Finding balance between speed and efficiency</h5> The fastest simulations may be inefficient due to poor parallel scaling to many CPUs or GPUs. Inefficient simulations consume more resources and impact priority, resulting in longer times in queue and less work done. Color-coded by efficiency chart allows choosing an optimal combination of speed and efficiency.</li>
+                  </ul>
             </div>
           </div>
         </div>
@@ -39,11 +39,12 @@
           <div class="col-auto" >
             <div class="card border-0" style="background-color: #eee;" >
               <div class="card-body">
-                <h4 class="card-title">Maximum Speed: How Fast Can a Simulation Run?</h4>
+                <h4 class="card-title">Best Performance Of Each MD Engine Among All Clusters</h4>
                 <div class="card-img-top">
                    {% autoescape off %}
                    {{ figure }}
                    {% endautoescape %}
+                   <sup>*</sup>Data from simulations of 6n4o dataset
                 </div>
               </div>
             </div>
@@ -60,11 +61,12 @@
           <div class="col-auto" >
             <div class="card border-0" >
               <div class="card-body">
-                <h4 class="card-title" style="color: #B79754;">Cost of Simulations Using GPUs</h4>
+                <h4 class="card-title" style="color: #B79754;">Cost Of Simulations With Best Performing GPU MD Engines</h4>
                   <div class="card-img-top">
                     {% autoescape off %}
                       {{ figure_cost_gpu }}
                     {% endautoescape %}
+                    <sup>*</sup>Data from simulations of 6n4o dataset                    
                   </div>   
               </div>   
             </div>            
@@ -81,10 +83,14 @@
             <div class="card border-0" style="background-color: #fff;">
               <div class="card-body">
                    <h3 class="card-title" style="color: #B79754;" >REDUCE RESOURCE USAGE</h3>
-                <div class="card-text p-2" style="background-color: #fff;">
-                    <p class="pb-1"> Choosing the most efficient program does not guarantee that a simulation will use the minimal number of CPU/GPU cycles. Both speed and efficiency contribute to the total amount of consumed computing resources, the "cost" of a simulation.</p> 
-                    <p> GPU usage is calculated in GPU equivalents per year. GPU equivalent is a bundle made up of a single GPU, a number of CPU cores, and some memory (CPU memory, not VRAM). Composition of GPU equivalents varies between systems. We use the best number of cores per GPU (the number needed for the fastest simulation time but not exceeding the maximum number of CPUs per GPU in a GPU equivalent).</p>
-                
+                   <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                      <h5 class="card-subtitle pt-4 pb-2" style="color: #B79754;">Cost of a simulation</h5>Choosing the most efficient program does not guarantee that a simulation will use the minimal number of CPU/GPU cycles. Both speed and efficiency contribute to the total amount of consumed computing resources, the "cost" of a simulation.</li> 
+                    <li class="list-group-item">
+                      <h5 class="card-subtitle pt-4 pb-2" style="color: #B79754;">Understanding GPU equivalents</h5>We express GPU usage in GPU equivalents per year. GPU equivalent is a bundle made up of a single GPU, several CPU cores, and some memory (CPU memory, not VRAM). Composition of GPU equivalents is variable because it is defined by a number of CPU cores and RAM per GPU in a compute node.</li>
+                    <li class="list-group-item">
+                      <h5 class="card-subtitle pt-4 pb-2" style="color: #B79754;">Benchmarking GPU accelerated MD Engines</h5>For benchmarking we use the optimal number of cores per GPU (the number needed for the fastest simulation time but not exceeding the maximum number of CPU cores per GPU in a GPU equivalent).</li>
+                    </ul>
                 </div>
               </div>
             </div>
@@ -96,7 +102,6 @@
 </div>
 
 <div class="row gx-0" style="background-color: #eee">
-
   <div class="col-sm-8" style="background-color: #eee">
     <div>
       <div class="container-fluid pt-3">
@@ -104,11 +109,12 @@
           <div class="col-auto" >
             <div class="card border-0" style="background-color: #eee" >
               <div class="card-body">
-                  <h4 class="card-title pt-2" style="color: #B79754;">Cost of Simulations Using CPUs</h4>
+                  <h4 class="card-title pt-2" style="color: #B79754;">Cost Of Simulations With Best Performing CPU MD Engines</h4>
                   <div class="card-img-top">
                     {% autoescape off %}
                       {{ figure_cost_cpu }}
                     {% endautoescape %}
+                    <sup>*</sup>Data from simulations of 6n4o dataset                    
                   </div>
               </div>
             </div>
@@ -125,12 +131,15 @@
            <div class="col-auto" >
             <div class="card border-0" style="background-color: #eee;">
               <div class="card-body">
-                  <p> CPU usage is calculated in core equivalents per year. Core equivalent is a bundle made up of a single core, and some memory associated with it. For most of the systems one core equivalent includes 4000M per core.<p>    
-                  <h3 class="card-title" style="color: #B79754;" >ACCESSING THE DATABASE</h3>
-                <div class="card-text">
-                    <p class="pb-2"> A detailed view of each benchmark accessed from the "Benchmark ID" form at the top-right provides essential details, such as simulation input and sbatch submission scripts.</p> 
-                    <p>All benchmarks are available from the "Database" tab. When this page is visited for the first time no filters are applied, and the filter status is empty: "FILTERS: _ _ _ _ _ _ _"</p>   
-                    </p>A subset of interest can be selected using a custom chain of filters. Selected database entries can be then downloaded as CSV files for further analysis or viewed in the Table below.</p>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item" style="background-color: #eee;">
+                    <h5 class="card-subtitle pt-4 pb-2" style="color: #B79754;">Benchmarking CPU-only MD Engines</h5>We calculate CPU usage in core equivalents per year. Core equivalent is a bundle made up of a single core, and some memory associated with it. For most of the systems one core equivalent includes 4000M per core.<li>  
+                  <li class="list-group-item" style="background-color: #eee;">  
+                    <h3 class="card-title pt-2">EXPLORING THE DATABASE</h3>
+                    <h5 class="card-subtitle pt-4 pb-2">Accessing benchmarks</h5>All benchmarks are available from the <b>Explore</b> menu. The <b>Explore</b> menu offers tools for querying, filtering, and viewing benchmark data. 
+                  <li class="list-group-item" style="background-color: #eee;">
+                    <h5 class="card-subtitle pt-4 pb-2">Detailed views</h5>A detailed view of each database entry can be accessed from <b>Benchmark ID</b> and <b>Software ID</b> menu items. Detailed views include submission commands and simulation input files. </li> 
+                    </li>
                 </div>                  
               </div>
             </div>
@@ -166,3 +175,4 @@
 </div>
 
 {% endblock %}
+
