@@ -233,7 +233,7 @@
   </div>
 </div>
 
-
+{% if not 'NO CPU BENCHMARKS' in plot_div_cost_cpu %}
 <div class="row gx-0" style="background-color: #fff">
 
   <div class="col-sm-8">
@@ -276,7 +276,9 @@
   </div>
 
 </div>
+{% endif %}
 
+{% if not 'NO GPU BENCHMARKS' in plot_div_cost_gpu %}
 <div class="row gx-0" style="background-color: #eee">
   <div class="col-sm-8"> 
     <div style="background-color: #eee">
@@ -315,6 +317,7 @@
       </div>
     </div>
   </div>
+{% endif %}
 
 </div>
 
