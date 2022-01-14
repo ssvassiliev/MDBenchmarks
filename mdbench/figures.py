@@ -101,7 +101,7 @@ def QuerySetScatterPlot(qs, fig_title, n=1000):
     figTitle=dict(text=fig_title,)
 
     x_data, y_data, e_data, lin_sc, lab, ids = ([] for _ in range(6)) 
-    h=480
+    h=680
     w=680
     c=0
 
@@ -197,6 +197,8 @@ def QuerySetScatterPlot(qs, fig_title, n=1000):
 
     fig.update_layout(
         autosize=False,  
+        height=h,
+        width=w,
         margin=dict(
         l=50,
         r=50,
