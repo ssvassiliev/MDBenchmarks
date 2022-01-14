@@ -60,9 +60,8 @@ def BootstrapFilterView(request):
     que.append(dataset_exact_query or "_____")
     query_string=" ".join(que)
 
-    caption='SIMULATION SPEED' 
+    caption="Higher is better (faster), darker is more efficient"
     plot_div=QuerySetPlot(qs, caption, 20)
-    
     plot_div_cost_cpu=QuerySetBarPlotCostCPU(qs, caption, 20)
     plot_div_cost_gpu=QuerySetBarPlotCostGPU(qs, caption, 20)
     QuerySetWriteCSV(qs)

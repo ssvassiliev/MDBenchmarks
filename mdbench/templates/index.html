@@ -20,11 +20,13 @@
                   <h3 class="card-title">ACCELERATE SIMULATIONS</h3>
                   <ul class="list-group list-group-flush">
                   <li class="list-group-item" style="background-color: #eee;">
-                    <h5 class="card-subtitle pt-4 pb-2">Finding optimal resources</h5>A poor choice of job submission or simulation parameters leads to a poor performance and waste of computing resources. However, finding an optimal MD engines and submission parameters in a complex HPC environment with heterogeneous hardware is a daunting and time-consuming challenge. We developed this web portal to simplify this task.</li>
+                    <h5 class="card-subtitle p-2">Finding optimal resources</h5>A poor choice of job submission or simulation parameters leads to a poor performance and waste of computing resources. However, finding an optimal MD engines and submission parameters in a complex HPC environment with heterogeneous hardware is a daunting and time-consuming challenge. We developed this web portal to simplify this task.</li>
                   <li class="list-group-item" style="background-color: #eee;">
-                    <h5 class="card-subtitle pt-4 pb-2">How fast will a simulation run?</h5> Chart of the maximum simulation speed of all tested MD executables attained on CC systems provides a quick idea of how long a simulation will take. </li>
+                    <h5 class="card-subtitle p-2">How fast will a simulation run?</h5> Chart of the maximum simulation speed of all tested MD executables attained on CC systems provides a quick idea of how long a simulation will take. </li>
                   <li class="list-group-item" style="background-color: #eee;">
-                    <h5 class="card-subtitle pt-4 pb-2">Finding balance between speed and efficiency</h5> The fastest simulations may be inefficient due to poor parallel scaling to many CPUs or GPUs. Inefficient simulations consume more resources and impact priority, resulting in longer times in queue and less work done. Color-coded by efficiency chart allows choosing an optimal combination of speed and efficiency.</li>
+                    <h5 class="card-subtitle p-2">Finding balance between speed and efficiency</h5> The fastest simulations may be inefficient due to poor parallel scaling to many CPUs or GPUs. Inefficient simulations consume more resources and impact priority, resulting in longer times in queue and less work done. Color-coded by efficiency chart allows choosing an optimal combination of speed and efficiency.</li>
+                  <li class="list-group-item" style="background-color: #eee;">  
+                    <h5 class="card-subtitle p-2">Exploring the database</h5>All benchmarks are available from the <b>Explore</b> menu. The <b>Explore</b> menu offers tools for querying, filtering, and viewing benchmark data. </li>                   
                   </ul>
             </div>
           </div>
@@ -56,60 +58,13 @@
 
 <div class="row gx-0" style="background-color: #fff">
   <div class="col-sm-8" style="background-color: #fff">
-      <div class="container-fluid pt-3">
-        <div class="row justify-content-center">
-          <div class="col-auto" >
-            <div class="card border-0" >
-              <div class="card-body">
-                <h4 class="card-title" style="color: #B79754;">Cost Of Simulations With Best Performing GPU MD Engines</h4>
-                  <div class="card-img-top">
-                    {% autoescape off %}
-                      {{ figure_cost_gpu }}
-                    {% endautoescape %}
-                    <sup>*</sup>Data from simulations of 6n4o dataset                    
-                  </div>   
-              </div>   
-            </div>            
-          </div>
-        </div>
-      </div>
-  </div>
-
-  <div class="col-sm-4">
-    <div>
-      <div class="container-fluid pt-3">
-        <div class="row justify-content-center">
-           <div class="col-auto" >
-            <div class="card border-0" style="background-color: #fff;">
-              <div class="card-body">
-                   <h3 class="card-title" style="color: #B79754;" >REDUCE RESOURCE USAGE</h3>
-                   <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                      <h5 class="card-subtitle pt-4 pb-2" style="color: #B79754;">Cost of a simulation</h5>Choosing the most efficient program does not guarantee that a simulation will use the minimal number of CPU/GPU cycles. Both speed and efficiency contribute to the total amount of consumed computing resources, the "cost" of a simulation.</li> 
-                    <li class="list-group-item">
-                      <h5 class="card-subtitle pt-4 pb-2" style="color: #B79754;">Understanding GPU equivalents</h5>We express GPU usage in GPU equivalents per year. GPU equivalent is a bundle made up of a single GPU, several CPU cores, and some memory (CPU memory, not VRAM). Composition of GPU equivalents is variable because it is defined by a number of CPU cores and RAM per GPU in a compute node.</li>
-                    <li class="list-group-item">
-                      <h5 class="card-subtitle pt-4 pb-2" style="color: #B79754;">Benchmarking GPU accelerated MD Engines</h5>For benchmarking we use the optimal number of cores per GPU (the number needed for the fastest simulation time but not exceeding the maximum number of CPU cores per GPU in a GPU equivalent).</li>
-                    </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="row gx-0" style="background-color: #eee">
-  <div class="col-sm-8" style="background-color: #eee">
     <div>
       <div class="container-fluid pt-3">
         <div class="row justify-content-center">
           <div class="col-auto" >
-            <div class="card border-0" style="background-color: #eee" >
+            <div class="card border-0" style="background-color: #fff" >
               <div class="card-body">
-                  <h4 class="card-title pt-2" style="color: #B79754;">Cost Of Simulations With Best Performing CPU MD Engines</h4>
+                  <h4 class="card-title pt-2" style="color: #B79754;">Cost Of Simulations Using Best Performing CPU-only MD Engines</h4>
                   <div class="card-img-top">
                     {% autoescape off %}
                       {{ figure_cost_cpu }}
@@ -129,17 +84,16 @@
       <div class="container-fluid pt-3">
         <div class="row justify-content-center">
            <div class="col-auto" >
-            <div class="card border-0" style="background-color: #eee;">
+            <div class="card border-0" style="background-color: #fff;">
               <div class="card-body">
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item" style="background-color: #eee;">
+                  <h3 class="card-title" style="color: #B79754;" >REDUCE RESOURCE USAGE</h3>
+                   <li class="list-group-item">
+                     <h5 class="card-subtitle p-2" style="color: #B79754;">Cost of a simulation</h5>Choosing fast and efficient job submission parameters is a good approach, but the total amount of computing resources used for a job, as we call it, cost, is more important. Three components define cost: CPU time, GPU time, and RAM. We measure cost in core years and GPU years.</li> 
+
+
+                  <li class="list-group-item" style="background-color: #fff;">
                     <h5 class="card-subtitle pt-4 pb-2" style="color: #B79754;">Benchmarking CPU-only MD Engines</h5>We calculate CPU usage in core equivalents per year. Core equivalent is a bundle made up of a single core, and some memory associated with it. For most of the systems one core equivalent includes 4000M per core.<li>  
-                  <li class="list-group-item" style="background-color: #eee;">  
-                    <h3 class="card-title pt-2">EXPLORING THE DATABASE</h3>
-                    <h5 class="card-subtitle pt-4 pb-2">Accessing benchmarks</h5>All benchmarks are available from the <b>Explore</b> menu. The <b>Explore</b> menu offers tools for querying, filtering, and viewing benchmark data. 
-                  <li class="list-group-item" style="background-color: #eee;">
-                    <h5 class="card-subtitle pt-4 pb-2">Detailed views</h5>A detailed view of each database entry can be accessed from <b>Benchmark ID</b> and <b>Software ID</b> menu items. Detailed views include submission commands and simulation input files. </li> 
-                    </li>
                 </div>                  
               </div>
             </div>
@@ -149,6 +103,55 @@
     </div>
   </div>
 </div>
+
+
+
+<div class="row gx-0" style="background-color: #eee">
+  <div class="col-sm-8" style="background-color: #eee">
+      <div class="container-fluid pt-3">
+        <div class="row justify-content-center">
+          <div class="col-auto" >
+            <div class="card border-0" style="background-color: #eee;">>
+              <div class="card-body">
+                <h4 class="card-title" style="color: #B79754;">Cost Of Simulations Using Best Performing GPU-accelerated MD Engines</h4>
+                  <div class="card-img-top">
+                    {% autoescape off %}
+                      {{ figure_cost_gpu }}
+                    {% endautoescape %}
+                    <sup>*</sup>Data from simulations of 6n4o dataset                    
+                  </div>   
+              </div>   
+            </div>            
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <div class="col-sm-4">
+    <div>
+      <div class="container-fluid pt-3">
+        <div class="row justify-content-center">
+           <div class="col-auto" >
+            <div class="card border-0" style="background-color: #eee;">
+              <div class="card-body">
+                   <ul class="list-group list-group-flush">
+                    <li class="list-group-item" style="background-color: #eee;">
+                      <h5 class="card-subtitle p-2" style="color: #B79754;">Why does choosing the least expensive submission matter?</h5>Scheduler controls resource usage to ensure that each user gets equal resources. If you use more resources than an average user, the scheduler will put your jobs on hold so that other users can catch up. You can avoid delays by minimizing the cost. Often you can significantly reduce cost by choosing simulations that are only slightly slower than more expensive.</li>
+                    <li class="list-group-item" style="background-color: #eee;">  
+                      <h5 class="card-subtitle p-2" style="color: #B79754;">Understanding GPU equivalents</h5>We express GPU usage in GPU equivalents per year. GPU equivalent is a bundle made up of a single GPU, several CPU cores, and some memory (CPU memory, not VRAM). Composition of GPU equivalents is variable because it is defined by a number of CPU cores and RAM per GPU in a compute node.</li>
+                    <li class="list-group-item" style="background-color: #eee;">
+                      <h5 class="card-subtitle p-2" style="color: #B79754;">Benchmarking GPU accelerated MD Engines</h5>For benchmarking we use the optimal number of cores per GPU (the number needed for the fastest simulation time but not exceeding the maximum number of CPU cores per GPU in a GPU equivalent).</li>
+                    </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <div style="background-color: #222529">
     <div class="container-fluid pt-3">

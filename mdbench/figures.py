@@ -386,8 +386,8 @@ def QuerySetBarPlotCostCPU(qs, fig_title, n=1000):
         t=40,
         pad=4
     ),    
-        paper_bgcolor='#eee',
-        template="ggplot2",
+        paper_bgcolor='#fff',
+        template="plotly_white",
         titlefont=dict(size=28, color='#3f8b64', family='Arial, sans-serif;'),
         title="Lower is better (cheaper), darker is faster",
         title_x=0.02,
@@ -476,8 +476,8 @@ def QuerySetBarPlotCostGPU(qs, fig_title, n=1000):
         t=40,
         pad=4
     ),    
-        paper_bgcolor='#fff',
-        template="plotly_white",
+        paper_bgcolor='#eee',
+        template="ggplot2",
         titlefont=dict(size=28, color='#3f8b64', family='Arial, sans-serif;'),
         title="Lower is better (cheaper), darker is faster",
         title_x=0.02,

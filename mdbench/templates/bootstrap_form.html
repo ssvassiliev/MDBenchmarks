@@ -201,23 +201,29 @@
     <div class="d-flex justify-content-center pt-3">
       <div class="card border-0" style="background-color: #eee;">
         <div class="card-body">
-            <h3 class="card-title">ACCESSING THE DATABASE</h3>
-              <div class="card-text">
-                </p>When this page is viewed no filters are initially applied. All benchmarks are selected and sorted by simulation speed. The chart on the right displays only top 20 benchmarks for clarity.</p>  
-                <p>A subset of benchmarks can be selected using a custom chain of filters. Search fields are case insensitive and can be abbreviated.</p>
-                <p> Selected database entries can be downloaded as CSV files for further analysis or viewed in the Table below.</p>
-                <p> Efficiency = PS/(SS * N) where PS is speed of the parallel program, SS is speed of the serial program, and N is the number of CPUs or GPUs<p>               
-             </div>   
-         </div>
-      </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" style="background-color: #eee;">
+              <h3 class="card-title">EXPLORING THE DATABASE</h3>
+              <h5 class="card-subtitle p-2">Default view</h5>When this page is viewed no filters are initially applied. All benchmarks are selected and sorted by simulation speed. The chart on the right displays only top 20 benchmarks for clarity.</li>
+            <li class="list-group-item" style="background-color: #eee;">
+              <h5 class="card-subtitle p-2">Selecting benchmarks</h5>A subset of benchmarks can be selected using a custom chain of filters. Search fields are case insensitive and can be abbreviated.Selected database entries can be downloaded as CSV files for further analysis or viewed in the Table below. 
+            <li class="list-group-item" style="background-color: #eee;">
+              <h5 class="card-subtitle p-2">Detailed views</h5>A detailed view of each database entry can be accessed from <b>Benchmark ID</b> and <b>Software ID</b> menu items. Detailed views include submission commands and simulation input files. </li>   
+            <li class="list-group-item" style="background-color: #eee;">
+              <h5 class="card-subtitle p-2">Parallel scaling</h5>Efficiency is computed as PS/(SS * N) where PS is speed of the parallel program, SS is speed of the serial program, and N is the number of CPUs or GPUs</li> 
+
+          </ul>                           
+          </div>   
+       </div>
     </div>
   </div>
+  
 
   <div class="col-sm-8">
     <div class="d-flex justify-content-center pt-3">
       <div class="card border-0" style="background-color: #eee;" >
         <div class="card-body">
-          <h3 class="card-title">Performance</h3>
+          <h3 class="card-title">Performance Chart For Selected Benchmarks</h3>
             <div class="card-img-top">
               {% autoescape off %} {{ plot_div }} {% endautoescape %}
             </div>
@@ -227,61 +233,15 @@
   </div>
 </div>
 
+
 <div class="row gx-0" style="background-color: #fff">
-  <div class="col-sm-8"> 
-    <div style="background-color: #fff">
-        <div class="d-flex justify-content-center pt-3">
-            <div class="card border-0" style="background-color: #fff;" >
-              <div class="card-body">
-                <h3 class="card-title" style="color: #B79754;">Cost of Simulations Using GPUs</h3>
-                  <div class="card-img-top">
-                    {% autoescape off %} {{ plot_div_cost_gpu }} {% endautoescape %}
-                  </div>
-              </div>
-            </div>
-        </div>
-   </div>
-</div>
-
-  <div class="col-sm-4">
-    <div class="container-fluid pt-3">
-      <div class="row justify-content-center">
-        <div class="col-auto" >
-          <div class="card border-0" style="background-color: #fff;">
-            <div class="card-body">
-                <h3 class="card-title" style="color: #B79754;">SIMULATIONS ON MULTIPLE GPUS</h3>
-               <div class="card-text">
-                </p>Parallel scaling to multiple GPUs strongly depends on the compibation of software, hardware and simulation parameters. Often simulations do not run faster even on two GPUs. For example, search for namd2.cuda in "Software name" and Cedar in "Cluster".</p>  
-                <p> Simulations on nodes with direct interconnect between GPUs (NVLink) may benefit from multiple GPUs, but efficiency decreases and cost goes up with the number of GPUs. Example: pmemd.cuda, narval</p>
-               </div>   
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="row gx-0" style="background-color: #eee">
-  <div class="col-sm-4">
-      <div class="d-flex justify-content-center pt-3">
-          <div class="card border-0" style="background-color: #eee;">
-            <div class="card-body">
-                <h4 class="card-title" style="color: #B79754;">SIMULATIONS ON MULTIPLE CPUS</h4>
-               <div class="card-text">
-                </p>Simulations using CPUs reach performance comparable to GPU only with hundreds of cores used. It is not uncommon for simulations to wait in the queue for up to several days for such a significant resource to be available.</p>  
-               </div>   
-            </div>
-          </div>
-      </div>
-  </div>
 
   <div class="col-sm-8">
-    <div style="background-color: #eee">
+    <div style="background-color: #fff">
         <div class="d-flex justify-content-center pt-3">
-            <div class="card border-0" style="background-color: #eee" >
+            <div class="card border-0" style="background-color: #fff" >
               <div class="card-body">
-                <h3 class="card-title" style="color: #B79754;">Cost of Simulations Using CPUs</h3>
+                <h3 class="card-title" style="color: #B79754;">Cost Of CPU-only Simulations</h3>
                   <div class="card-img-top">
                     {% autoescape off %}
                     {{ plot_div_cost_cpu }}
@@ -292,7 +252,77 @@
         </div>
     </div>
   </div>
+
+  <div class="col-sm-4">
+    <div>
+      <div class="container-fluid pt-3">
+        <div class="row justify-content-center">
+           <div class="col-auto" >
+            <div class="card border-0" style="background-color: #fff;">
+              <div class="card-body">
+                <ul class="list-group list-group-flush">
+                  <h3 class="card-title" style="color: #B79754;" >REDUCE RESOURCE USAGE</h3>
+                   <li class="list-group-item">
+                     <h5 class="card-subtitle p-2" style="color: #B79754;">Cost of a simulation</h5>Three components define cost: CPU time, GPU time, and RAM. We measure cost in core years and GPU years.</li> 
+                  <li class="list-group-item">
+                    <h5 class="card-subtitle p-2" style="color: #B79754;">Submitting CPU-only simulation</h5>CPU-only simulations reach performance comparable to GPU-accelerated ones only with hundreds of CPU cores. It is not uncommon for such jobs to wait in the queue for up to several days for such a significant resource to be available, especialy if a long time is requested.</li> 
+                  <li class="list-group-item" style="background-color: #fff;">
+                    <h5 class="card-subtitle p-2" style="color: #B79754;">Benchmarking CPU-only MD Engines</h5>We calculate CPU usage in core equivalents per year. Core equivalent is a bundle made up of a single core, and some memory associated with it. For most of the systems one core equivalent includes 4000M per core.<li>  
+                </div>                  
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
+
+<div class="row gx-0" style="background-color: #eee">
+  <div class="col-sm-8"> 
+    <div style="background-color: #eee">
+        <div class="d-flex justify-content-center pt-3">
+            <div class="card border-0" style="background-color: #eee;" >
+              <div class="card-body">
+                <h3 class="card-title" style="color: #B79754;">Cost Of GPU-accelerated Simulations</h3>
+                  <div class="card-img-top">
+                    {% autoescape off %} {{ plot_div_cost_gpu }} {% endautoescape %}
+                  </div>
+              </div>
+            </div>
+        </div>
+   </div>
+</div>
+
+<div class="col-sm-4">
+  <div>
+    <div class="container-fluid pt-3">
+      <div class="row justify-content-center">
+         <div class="col-auto" >
+          <div class="card border-0" style="background-color: #eee;">
+            <div class="card-body">
+                 <ul class="list-group list-group-flush">
+                  <li class="list-group-item" style="background-color: #eee;">  
+                    <h5 class="card-subtitle p-2" style="color: #B79754;">Understanding GPU equivalents</h5>We express GPU usage in GPU equivalents per year. GPU equivalent is a bundle made up of a single GPU, several CPU cores, and some memory (CPU memory, not VRAM). Composition of GPU equivalents is variable because it is defined by a number of CPU cores and RAM per GPU in a compute node.</li>
+                  <li class="list-group-item" style="background-color: #eee;">
+                    <h5 class="card-subtitle p-2" style="color: #B79754;">Benchmarking GPU accelerated MD Engines</h5>For benchmarking we use the optimal number of cores per GPU (the number needed for the fastest simulation time but not exceeding the maximum number of CPU cores per GPU in a GPU equivalent).</li>
+                  <li class="list-group-item" style="background-color: #eee;">
+                    <h5 class="card-subtitle p-2" style="color: #B79754;">Parallel scaling to multiple GPUs</h5>Parallel scaling to multiple GPUs strongly depends on the compibation of software, hardware and simulation parameters. Often simulations do not run faster on multiple GPUs (<a href="http://mdbench.ace-net.ca/mdbench/bform/?software_contains=PMEMD.cuda&software_id=&module_contains=&module_version=&site_contains=Cedar&gpu_model=P100-PCIE&cpu_model=&arch=&dataset=6n4o">Example</a>).Simulations on nodes with direct interconnect between GPUs (NVLink) may benefit from multiple GPUs, but efficiency decreases and cost goes up with the number of GPUs (<a href="http://mdbench.ace-net.ca/mdbench/bform/?software_contains=NAMD3.cuda&software_id=&module_contains=&module_version=&site_contains=Cedar&gpu_model=V100-SXM2&cpu_model=&arch=&dataset=6n4o">Example</a>).</li>
+   
+
+                  </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
 
 <div style="background-color:  #222529">
   <div class="d-flex justify-content-center pt-3">
@@ -316,6 +346,9 @@
       </div>
   </div>
 </div>
+
+
+
 
 {% endblock %}
 
