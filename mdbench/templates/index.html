@@ -17,7 +17,7 @@
         <div class="col-auto" >
           <div class="card border-0" style="background-color: #eee;">
             <div class="card-body">
-                  <h3 class="card-title">ACCELERATE SIMULATIONS</h3>
+                  <h4 class="card-title">SPEED UP SIMULATION</h4>
                   <ul class="list-group list-group-flush">
                   <li class="list-group-item" style="background-color: #eee;">
                     <h5 class="card-subtitle p-2">Finding optimal resources</h5>A poor choice of job submission or simulation parameters leads to a poor performance and waste of computing resources. However, finding an optimal MD engines and submission parameters in a complex HPC environment with heterogeneous hardware is a daunting and time-consuming challenge. We developed this web portal to simplify this task.</li>
@@ -87,13 +87,11 @@
             <div class="card border-0" style="background-color: #fff;">
               <div class="card-body">
                 <ul class="list-group list-group-flush">
-                  <h3 class="card-title" style="color: #B79754;" >REDUCE RESOURCE USAGE</h3>
+                  <h4 class="card-title" style="color: #B79754;" >OPTIMIZING CPU USAGE</h4>
                    <li class="list-group-item">
                      <h5 class="card-subtitle p-2" style="color: #B79754;">Cost of a simulation</h5>Choosing fast and efficient job submission parameters is a good approach, but the total amount of computing resources used for a job, as we call it, cost, is more important. Three components define cost: CPU time, GPU time, and RAM. We measure cost in core years and GPU years.</li> 
-
-
-                  <li class="list-group-item" style="background-color: #fff;">
-                    <h5 class="card-subtitle pt-4 pb-2" style="color: #B79754;">Benchmarking CPU-only MD Engines</h5>We calculate CPU usage in core equivalents per year. Core equivalent is a bundle made up of a single core, and some memory associated with it. For most of the systems one core equivalent includes 4000M per core.<li>  
+                   <li class="list-group-item">                   
+                     <h5 class="card-subtitle p-2" style="color: #B79754;">Minimizing queue time</h5>Scheduler controls resource usage to ensure that each user gets equal resources. If you use more resources than an average user, the scheduler will put your jobs on hold so that other users can catch up. You can avoid delays by minimizing the cost. Often you can significantly reduce cost by choosing simulations that are only slightly slower than more expensive.</li>                
                 </div>                  
               </div>
             </div>
@@ -102,6 +100,7 @@
       </div>
     </div>
   </div>
+
 </div>
 
 
@@ -135,10 +134,11 @@
             <div class="card border-0" style="background-color: #eee;">
               <div class="card-body">
                    <ul class="list-group list-group-flush">
-                    <li class="list-group-item" style="background-color: #eee;">
-                      <h5 class="card-subtitle p-2" style="color: #B79754;">Why does choosing the least expensive submission matter?</h5>Scheduler controls resource usage to ensure that each user gets equal resources. If you use more resources than an average user, the scheduler will put your jobs on hold so that other users can catch up. You can avoid delays by minimizing the cost. Often you can significantly reduce cost by choosing simulations that are only slightly slower than more expensive.</li>
                     <li class="list-group-item" style="background-color: #eee;">  
+                      <h4 class="card-title" style="color: #B79754;" >OPTIMIZING GPU USAGE</h4>
                       <h5 class="card-subtitle p-2" style="color: #B79754;">Understanding GPU equivalents</h5>We express GPU usage in GPU equivalents per year. GPU equivalent is a bundle made up of a single GPU, several CPU cores, and some memory (CPU memory, not VRAM). Composition of GPU equivalents is variable because it is defined by a number of CPU cores and RAM per GPU in a compute node.</li>
+                    <li class="list-group-item" style="background-color: #eee;">
+                      <h5 class="card-subtitle p-2" style="color: #B79754;">Benchmarking CPU-only MD Engines</h5>We calculate CPU usage in core equivalents per year. Core equivalent is a bundle made up of a single core, and some memory associated with it. For most of the systems one core equivalent includes 4000M per core.</li>                        
                     <li class="list-group-item" style="background-color: #eee;">
                       <h5 class="card-subtitle p-2" style="color: #B79754;">Benchmarking GPU accelerated MD Engines</h5>For benchmarking we use the optimal number of cores per GPU (the number needed for the fastest simulation time but not exceeding the maximum number of CPU cores per GPU in a GPU equivalent).</li>
                     </ul>
