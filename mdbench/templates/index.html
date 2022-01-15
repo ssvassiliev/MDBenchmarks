@@ -26,7 +26,7 @@
                   <li class="list-group-item" style="background-color: #eee;">
                     <h5 class="card-subtitle p-2">Finding balance between speed and efficiency</h5> The fastest simulations may be inefficient due to poor parallel scaling to many CPUs or GPUs. Inefficient simulations consume more resources and impact priority, resulting in longer times in queue and less work done. Color-coded by efficiency chart allows choosing an optimal combination of speed and efficiency.</li>
                   <li class="list-group-item" style="background-color: #eee;">  
-                    <h5 class="card-subtitle p-2">Exploring the database</h5>All benchmarks are available from the <a href="https://mdbench.ace-net.ca/mdbench/bform/">Explore</a> menu. This menu offers tools for querying, filtering, and viewing benchmark data. </li>                   
+                    <h5 class="card-subtitle p-2">Exploring the database</h5>All benchmarks are available from the <a  href={% url 'bootstrapfilter' %}>Explore</a> menu. This menu offers tools for querying, filtering, and viewing benchmark data. </li>                   
                   </ul>
             </div>
           </div>
@@ -91,7 +91,7 @@
                    <li class="list-group-item">
                      <h5 class="card-subtitle p-2" style="color: #B79754;">Cost of a simulation</h5>Choosing fast and efficient job submission parameters is a good approach, but the total amount of computing resources used for a job, as we call it, cost, is more important. Three components define cost: CPU time, GPU time, and RAM. We measure cost in core years and GPU years.</li> 
                    <li class="list-group-item">                   
-                     <h5 class="card-subtitle p-2" style="color: #B79754;">Minimizing queue time</h5>Scheduler controls resource usage to ensure that each user gets equal resources. If you use more resources than an average user, the scheduler will put your jobs on hold so that other users can catch up. You can avoid delays by minimizing the cost. Often you can significantly reduce cost by choosing simulations that are only slightly slower than the fastest but very expensive ones [<a href="https://mdbench.ace-net.ca/mdbench/bform/?software_contains=PMEMD.cuda&software_id=&module_contains=&module_version=&site_contains=Cedar&gpu_model=V100&cpu_model=&arch=&dataset=6n4o">Example</a>].</li>                
+                     <h5 class="card-subtitle p-2" style="color: #B79754;">Minimizing queue time</h5>Scheduler controls resource usage to ensure that each user gets equal resources. If you use more resources than an average user, the scheduler will put your jobs on hold so that other users can catch up. You can avoid delays by minimizing the cost. Often you can significantly reduce cost by choosing simulations that are only slightly slower than the fastest but very expensive ones [<a href={% url 'bootstrapfilter' %}?software_contains=PMEMD.cuda&site_contains=Cedar&gpu_model=V100&dataset=6n4o>Example</a>].</li>                
                 </div>                  
               </div>
             </div>

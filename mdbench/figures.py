@@ -91,9 +91,9 @@ def QuerySetPlot(qs, fig_title, n=1000):
     
     # Check if only the number of CPUs is changing
     if not Check_QS(qs):
-        return(QuerySetBarPlot(qs, fig_title, n=20))
+        return(QuerySetBarPlot(qs, fig_title, n))
     else:
-        return(QuerySetScatterPlot(qs, fig_title, n=20))    
+        return(QuerySetScatterPlot(qs, fig_title, n))    
 
 
 def QuerySetScatterPlot(qs, fig_title, n=1000):

@@ -104,9 +104,9 @@ def index(request):
 
     sorted_bench = sorted(bench, key=lambda BenchmarkInstance: BenchmarkInstance.rate_max, reverse=True)
     caption="Higher is better (faster), darker is more efficient"
-    plot_div=QuerySetPlot(sorted_bench, "Higher is better (faster), darker is more efficient", 20)
-    plot_div_cost_cpu=QuerySetBarPlotCostCPU(sorted_bench, caption, 20)
-    plot_div_cost_gpu=QuerySetBarPlotCostGPU(sorted_bench, caption, 20)
+    plot_div=QuerySetPlot(sorted_bench, "Higher is better (faster), darker is more efficient", 30)
+    plot_div_cost_cpu=QuerySetBarPlotCostCPU(sorted_bench, caption, 30)
+    plot_div_cost_gpu=QuerySetBarPlotCostGPU(sorted_bench, caption, 30)
 
     context = {
         'num_software': num_software,
