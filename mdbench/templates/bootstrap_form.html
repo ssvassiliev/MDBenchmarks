@@ -175,15 +175,15 @@
 
         <div class="row my-4">
               <div class="d-flex justify-content-center">
-                     <button class="btn btn-sm btn-outline-light mx-2" type="submit">Search <i class="fa fa-search"></i></button>
-                     <button class="btn btn-sm btn-outline-light mx-2" type=button onClick="javascript:history.go(-1);"> Back</button>                      
+                     <button class="btn btn-sm btn-outline-light mx-2" type="submit"><i class="fa fa-search"> Search</i></button>
+                     <button class="btn btn-sm btn-outline-light px-2" type=button onClick="javascript:history.go(-1);"> <i class="fa fa-chevron-left px-1"></i></button>                      
               {{ csv_file }}
               </div>
 
         <div class="row mt-4">
               <div class="d-flex justify-content-center">
-                 <div style="color: #85b737;" >APPLIED FILTERS: {{querystr}}</div>
-                 <button class="btn btn-sm btn-outline-light px-2 mx-4" type="button" onclick="location.href='{% url 'export' %}'">Download csv</button>.
+                 <div style="color: #85b737;"> APPLIED FILTERS: {{ querystr }}</div>
+                 <button class="btn btn-sm btn-outline-light px-2 mx-4" type="button" onclick="location.href='{% url 'export' %}'"><i class="fa fa-download"> Save results</i></button>.
               </div>
         </div>
       </div>
