@@ -8,26 +8,33 @@
 <div style="background-color: #fff">
   <table class="table">
     <thead class="table-secondary">
-      <th>ID</th>    
-      <th>Name</th> 
-      <th>Size</th> 
-      <th>Description</th> 
-      <th>Image</th> 
+      <th style="text-align:center">ID</th>    
+      <th style="text-align:center">Name</th> 
+      <th style="text-align:center">Size</th> 
+      <th style="text-align:center"><i class="fa fa-download"> Files<i></th>            
+      <th style="text-align:center">Description</th> 
+      <th style="text-align:center">Image</th> 
       <th></th>      
   </thead> 
     <tr>
     <td> {{ benchmark_list.0.id }}</td>   
       <td> {{ benchmark_list.0.name }}</td>
       <td> {{ benchmark_list.0.natoms }}</td>
-      <td> {{ benchmark_list.0.description | linebreaks }} </td>   
-      <td><img src="https://mdbench.ace-net.ca/static/media/images/6n4o.png" style="height:200px;" alt="{{ benchmark.name }}"> </td>
+      <td> <div class="d-grid gap-2 col-6">
+      <button class="btn btn-sm btn-success text-nowrap mt-2" type="button" onclick="location.href='https://mdbench.ace-net.ca/static/media/datasets/benchmark_6n4o_pmemd.tar.gz'">AMBER</button>    
+      <button class="btn btn-sm btn-success text-nowrap" type="button" onclick="location.href='https://mdbench.ace-net.ca/static/media/datasets/benchmark_6n4o_gmomacs.tar.gz'">GROMACS</button>   
+      <button class="btn btn-sm btn-success text-nowrap" type="button" onclick="location.href='https://mdbench.ace-net.ca/static/media/datasets/benchmark_6n4o_namd.tar.gz'">NAMD</button>  </div>       
+      </td>         
+      <td> {{ benchmark_list.0.description | safe | linebreaks }} </td>   
+      <td><img src="https://mdbench.ace-net.ca/static/media/images/6n4o.png" style="height:200px;" alt="{{ benchmark.name }}"></td>
     </tr>
 
     <tr>
     <td> {{ benchmark_list.1.id }}</td>   
       <td> {{ benchmark_list.1.name }}</td>
       <td> {{ benchmark_list.1.natoms }}</td>
-      <td> {{ benchmark_list.1.description | linebreaks }} </td>   
+      <td> </td>    
+      <td> {{ benchmark_list.1.description | safe | linebreaks }} </td>        
       <td><img src="https://mdbench.ace-net.ca/static/media/images/4cg1.png" style="height:200px;" alt="{{ benchmark.name }}"> </td>
      </tr>
 
