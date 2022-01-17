@@ -1,1 +1,11 @@
-django django-filter django-pygments django-sslserver django-widget-tweaks django-crispy-forms plotly pandas ipywidgets 
+django<4.0
+django-filter
+django-pygments
+django-sslserver
+django-widget-tweaks
+django-crispy-forms
+plotly
+pandas
+ipywidgets
+wheel
+Pillow
