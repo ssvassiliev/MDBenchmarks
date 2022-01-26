@@ -1,7 +1,9 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
   <title>MDBench - Molecular Dynamics Performance Guide</title>
+  <link rel="shortcut icon" type="image/x-icon" href="{% static 'mdbench/favicon.ico' %}"/>
   <script src="https://cdn.plot.ly/plotly-2.4.2.min.js"></script>
 
 {% block title %}
@@ -17,7 +19,6 @@
   <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css">
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
   <!-- Add additional CSS in static file -->
-  {% load static %}
   <link rel="stylesheet" type="text/css" href="{% static 'mdbench/css/styles.css' %}">                                                                                                            
   <link rel="stylesheet" type="text/css" href="{% static 'mdbench/css/vs.css' %}">
 </head>
