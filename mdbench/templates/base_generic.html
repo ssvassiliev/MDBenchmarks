@@ -40,13 +40,13 @@
           </li>
       </ul>
       <form class="d-flex mx-4 d-inline w-50" action = "{% url 'idsoftware' %}" method="get">
-        <input class="form-control form-control-sm" name="q" type="number" min="1" placeholder="Enter software ID to view details .." aria-label="Search">
+        <input class="form-control form-control-sm" name="q" type="number" min="1" placeholder="Enter software ID to view details .." aria-label="Search" required>
           <span class="input-group-addon">
             <button class="btn btn-sm btn-outline-light border-left-0 border" type="submit"><i class="fa fa-check"></i></button>
           </span>   
         </form>
       <form class="d-flex mx-4 d-inline w-50" action = "{% url 'idbenchmark' %}" method="get">
-        <input class="form-control form-control-sm" name="q" type="number" min="1" placeholder="Enter benchmark ID to view details .." aria-label="Search">
+        <input class="form-control form-control-sm" name="q" type="number" min="1" placeholder="Enter benchmark ID to view details .." aria-label="Search" required>
           <span class="input-group-addon">
             <button class="btn btn-sm btn-outline-light border-left-0 border" type="submit"><i class="fa fa-check"></i></button>
           </span>   
