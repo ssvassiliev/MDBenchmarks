@@ -2,7 +2,7 @@
 {% load static %}
 <html lang="en">
 <head>
-  <title>MDBench - Molecular Dynamics Performance Guide</title>
+  <title>MD Performance Guide - Compute Canada</title>
   <link rel="shortcut icon" type="image/x-icon" href="{% static 'mdbench/favicon.ico' %}"/>
   <script src="https://cdn.plot.ly/plotly-2.4.2.min.js"></script>
 
@@ -40,13 +40,13 @@
           </li>
       </ul>
       <form class="d-flex mx-4 d-inline w-50" action = "{% url 'idsoftware' %}" method="get">
-        <input class="form-control form-control-sm" name="q" type="number" min="1" placeholder="Enter software ID to view details .." aria-label="Search" required>
+        <input class="form-control form-control-sm" name="q" type="number" min="1" placeholder="Enter Software ID to view details .." aria-label="Search" required>
           <span class="input-group-addon">
             <button class="btn btn-sm btn-outline-light border-left-0 border" type="submit"><i class="fa fa-check"></i></button>
           </span>   
         </form>
       <form class="d-flex mx-4 d-inline w-50" action = "{% url 'idbenchmark' %}" method="get">
-        <input class="form-control form-control-sm" name="q" type="number" min="1" placeholder="Enter benchmark ID to view details .." aria-label="Search" required>
+        <input class="form-control form-control-sm" name="q" type="number" min="1" placeholder="Enter Benchmark ID to view details .." aria-label="Search" required>
           <span class="input-group-addon">
             <button class="btn btn-sm btn-outline-light border-left-0 border" type="submit"><i class="fa fa-check"></i></button>
           </span>   
@@ -84,5 +84,6 @@
         </nav>
   </div>
 </div>  
+
 </body>
 </html>

@@ -59,6 +59,7 @@ def BootstrapFilterView(request):
     que.append(arch_exact_query or "_____")
     que.append(dataset_exact_query or "_____")
     query_string=" ".join(que)
+    date_updated = BenchmarkInstance.objects.last().created_at
 
     caption="Higher is better (faster), darker is more efficient"
     plot_div=QuerySetPlot(qs, caption, 20)
@@ -73,6 +74,7 @@ def BootstrapFilterView(request):
     num_gpu_types = GPU.objects.all().count()
  
     context = {
+        'date_updated': date_updated, 
         'num_software': num_software,
         'num_benchmarks': num_benchmarks,
         'num_datasets': num_datasets,   
@@ -97,6 +99,8 @@ def index(request):
     num_gpu_types = GPU.objects.all().count()
     bench=[]
 
+    date_updated = BenchmarkInstance.objects.last().created_at
+
     for i in Software.objects.all():
         t=BenchmarkInstance.objects.filter(software__id=i.id).filter(benchmark__name="6n4o").order_by('rate_max').last()
         if t is not None:
@@ -109,6 +113,7 @@ def index(request):
     plot_div_cost_gpu=QuerySetBarPlotCostGPU(sorted_bench, caption, 30)
 
     context = {
+        'date_updated': date_updated,
         'num_software': num_software,
         'num_benchmarks': num_benchmarks,
         'num_datasets': num_datasets,   
