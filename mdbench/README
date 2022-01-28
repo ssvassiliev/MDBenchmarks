@@ -24,6 +24,12 @@ gunicorn -c config/gunicorn/dev.py
 
 *** After reboot /var/{log,run}/gunicorn/ were gone! Recreated them. ***
 
+# Error: /var/run/gunicorn doesn't exist. Can't create pidfile.
+# Solution:
+sudo mkdir -pv /var/run/gunicorn/
+sudo chown -cR ubuntu:ubuntu /var/run/gunicorn/
+gunicorn -c config/gunicorn/dev.py
+
 # Install nginx and configure mdbench app
 # Create conf file /etc/nginx/sites-available/mdbench
 -------8><---------><8---------

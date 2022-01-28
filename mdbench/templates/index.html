@@ -46,7 +46,7 @@
                    {% autoescape off %}
                    {{ figure }}
                    {% endautoescape %}
-                   <sup>*</sup>Data from simulations of 6n4o dataset
+                   <sup>*</sup>Data from simulations of 6n4o dataset, updated {{date_updated | date}}                   
                 </div>
               </div>
             </div>
@@ -69,7 +69,7 @@
                     {% autoescape off %}
                       {{ figure_cost_cpu }}
                     {% endautoescape %}
-                    <sup>*</sup>Data from simulations of 6n4o dataset                    
+                    <sup>*</sup>Data from simulations of 6n4o dataset, updated: {{date_updated | date}}                   
                   </div>
               </div>
             </div>
@@ -117,7 +117,7 @@
                     {% autoescape off %}
                       {{ figure_cost_gpu }}
                     {% endautoescape %}
-                    <sup>*</sup>Data from simulations of 6n4o dataset                    
+                    <sup>*</sup>Data from simulations of 6n4o dataset, updated {{date_updated | date}}                   
                   </div>   
               </div>   
             </div>            
@@ -170,8 +170,8 @@
                                 {% endfor %}
                             </table>
                          </div>   
+                         <div class="text-end"  style="color: #eee;"> Date Updated: {{date_updated}}</div>                      
                      </div>
-                     <div class="text-end"  style="color: #eee;"> Date Updated: {{date_updated}} <div>                      
                  </div>
             </div>
         </div>    
