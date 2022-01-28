@@ -1,2 +1,4 @@
 mdbench/__pycache__/*
 mdbench/migrations/__pycache__/*
+.DS_Store
+

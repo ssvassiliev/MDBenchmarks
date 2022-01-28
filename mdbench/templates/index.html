@@ -2,6 +2,8 @@
 
 {% block content %}
 
+<div class="hiddentext" style="display: none;">Compute Canada, CC Doc, narval, cedar, graham, niagara, beluga, siku,SANDER, PMEMD, GROMACS, AMBER, OPENMM, NAMD, Desmond, MD, simulation speed, ns/day, days/ns, simulation parameters, SLURM, sbatch, submission script, parallel scaling, optimization, benchmark</div>
+
 <div class="pt-4 border-0 text-left" style="background-image: url('https://mdbench.ace-net.ca/static/media/images/fig3.png'); height:200px;" >
 <div class="col-sm-5 pt-5">
   <h3 >FIND THE OPTIMAL<br>SUBMISSION PARAMETERS</h3>
@@ -46,7 +48,7 @@
                    {% autoescape off %}
                    {{ figure }}
                    {% endautoescape %}
-                   <sup>*</sup>Data from simulations of 6n4o dataset, updated {{date_updated | date}}                   
+                   <div class="text-end" style="color: #666;"><small><sup>*</sup>Data updated {{date_updated | date}}</small></div>                   
                 </div>
               </div>
             </div>
@@ -69,7 +71,7 @@
                     {% autoescape off %}
                       {{ figure_cost_cpu }}
                     {% endautoescape %}
-                    <sup>*</sup>Data from simulations of 6n4o dataset, updated: {{date_updated | date}}                   
+                    <div class="text-end" style="color: #666;"><small><sup>*</sup>Data updated {{date_updated | date}}</small></div>                  
                   </div>
               </div>
             </div>
@@ -100,9 +102,7 @@
       </div>
     </div>
   </div>
-
 </div>
-
 
 
 <div class="row gx-0" style="background-color: #eee">
@@ -117,7 +117,7 @@
                     {% autoescape off %}
                       {{ figure_cost_gpu }}
                     {% endautoescape %}
-                    <sup>*</sup>Data from simulations of 6n4o dataset, updated {{date_updated | date}}                   
+                    <div class="text-end" style="color: #666;"><small><sup>*</sup>Data updated {{date_updated | date}}</small></div>                  
                   </div>   
               </div>   
             </div>            
@@ -170,7 +170,7 @@
                                 {% endfor %}
                             </table>
                          </div>   
-                         <div class="text-end"  style="color: #eee;"> Date Updated: {{date_updated}}</div>                      
+                         <div class="text-end"  style="color: #eee;"><small>Date Updated: {{date_updated}}</small><div>                       
                      </div>
                  </div>
             </div>

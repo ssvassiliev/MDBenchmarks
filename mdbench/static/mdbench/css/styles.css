@@ -46,3 +46,9 @@ body {
 }
 
 .div {border-radius: 0;}
+
+.hiddentext {
+position: absolute
+top: 0px;
+left: -5000px;
+}
