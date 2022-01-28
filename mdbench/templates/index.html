@@ -48,7 +48,7 @@
                    {% autoescape off %}
                    {{ figure }}
                    {% endautoescape %}
-                   <div class="text-end" style="color: #666;"><small><sup>*</sup>Data updated {{date_updated | date}}</small></div>                   
+                   <div class="text-end" style="color: #666;"><small><sup>*</sup>Data from simulation of 6n4o system with ~240,000 atoms, updated  {{date_updated | date}}</small></div> 
                 </div>
               </div>
             </div>
@@ -71,7 +71,7 @@
                     {% autoescape off %}
                       {{ figure_cost_cpu }}
                     {% endautoescape %}
-                    <div class="text-end" style="color: #666;"><small><sup>*</sup>Data updated {{date_updated | date}}</small></div>                  
+                    <div class="text-end" style="color: #666;"><small><sup>*</sup>Data from simulation of 6n4o system with ~240,000 atoms, updated {{date_updated | date}}</small></div>                  
                   </div>
               </div>
             </div>
@@ -117,7 +117,7 @@
                     {% autoescape off %}
                       {{ figure_cost_gpu }}
                     {% endautoescape %}
-                    <div class="text-end" style="color: #666;"><small><sup>*</sup>Data updated {{date_updated | date}}</small></div>                  
+                    <div class="text-end" style="color: #666;"><small><sup>*</sup>Data from simulation of 6n4o system with ~240,000 atoms, updated  {{date_updated | date}}</small></div> 
                   </div>   
               </div>   
             </div>            
@@ -170,7 +170,7 @@
                                 {% endfor %}
                             </table>
                          </div>   
-                         <div class="text-end"  style="color: #eee;"><small>Date Updated: {{date_updated}}</small><div>                       
+            <div class="text-end"  style="color: #eee;"><small>Date Updated: {{date_updated}}</small><div>                       
                      </div>
                  </div>
             </div>
@@ -178,6 +178,5 @@
     </div>
 </div>
   
-
 {% endblock %}
 
