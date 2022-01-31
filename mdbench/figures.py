@@ -67,8 +67,8 @@ def Check_QS(qs):
             ss=False; break  
 
     # is it GPU benchmark?
-    if i.resource.ngpu != 0:
-        ss=False 
+    #if i.resource.ngpu != 0:
+    #    ss=False 
 
     # are both ntasks and ncpu changing?
     var_tasks=False; var_cpu=False
@@ -116,14 +116,21 @@ def QuerySetScatterPlot(qs, fig_title, n=1000):
 
     if qs[0].resource.ngpu > 0:
         xaxisTitle="Number of GPU equivalents"
+        fig_title=qs[0].software.name + ", " +\
+            qs[0].software.module+"/"+\
+            qs[0].software.module_version+", ID="+\
+            str(qs[0].software.id)+", "+\
+            qs[0].site.name + ", " + qs[0].gpu.model 
+        
+
     else:
         xaxisTitle="Number of core equivalents"        
+        fig_title=qs[0].software.name + ", "+\
+            qs[0].software.module+"/"+\
+            qs[0].software.module_version+", ID="+\
+            str(qs[0].software.id)+", "+\
+            qs[0].site.name 
 
-    fig_title="Parallel scaling of "+\
-        qs[0].software.module+"/"+\
-        qs[0].software.module_version+" (Software_ID="+\
-        str(qs[0].software.id)+") on "+\
-        qs[0].site.name
     
     for c,i in enumerate(qs):
         if c >= n:
@@ -315,6 +322,7 @@ def QuerySetBarPlot(qs, fig_title, n=1000):
     else:
          plot_div=('<div class="d-flex justify-content-center p-4"><h4 style="color:#bbb;">NO BENCHMARKS SELECTED</h4></div>')      
     return(plot_div)
+
 
 
 

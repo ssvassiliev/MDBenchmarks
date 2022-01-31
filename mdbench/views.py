@@ -62,9 +62,9 @@ def BootstrapFilterView(request):
     date_updated = BenchmarkInstance.objects.latest('updated_at').updated_at
 
     caption="Higher is better (faster), darker is more efficient"
-    plot_div=QuerySetPlot(qs, caption, 20)
-    plot_div_cost_cpu=QuerySetBarPlotCostCPU(qs, caption, 20)
-    plot_div_cost_gpu=QuerySetBarPlotCostGPU(qs, caption, 20)
+    plot_div=QuerySetPlot(qs, caption, 100)
+    plot_div_cost_cpu=QuerySetBarPlotCostCPU(qs, caption, 100)
+    plot_div_cost_gpu=QuerySetBarPlotCostGPU(qs, caption, 100)
     QuerySetWriteCSV(qs)
 
     num_software = Software.objects.all().count()
@@ -227,8 +227,6 @@ def filtered_benchmarks_plot(request):
             "t-"+str(i.resource.nnodes) +"n-"+
             str(i.resource.ngpu)+"g)-"+i.site.name)
         h+=25
-    
-    layout = go.Layout(title='line1' + '<br>' +  '<span style="font-size: 12px;">line2</span>')
 
     fig = go.FigureWidget(layout = go.Layout(height = h, width = 900))
     fig.add_trace(
