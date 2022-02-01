@@ -62,9 +62,9 @@ def BootstrapFilterView(request):
     date_updated = BenchmarkInstance.objects.latest('updated_at').updated_at
 
     caption="Higher is better (faster), darker is more efficient"
-    plot_div=QuerySetPlot(qs, caption, 100)
-    plot_div_cost_cpu=QuerySetBarPlotCostCPU(qs, caption, 100)
-    plot_div_cost_gpu=QuerySetBarPlotCostGPU(qs, caption, 100)
+    plot_div=QuerySetPlot(qs, caption, 50)
+    plot_div_cost_cpu=QuerySetBarPlotCostCPU(qs, caption, 50)
+    plot_div_cost_gpu=QuerySetBarPlotCostGPU(qs, caption, 50)
     QuerySetWriteCSV(qs)
 
     num_software = Software.objects.all().count()
@@ -108,9 +108,9 @@ def index(request):
 
     sorted_bench = sorted(bench, key=lambda BenchmarkInstance: BenchmarkInstance.rate_max, reverse=True)
     caption="Higher is better (faster), darker is more efficient"
-    plot_div=QuerySetPlot(sorted_bench, "Higher is better (faster), darker is more efficient", 30)
-    plot_div_cost_cpu=QuerySetBarPlotCostCPU(sorted_bench, caption, 30)
-    plot_div_cost_gpu=QuerySetBarPlotCostGPU(sorted_bench, caption, 30)
+    plot_div=QuerySetPlot(sorted_bench, "Higher is better (faster), darker is more efficient", 50)
+    plot_div_cost_cpu=QuerySetBarPlotCostCPU(sorted_bench, caption, 50)
+    plot_div_cost_gpu=QuerySetBarPlotCostGPU(sorted_bench, caption, 50)
 
     context = {
         'date_updated': date_updated,

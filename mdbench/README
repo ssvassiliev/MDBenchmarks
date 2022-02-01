@@ -107,3 +107,8 @@ sed '2s/.*/  pk: null/' mdbench/fixtures/tmp.yaml > mdbench/fixtures/tmp2.yaml
 python3 manage.py loaddata mdbench/fixtures/tmp2.yaml
 rm mdbench/fixtures/tmp?.yaml
 -------8><---------><8---------
+
+python3 manage.py dumpdata mdbench.BenchmarkInstance \
+--pks 6 --format yaml > mdbench/fixtures/tmp.yaml
+
+python3 manage.py loaddata mdbench/fixtures/tmp.yaml
