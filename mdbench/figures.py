@@ -105,13 +105,15 @@ def QuerySetScatterPlot(qs, fig_title, n=1000):
     w=680
     c=0
 
-    ids.append(0) # Fix it
+    ids.append(qs[0].serial.id) 
     x_data.append(1)
     y_data.append(qs[0].serial.rate_max) 
     e_data.append(100.0)
     lin_sc.append(qs[0].serial.rate_max)
-    lab.append("Serial")
-
+    lab.append(
+        "Serial_ID="+
+        str(qs[0].serial.id)
+        )        
     c1=1
 
     if qs[0].resource.ngpu > 0:
@@ -123,7 +125,6 @@ def QuerySetScatterPlot(qs, fig_title, n=1000):
             qs[0].gpu.model + ", " + \
             qs[0].site.name 
         
-
     else:
         xaxisTitle="Number of core equivalents"  
         fig_title=str(qs[0].software.id) + ": " + \
@@ -325,9 +326,6 @@ def QuerySetBarPlot(qs, fig_title, n=1000):
 
 
 
-
-
-
 def QuerySetBarPlotCostCPU(qs, fig_title, n=1000):
     # Limit plot to first n benchmarks
     figTitle=dict(text=fig_title,)
@@ -426,6 +424,7 @@ def QuerySetBarPlotCostGPU(qs, fig_title, n=1000):
 
     c=c1=0
     max_speed=0
+
     for c,i in enumerate(qs):
         if c >=n:
             break
