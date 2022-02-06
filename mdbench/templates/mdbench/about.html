@@ -7,8 +7,12 @@
 {% endblock content %}
 {% block content2 %}
     <div class="p-4 text-left" style="background-color: #eee; color:#000;">
-        <p>Benchmarking is essential for designing optimal MD workflows because a poor choice of job submission or simulation parameters can degrade performance and waste computing resources. However a systematic benchmarking of numerous MD engines in a complex HPC environment with heterogeneous hardware is a daunting and time-consuming task.</p>
-        This web portal aims to help researchers to optimize usage of hardware resources and, at the same time, keep simulation time to a minimum. It provides an up-to-date performance comparison of all installed software packages and a searchable database of benchmarks. Each database entry includes simulation details such as the hardware description, example submission scripts, and simulation input files. Currently, the database has benchmarks for three major MD software packages: AMBER, GROMACS, and NAMD. This data allows to estimate resources required for simulations and helps new users to get started with MD simulations.
+        <h3>What are the fastest and most efficient ways to run MD simulations?</h3>
+        <p>A poor choice of job submission or simulation parameters leads to poor performance and a waste of computing resources. A common mistake is requesting too many CPUs or GPUs to run a simulation as fast as possible. The fastest simulations may be inefficient due to poor parallel scaling. As a result, such simulations use excessive resources and negatively impact priority, resulting in longer queue times and reduced productivity.</p>
+
+        <p>Finding optimal MD engines and submission parameters in a complex HPC environment with heterogeneous hardware poses a daunting and time-consuming challenge. We designed this interactive performance guide to simplify optimization of MD simulations. This web portal presents performance metrics of all installed MD software packages. It includes a searchable benchmarks database with simulation details such as hardware descriptions, SLURM submission scripts and input files for simulations.</p>
+
+        <p>Currently, the database contains benchmarks for four major MD software packages: AMBER, GROMACS, NAMD and OpenMM. The efforts to test all possible hardware/software combinations are underway.</p>
     </div>
 </div>
 {% endblock content2 %}

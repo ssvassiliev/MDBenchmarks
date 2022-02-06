@@ -19,6 +19,8 @@ def download_csv(request):
     return response
 
 def BootstrapFilterView(request):
+
+
     qs = BenchmarkInstance.objects.all().order_by("-rate_max")
     software_contains_query = request.GET.get('software_contains')
     software_id_query = request.GET.get('software_id')   
@@ -28,7 +30,7 @@ def BootstrapFilterView(request):
     gpu_model_query = request.GET.get('gpu_model')
     cpu_model_query = request.GET.get('cpu_model')   
     arch_exact_query = request.GET.get('arch')
-    dataset_exact_query = request.GET.get('dataset')   
+    dataset_exact_query = request.GET.get('dataset') 
     if software_contains_query != '' and software_contains_query is not None:
         qs = qs.filter(software__name__icontains=software_contains_query)
     if software_id_query != '' and software_id_query is not None:
@@ -62,9 +64,9 @@ def BootstrapFilterView(request):
     date_updated = BenchmarkInstance.objects.latest('updated_at').updated_at
 
     caption="Higher is better (faster), darker is more efficient"
-    plot_div=QuerySetPlot(qs, caption, 50)
-    plot_div_cost_cpu=QuerySetBarPlotCostCPU(qs, caption, 50)
-    plot_div_cost_gpu=QuerySetBarPlotCostGPU(qs, caption, 50)
+    plot_div=QuerySetPlot(qs, caption, 30)
+    plot_div_cost_cpu=QuerySetBarPlotCostCPU(qs, caption, 30)
+    plot_div_cost_gpu=QuerySetBarPlotCostGPU(qs, caption, 30)
     QuerySetWriteCSV(qs)
 
     num_software = Software.objects.all().count()
@@ -108,9 +110,9 @@ def index(request):
 
     sorted_bench = sorted(bench, key=lambda BenchmarkInstance: BenchmarkInstance.rate_max, reverse=True)
     caption="Higher is better (faster), darker is more efficient"
-    plot_div=QuerySetPlot(sorted_bench, "Higher is better (faster), darker is more efficient", 50)
-    plot_div_cost_cpu=QuerySetBarPlotCostCPU(sorted_bench, caption, 50)
-    plot_div_cost_gpu=QuerySetBarPlotCostGPU(sorted_bench, caption, 50)
+    plot_div=QuerySetPlot(sorted_bench, "Higher is better (faster), darker is more efficient", 40)
+    plot_div_cost_cpu=QuerySetBarPlotCostCPU(sorted_bench, caption, 40)
+    plot_div_cost_gpu=QuerySetBarPlotCostGPU(sorted_bench, caption, 40)
 
     context = {
         'date_updated': date_updated,

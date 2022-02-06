@@ -3,7 +3,7 @@
 {%block content%}
 <div class="card border-0 text-left pt-4" style="background-image: url('https://mdbench.ace-net.ca/static/media/images/fig3.png'); border-radius: 0;">
     <div class="card-title">
-        <h3>FILTERS</h3>
+        <h3>EXPLORE</h3>
     </div>
     <div class="card-body">
     <form method='GET' action = '.'>
@@ -205,15 +205,15 @@
           <ul class="list-group list-group-flush">
             <li class="list-group-item" style="background-color: #eee;">
               <h4 class="card-title">EXPLORING THE DATABASE</h4>
-              <h5 class="card-subtitle p-2">Default view</h5>When this page is viewed no filters are initially applied. All benchmarks are selected and sorted by simulation speed. The chart on the right displays only top 20 benchmarks for clarity.</li>
+              <h5 class="card-subtitle p-2">Default view</h5>When this page is viewed no filters are initially applied. All benchmarks are selected and sorted by simulation speed. The chart on the right displays only top 50 benchmarks for clarity.</li>
             <li class="list-group-item" style="background-color: #eee;">
-              <h5 class="card-subtitle p-2">Selecting benchmarks</h5>A subset of benchmarks can be selected using a custom chain of filters. Selected database entries can be downloaded as CSV files for further analysis or viewed in the Table at the bottom of the page. If only one software and one cluster are selected, the plot will show parallel scaling (<a href={% url 'bootstrapfilter' %}?software_contains=GROMACS.mpi&site_contains=Narval&dataset=6n4o>Example</a>).
+              <h5 class="card-subtitle p-2">Selecting benchmarks</h5>A subset of benchmarks can be selected using a custom chain of filters. Selected database entries can be downloaded as CSV files for further analysis or viewed in the <i>Benchmark Details</i> table at the bottom of the page. If only one software and one cluster are selected, the plot will show parallel scaling. View example: GROMACS @Narval <a href={% url 'bootstrapfilter' %}?software_contains=GROMACS.mpi&site_contains=Narval&dataset=6n4o><i class="fas fa-link link-success"></i></a>.
             <li class="list-group-item" style="background-color: #eee;">
-              <h5 class="card-subtitle p-2">Detailed views</h5>A detailed view of each database entry can be accessed from <b>Benchmark ID</b> and <b>Software ID</b> menu items. Detailed views include submission commands and simulation input files. </li>   
+              <h5 class="card-subtitle p-2">Detailed views</h5>A detailed view of each database entry can be accessed from <i>Benchmark ID</i> and <i>Software ID</i> search forms. Detailed views include submission commands and simulation input files. View example: PMEMD @Narval (benchmark ID=46)<a href={% url 'idbenchmark' %}?q=46><i class="fas fa-link link-success"></i></a>. </li>   
             <li class="list-group-item" style="background-color: #eee;">
               <h5 class="card-subtitle p-2">Parallel scaling</h5><i>Efficiency</i> is computed as <i>PS/(SS * N)</i> where <i>PS</i> is speed of the parallel program, <i>SS</i> is speed of the serial program, and <i>N</i> is the number of CPUs or GPUs.</li> 
             <li class="list-group-item" style="background-color: #eee;">  
-              <h5 class="card-subtitle p-2">Viewing QM/MM benchmarks</h5>To view QM/MM benchmarks select simulation system 4cg1.</li>  
+              <h5 class="card-subtitle p-2">Viewing QM/MM benchmarks</h5>To view QM/MM benchmarks select simulation system 4cg1 <a  href={% url 'bootstrapfilter' %}?software_contains=&software_id=&module_contains=&module_version=&site_contains=&gpu_model=&cpu_model=&arch=&dataset=4cg1 ><i class="fas fa-link link-success"></i></a>.</li>  
           </ul>                           
           </div>   
        </div>
@@ -269,7 +269,7 @@
                   <li class="list-group-item">
                     <h5 class="card-subtitle p-2" style="color: #B79754;">Submitting CPU-only simulation</h5>CPU-only simulations reach performance comparable to GPU-accelerated ones only with hundreds of CPU cores. It is not uncommon for such jobs to wait in the queue for up to several days for such a significant resource to be available, especialy if a long time is requested.</li> 
                   <li class="list-group-item" style="background-color: #fff;">
-                    <h5 class="card-subtitle p-2" style="color: #B79754;">Benchmarking CPU-only MD Engines</h5>We calculate CPU usage in core equivalent years. <a href="https://docs.computecanada.ca/wiki/Allocations_and_compute_scheduling#What_is_a_core_equivalent_and_how_is_it_used_by_the_scheduler.3F">Core equivalent</a> is a bundle made up of a single core, and some memory associated with it. For most of the systems one core equivalent includes 4000M per core.<li>  
+                    <h5 class="card-subtitle p-2" style="color: #B79754;">Benchmarking CPU-only MD Engines</h5>We calculate CPU usage in core equivalents per year. Core equivalent is a bundle made up of a single core, and some memory associated with it <a href="https://docs.computecanada.ca/wiki/Allocations_and_compute_scheduling#What_is_a_core_equivalent_and_how_is_it_used_by_the_scheduler.3F"><i class="fas fa-external-link-alt link-success"></i></a>. For most of the systems one core equivalent includes 4000M per core.<li>  
                 </div>                  
               </div>
             </div>
@@ -310,7 +310,7 @@
                  <ul class="list-group list-group-flush">
                   <li class="list-group-item" style="background-color: #eee;">
                     <h4 class="card-title" style="color: #B79754;" >OPTIMIZING GPU USAGE</h4>
-                    <h5 class="card-subtitle p-2" style="color: #B79754;">Parallel scaling to multiple GPUs</h5>Parallel scaling to multiple GPUs strongly depends on the compibation of software, hardware and simulation parameters. Often simulations do not run faster on multiple GPUs (<a href={% url 'bootstrapfilter' %}?software_contains=PMEMD.cuda&site_contains=Cedar&gpu_model=P100-PCIE&dataset=6n4o>Example</a>). Simulations on nodes with direct interconnect between GPUs (NVLink) are more likely to benefit from multiple GPUs, but efficiency decreases and cost goes up with the number of GPUs (<a href={% url 'bootstrapfilter' %}?software_contains=NAMD3.cuda&site_contains=Cedar&gpu_model=V100-SXM2&dataset=6n4o>Example</a>).</li>
+                    <h5 class="card-subtitle p-2" style="color: #B79754;">Parallel scaling to multiple GPUs</h5>Parallel scaling to multiple GPUs strongly depends on the compibation of software, hardware and simulation parameters. Often simulations do not run faster on multiple GPUs (PMEMD @Cedar example<a href={% url 'bootstrapfilter' %}?software_contains=PMEMD.cuda.MPI&site_contains=Cedar&gpu_model=P100-PCIE&dataset=6n4o><i class="fas fa-link link-success"></i></a>). Simulations on nodes with direct interconnect between GPUs (NVLink) are more likely to benefit from multiple GPUs, but efficiency decreases and cost goes up with the number of GPUs (NAMD3 @Cedar example <a href={% url 'bootstrapfilter' %}?software_contains=NAMD3.cuda&site_contains=Cedar&gpu_model=V100-SXM2&dataset=6n4o> <i class="fas fa-link link-success"></i></a>).</li>
                   <li class="list-group-item" style="background-color: #eee;">
                     <h5 class="card-subtitle p-2" style="color: #B79754;">Benchmarking GPU accelerated MD Engines</h5>For benchmarking we use the optimal number of cores per GPU (the number needed for the fastest simulation time but not exceeding the maximum number of CPU cores per GPU in a GPU equivalent).</li>
 
