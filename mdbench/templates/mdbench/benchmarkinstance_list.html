@@ -28,7 +28,7 @@
       {% if benchmarkinstance.sbatch_script %}
          <li><strong>Benchmark submission script:</strong><div class="p-3"><pre lang="bash">{{ benchmarkinstance.sbatch_script|linebreaks }}</pre></div></li>   
       {% else %}    
-      <li><strong>Example submission script for the software:</strong><div class="p-3"><pre lang="bash">{{ benchmarkinstance.software.example_submission|linebreaks }}</pre></div></li>         
+      <li><strong>Generic software submission script:</strong><div class="p-3"><pre lang="bash">{{ benchmarkinstance.software.example_submission|linebreaks }}</pre></div></li>         
       {% endif %} 
       <li><strong>Simulation input file:</strong><div class="p-3"><pre lang="python">{{ benchmarkinstance.serial.simulation_input.input | linebreaks }}</pre></div></li> 
     </ul> 
