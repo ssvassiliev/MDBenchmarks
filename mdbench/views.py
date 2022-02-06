@@ -19,8 +19,6 @@ def download_csv(request):
     return response
 
 def BootstrapFilterView(request):
-
-
     qs = BenchmarkInstance.objects.all().order_by("-rate_max")
     software_contains_query = request.GET.get('software_contains')
     software_id_query = request.GET.get('software_id')   
