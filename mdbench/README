@@ -45,6 +45,12 @@ server {
     proxy_set_header        Host $host;
   }
 }
+# Add NGINX-AMPLIFY
+location /nginx_status { 
+        stub_status on;
+        allow 127.0.0.1;
+        deny all;
+}
 -------8><---------><8---------
 
 # Create link to 'sites-available/mdbench' in 'sites-enabled':
