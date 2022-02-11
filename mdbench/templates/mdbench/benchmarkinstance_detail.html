@@ -21,7 +21,7 @@
   <li><strong>Date:</strong> {{ benchmarkinstance.updated_at }}</li>  
   <li><strong>Submission script:</strong><pre lang="bash">{{ benchmarkinstance.sbatch_script | linebreaks | safe }}</pre></li>   
   <li><strong>Notes:</strong> {{ benchmarkinstance.notes | linebreaks }}</li>   
-  <li><strong>Simulation input file:</strong><pre lang="python">{{ benchmarkinstance.serial.simulation_input.input | linebreaks }}</pre></li> 
+  <li><strong>Simulation input file:</strong><pre lang="python">{{ benchmarkinstance.serial.simulation_input.input | linebreaks | safe }}</pre></li> 
 </ul> 
 </div>
 {% endpygment %}
