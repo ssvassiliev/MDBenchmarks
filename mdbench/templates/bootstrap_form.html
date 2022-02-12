@@ -261,7 +261,6 @@
   </div>
 
   <div class="col-sm-4">
-    <div>
       <div class="container-fluid pt-3">
         <div class="row justify-content-center">
            <div class="col-auto" >
@@ -272,36 +271,34 @@
                   <li class="list-group-item">
                     <h5 class="card-subtitle p-2" style="color: #B79754;">Submitting CPU-only simulation</h5>CPU-only simulations reach performance comparable to GPU-accelerated ones only with hundreds of CPU cores. It is not uncommon for such jobs to wait in the queue for up to several days for such a significant resource to be available, especialy if a long time is requested.</li> 
                   <li class="list-group-item" style="background-color: #fff;">
-                    <h5 class="card-subtitle p-2" style="color: #B79754;">Benchmarking CPU-only MD Engines</h5>We calculate CPU usage in core equivalents per year. Core equivalent is a bundle made up of a single core, and some memory associated with it <a href="https://docs.computecanada.ca/wiki/Allocations_and_compute_scheduling#What_is_a_core_equivalent_and_how_is_it_used_by_the_scheduler.3F"><i class="fas fa-external-link-alt link-success"></i></a>. For most of the systems one core equivalent includes 4000M per core.<li>  
-                </div>                  
-              </div>
+                    <h5 class="card-subtitle p-2" style="color: #B79754;">Benchmarking CPU-only MD Engines</h5>We calculate CPU usage in core equivalents per year. Core equivalent is a bundle made up of a single core, and some memory associated with it <a href="https://docs.computecanada.ca/wiki/Allocations_and_compute_scheduling#What_is_a_core_equivalent_and_how_is_it_used_by_the_scheduler.3F"><i class="fas fa-external-link-alt link-success"></i></a>. For most of the systems one core equivalent includes 4000M per core.</li>  
+                </ul>
+               </div>                  
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-
+   </div>
 </div>
 {% endif %}
 
 {% if not 'NO GPU BENCHMARKS' in plot_div_cost_gpu %}
 <div class="row gx-0" style="background-color: #eee">
   <div class="col-sm-8"> 
-    <div style="background-color: #eee">
+     <div style="background-color: #eee">
         <div class="d-flex justify-content-center pt-3">
-            <div class="card border-0" style="background-color: #eee;" >
+           <div class="card border-0" style="background-color: #eee;" >
               <div class="card-body">
                 <h3 class="card-title" style="color: #B79754;">Cost Of GPU-accelerated Simulations</h3>
-                  <div class="card-img-top">
+                   <div class="card-img-top">
                     {% autoescape off %} {{ plot_div_cost_gpu }} {% endautoescape %}
                     <div class="text-end" style="color: #666;"><small><sup>*</sup>Data updated {{date_updated | date}} </small> </div>             
-                  </div>
+                   </div>
               </div>
-            </div>
+           </div>
         </div>
-   </div>
-</div>
+     </div>
+  </div>
 
 <div class="col-sm-4">
   <div>
@@ -328,13 +325,10 @@
 {% endif %}
 </div>
 
-
-
-<div style="background-color:  #222529">
-  <div class="d-flex justify-content-center pt-3">
-      <div class="card" style="background-color: #35754c;">
+  <div class="container-fluid pt-3">
+      <div class="card pt-3" style="background-color: #eee;">
           <div class="card-body">
-              <div class="card-title"><h3>BENCHMARK DETAILS</h3>
+              <div class="card-title"><h3>DETAILS OF SELECTED BENCHMARKS</h3>
                     <button class="btn btn-sm btn-outline-light"><a style="color: #aaa" href="{% url 'export' %}">Download CSV</a></button>
               </div>
               {{ csv_file }}
@@ -348,11 +342,11 @@
                   {% endfor %} 
                   </table>
               </div>  
-             <div class="text-end"  style="color: #eee;"><small>Date Updated: {{date_updated}}</small><div>              
+             <div class="text-end"  style="color: #666;"><small>Date Updated: {{date_updated}}</small><div>              
           </div>
       </div>
   </div>
-</div>
+
 
 
 

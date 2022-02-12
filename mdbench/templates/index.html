@@ -4,7 +4,7 @@
 
 <div class="hiddentext" style="display: none;">Compute Canada, CC Doc, narval, cedar, graham, niagara, beluga, siku,SANDER, PMEMD, GROMACS, AMBER, OPENMM, NAMD, Desmond, MD, simulation speed, ns/day, days/ns, simulation parameters, SLURM, sbatch, submission script, parallel scaling, optimization, benchmark</div>
 
-<div class="pt-4 border-0 text-left" style="background-image: url('https://mdbench.ace-net.ca/static/media/images/fig3.png'); height:200px;" >
+<div class="pt-4 border-0 text-left" style="background-image: url('https://mdbench.ace-net.ca/static/media/images/fig3.png'); border-radius: 0; height:200px;" >
 <div class="col-sm-5 pt-5">
   <h3 >FIND THE OPTIMAL<br>SUBMISSION PARAMETERS</h3>
 </div> 
@@ -12,12 +12,13 @@
 {% endblock %}
 
 {% block content2 %}
+
+
+
 <div class="row gx-0" style="background-color: #eee;">
   <div class="col-sm-4">
-    <div class="container-fluid pt-3">
-      <div class="row justify-content-center">
-        <div class="col-auto" >
-          <div class="card border-0" style="background-color: #eee;">
+    <div class="d-flex justify-content-center pt-3">
+        <div class="card border-0" style="background-color: #eee;">
             <div class="card-body">
                   <h4 class="card-title">SPEED UP SIMULATION</h4>
                   <ul class="list-group list-group-flush">
@@ -32,18 +33,14 @@
                   <li class="list-group-item" style="background-color: #eee;">  
                     <h5 class="card-subtitle p-2">Viewing QM/MM benchmarks</h5>To view QM/MM benchmarks select simulation system 4cg1 in the <i>Explore</i> window <a  href={% url 'bootstrapfilter' %}?software_contains=&software_id=&module_contains=&module_version=&site_contains=&gpu_model=&cpu_model=&arch=&dataset=4cg1 ><i class="fas fa-link link-success"></i></a>.</li>   
                   </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+             </div>
+         </div>
+     </div>
   </div>
 
   <div class="col-sm-8">
-      <div class="container-fluid pt-3">
-        <div class="row justify-content-center">
-          <div class="col-auto" >
-            <div class="card border-0" style="background-color: #eee;">
+      <div class="d-flex justify-content-center pt-3">
+          <div class="card border-0" style="background-color: #eee;">
               <div class="card-body">
                 <h4 class="card-title">Best Performance Of Each MD Engine Among All Clusters</h4>
                 <div class="card-img-top">
@@ -53,20 +50,15 @@
                    <div class="text-end" style="color: #666;"><small><sup>*</sup>Data from simulation of 6n4o system with ~240,000 atoms, updated  {{date_updated | date}}</small></div> 
                 </div>
               </div>
-            </div>
           </div>
-        </div>
       </div>
   </div>
 </div>
 
 <div class="row gx-0" style="background-color: #fff">
   <div class="col-sm-8" style="background-color: #fff">
-    <div>
-      <div class="container-fluid pt-3">
-        <div class="row justify-content-center">
-          <div class="col-auto">
-            <div class="card border-0" style="background-color: #fff">
+      <div class="d-flex justify-content-center  pt-3">
+           <div class="card border-0" style="background-color: #fff">
               <div class="card-body">
                   <h4 class="card-title pt-2" style="color: #B79754;">Cost Of Simulations Using Best Performing CPU-only MD Engines</h4>
                   <div class="card-img-top">
@@ -76,20 +68,14 @@
                     <div class="text-end" style="color: #666;"><small><sup>*</sup>Data from simulation of 6n4o system with ~240,000 atoms, updated {{date_updated | date}}</small></div>                  
                   </div>
               </div>
-            </div>
           </div>
-        </div>
       </div>
-    </div>
   </div>
 
   <div class="col-sm-4">
-    <div>
-      <div class="container-fluid pt-3">
-        <div class="row justify-content-center">
-           <div class="col-auto" >
-            <div class="card border-0" style="background-color: #fff;">
-              <div class="card-body">
+     <div class="d-flex justify-content-center pt-3">
+        <div class="card border-0" style="background-color: #fff;">
+            <div class="card-body">
                 <ul class="list-group list-group-flush">
                   <h4 class="card-title" style="color: #B79754;" >OPTIMIZING CPU USAGE</h4>
                    <li class="list-group-item">
@@ -100,20 +86,12 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
+       
 <div class="row gx-0" style="background-color: #eee">
   <div class="col-sm-8" style="background-color: #eee">
-      <div class="container-fluid pt-3">
-        <div class="row justify-content-center">
-          <div class="col-auto" >
-            <div class="card border-0" style="background-color: #eee;">
-              <div class="card-body">
+    <div class="d-flex justify-content-center pt-3">
+        <div class="card border-0" style="background-color: #eee;">
+            <div class="card-body">
                 <h4 class="card-title" style="color: #B79754;">Cost Of Simulations Using Best Performing GPU-accelerated MD Engines</h4>
                   <div class="card-img-top">
                     {% autoescape off %}
@@ -122,17 +100,12 @@
                     <div class="text-end" style="color: #666;"><small><sup>*</sup>Data from simulation of 6n4o system with ~240,000 atoms, updated  {{date_updated | date}}</small></div> 
                   </div>   
               </div>   
-            </div>            
-          </div>
-        </div>
+          </div>            
       </div>
   </div>
 
   <div class="col-sm-4">
-    <div>
-      <div class="container-fluid pt-3">
-        <div class="row justify-content-center">
-           <div class="col-auto" >
+    <div class="d-flex justify-content-center pt-3">      
             <div class="card border-0" style="background-color: #eee;">
               <div class="card-body">
                    <ul class="list-group list-group-flush">
@@ -150,35 +123,24 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
 
-
-<div style="background-color: #222529">
-    <div class="container-fluid pt-3">
-        <div class="row justify-content-center">
-            <div class="col-auto" >
-                <div class="card" style="background-color: #35754c;" >
-                    <div class="card-body">
-                        <h3 class="card-title">BENCHMARK DETAILS</h3>
-                        <div style="background-color: #eee;">
-                            <table class="table table-hover">
-                                {% include "mdbench/t_head.html" %}
-                                {% for benchmark in benchmarks %}
-                                <tr>
-                                    {% include "mdbench/t_data.html" %}
-                                </tr>   
-                                {% endfor %}
-                            </table>
-                         </div>   
-            <div class="text-end"  style="color: #eee;"><small>Date Updated: {{date_updated}}</small><div>                       
-                     </div>
-                 </div>
-            </div>
-        </div>    
-    </div>
-</div>
-  
+<div class="container-fluid pt-3">
+    <div class="card pt-3" style="background-color: #eee;">
+        <div class="card-body">
+            <h3 class="card-title">BENCHMARK DETAILS</h3>
+            <div style="background-color: #eee;">
+                        <table class="table table-hover">
+                            {% include "mdbench/t_head.html" %}
+                            {% for benchmark in benchmarks %}
+                            <tr>
+                                {% include "mdbench/t_data.html" %}
+                            </tr>   
+                            {% endfor %}
+                        </table>
+            </div>   
+            <div class="text-end"  style="color: #666;"><small>Date Updated: {{date_updated}}</small><div>                       
+        </div>
+      </div>
+   </div>
+</div>  
 {% endblock %}
-
