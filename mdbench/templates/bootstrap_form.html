@@ -218,12 +218,11 @@
             <li class="list-group-item" style="background-color: #eee;">  
               <h5 class="card-subtitle p-2">Viewing QM/MM benchmarks</h5>To view QM/MM benchmarks select simulation system 4cg1 <a  href={% url 'bootstrapfilter' %}?software_contains=&software_id=&module_contains=&module_version=&site_contains=&gpu_model=&cpu_model=&arch=&dataset=4cg1 ><i class="fas fa-link link-success"></i></a>.</li>  
           </ul>                           
-          </div>   
-       </div>
+        </div>   
+      </div>
     </div>
   </div>
   
-
   <div class="col-sm-8">
     <div class="d-flex justify-content-center pt-3">
       <div class="card border-0" style="background-color: #eee;" >
@@ -328,7 +327,7 @@
   <div class="container-fluid pt-3">
       <div class="card pt-3" style="background-color: #eee;">
           <div class="card-body">
-              <div class="card-title"><h3>DETAILS OF SELECTED BENCHMARKS</h3>
+              <div class="card-title"><h3>BENCHMARK RESULTS</h3>
                     <button class="btn btn-sm btn-outline-light"><a style="color: #aaa" href="{% url 'export' %}">Download CSV</a></button>
               </div>
               {{ csv_file }}
