@@ -7,6 +7,7 @@ import plotly.express as px
 import pandas as pd        
 import plotly.graph_objects as go
 from .models import Benchmark, Software, BenchmarkInstance, CPU, GPU
+from django.core.paginator import Paginator
 
 def download_csv(request):
     global csv_data
@@ -47,6 +48,9 @@ def BootstrapFilterView(request):
         qs = qs.filter(software__instruction_set__exact=arch_exact_query)
     if dataset_exact_query != '' and dataset_exact_query is not None:
         qs = qs.filter(benchmark__name__exact=dataset_exact_query)
+    paginator = Paginator(qs, 20)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
     que=[]
     que.append(software_contains_query or "_____")
@@ -85,6 +89,7 @@ def BootstrapFilterView(request):
         'plot_div': plot_div,
         'plot_div_cost_cpu': plot_div_cost_cpu,     
         'plot_div_cost_gpu': plot_div_cost_gpu,  
+        'page_obj': page_obj,
         }
     return render(request, 'bootstrap_form.html', context)
 
