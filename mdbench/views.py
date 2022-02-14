@@ -82,9 +82,9 @@ def BootstrapFilterView(request):
     if(cpu_model_query):          
         qurl.append("cpu_model=" + cpu_model_query)
     if(arch_exact_query):         
-        qurl.append("arch_exact=" + arch_exact_query)
+        qurl.append("arch=" + arch_exact_query)
     if(dataset_exact_query):     
-        qurl.append("dataset_exact=" + dataset_exact_query)                    
+        qurl.append("dataset=" + dataset_exact_query)                    
     qurl_string="&".join(qurl)
 
     caption="Higher is better (faster), darker is more efficient"
