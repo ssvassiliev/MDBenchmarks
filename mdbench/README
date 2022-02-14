@@ -82,6 +82,10 @@ python manage.py collectstatic
 # Turn off debug and restart nginx
 sudo systemctl restart nginx
 
+# Updating CSS: copy .css in static html folder:
+cp /home/ubuntu/MDBenchmarks/mdbench/static/styles.css /var/www/mdbench.ace-net.ca/static/mdbench/css
+
+
 # 2. LOADING DATA WITH FIXTURES
 
 # Creating a fixture:

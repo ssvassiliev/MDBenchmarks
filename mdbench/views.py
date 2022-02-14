@@ -20,6 +20,7 @@ def download_csv(request):
     return response
 
 def BootstrapFilterView(request):
+    page_number = request.GET.get('page')
     qs = BenchmarkInstance.objects.all().order_by("-rate_max")
     software_contains_query = request.GET.get('software_contains')
     software_id_query = request.GET.get('software_id')   
@@ -49,10 +50,11 @@ def BootstrapFilterView(request):
     if dataset_exact_query != '' and dataset_exact_query is not None:
         qs = qs.filter(benchmark__name__exact=dataset_exact_query)
     paginator = Paginator(qs, 20)
-    page_number = request.GET.get('page')
+    
     page_obj = paginator.get_page(page_number)
 
     que=[]
+    qurl=[]
     que.append(software_contains_query or "_____")
     que.append(software_id_query or "_____") 
     que.append(module_contains_query or "_____")
@@ -64,6 +66,28 @@ def BootstrapFilterView(request):
     que.append(dataset_exact_query or "_____")
     query_string=" ".join(que)
     date_updated = BenchmarkInstance.objects.latest('updated_at').updated_at
+
+    if(software_contains_query):
+        qurl.append("software_contains=" + software_contains_query)
+    if(software_id_query):        
+        qurl.append("software_id=" + software_id_query)
+    if(module_contains_query):             
+        qurl.append("module_contains=" + module_contains_query)
+    if(module_version_query):   
+        qurl.append("module_version=" + module_version_query) 
+    if(site_contains_query):     
+        qurl.append("site_contains=" + site_contains_query) 
+    if(gpu_model_query):      
+        qurl.append("gpu_model=" + gpu_model_query)
+    if(cpu_model_query):          
+        qurl.append("cpu_model=" + cpu_model_query)
+    if(arch_exact_query):         
+        qurl.append("arch_exact=" + arch_exact_query)
+    if(dataset_exact_query):     
+        qurl.append("dataset_exact=" + dataset_exact_query)                    
+
+    qurl_string="&".join(qurl)
+    print(qurl_string)
 
     caption="Higher is better (faster), darker is more efficient"
     plot_div=QuerySetPlot(qs, caption, 30)
@@ -86,6 +110,7 @@ def BootstrapFilterView(request):
         'num_gpu_types': num_gpu_types,  
         'queryset' : qs,
         'querystr': query_string,
+        'qurlstr': qurl_string,
         'plot_div': plot_div,
         'plot_div_cost_cpu': plot_div_cost_cpu,     
         'plot_div_cost_gpu': plot_div_cost_gpu,  
