@@ -328,16 +328,13 @@
   <div class="card pt-3" style="background-color: #eee;">
       <div class="card-body">
           <div class="card-title"><h3>BENCHMARK RESULTS</h3>
-                <button class="btn btn-sm btn-outline-light"><a style="color: #aaa" href="{% url 'export' %}">Download CSV</a></button>
+              <button class="btn btn-sm btn-outline-light"><a style="color: #aaa" href="{% url 'export' %}">Download CSV</a></button>
           </div>
           {{ csv_file }}
           <div style="background-color: #eee;">
-            <table class="table table-hover">
-              {% include "mdbench/t_head.html" %}
+              <table class="table table-hover"> {% include "mdbench/t_head.html" %}
               {% for benchmark in page_obj.object_list %}
-                <tr>
-                  {% include "mdbench/t_data.html" %}
-                </tr>   
+                <tr>{% include "mdbench/t_data.html" %}</tr>   
               {% endfor %} 
               </table>
           </div>  
@@ -346,7 +343,6 @@
   </div>
 </div>
 
-
 {% if page_obj.has_other_pages %}
   <ul class="pagination pagination-sm justify-content-center">
     {% if page_obj.has_previous %}
@@ -354,6 +350,7 @@
     {% else %}
       <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
     {% endif %}
+
     {% for i in page_obj.paginator.page_range %}
       {% if page_obj.number == i %}
         <li class="page-item active"> <a class="page-link" > {{ i }} </a></li>
@@ -361,6 +358,7 @@
         <li><a class="page-link" href="?page={{ i }}&{{qurlstr}}">{{ i }}</a></li>
       {% endif %}
     {% endfor %}
+
     {% if page_obj.has_next %}
       <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}&{{qurlstr}}">&raquo;</a></li>
     {% else %}

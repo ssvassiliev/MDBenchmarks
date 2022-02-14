@@ -49,8 +49,8 @@ def BootstrapFilterView(request):
         qs = qs.filter(software__instruction_set__exact=arch_exact_query)
     if dataset_exact_query != '' and dataset_exact_query is not None:
         qs = qs.filter(benchmark__name__exact=dataset_exact_query)
-    paginator = Paginator(qs, 20)
     
+    paginator = Paginator(qs, 10)
     page_obj = paginator.get_page(page_number)
 
     que=[]
@@ -85,9 +85,7 @@ def BootstrapFilterView(request):
         qurl.append("arch_exact=" + arch_exact_query)
     if(dataset_exact_query):     
         qurl.append("dataset_exact=" + dataset_exact_query)                    
-
     qurl_string="&".join(qurl)
-    print(qurl_string)
 
     caption="Higher is better (faster), darker is more efficient"
     plot_div=QuerySetPlot(qs, caption, 30)
@@ -118,7 +116,6 @@ def BootstrapFilterView(request):
         }
     return render(request, 'bootstrap_form.html', context)
 
-
 def index(request):
     """View function for home page of site."""
     # Generate counts of some of the main objects
@@ -142,6 +139,11 @@ def index(request):
     plot_div_cost_cpu=QuerySetBarPlotCostCPU(sorted_bench, caption, 40)
     plot_div_cost_gpu=QuerySetBarPlotCostGPU(sorted_bench, caption, 40)
 
+    page_number = request.GET.get('page')
+    paginator = Paginator(sorted_bench, 10)
+    page_obj = paginator.get_page(page_number)
+
+
     context = {
         'date_updated': date_updated,
         'num_software': num_software,
@@ -153,8 +155,8 @@ def index(request):
         'figure_cost_cpu': plot_div_cost_cpu,
         'figure_cost_gpu': plot_div_cost_gpu,        
         'benchmarks': sorted_bench,
+        'page_obj': page_obj,
     }
-
     return render(request, 'index.html', context=context)
 
 def about(request):
@@ -173,31 +175,23 @@ def about(request):
     }
     return render(request, 'mdbench/about.html', context) 
 
-
 class BenchmarkListView(generic.ListView):
     queryset = BenchmarkInstance.objects.order_by('-rate_max')    
-
 class BenchmarkDetailView(generic.DetailView):
     model = BenchmarkInstance
-
 class SoftwareListView(generic.ListView):
     model = Software
     queryset = Software.objects.order_by('name')    
-
 class SoftwareDetailView(generic.DetailView):
     model = Software
-
 class DatasetListView(generic.ListView):
     model = Benchmark
-
 class CPUListView(generic.ListView):
     model = CPU
     queryset = CPU.objects.order_by('name')   
-
 class GPUListView(generic.ListView):
     model = GPU
     queryset = GPU.objects.order_by('model')   
-
 class DatasetDetailView(generic.DetailView):
     model = Benchmark
 
@@ -234,7 +228,6 @@ def filtered_benchmarks_list(request):
 	benchmarks = BenchmarkInstance.objects.all().order_by('-rate_max')
 	filter = BenchmarkInstanceFilter(request.GET, queryset = benchmarks)
 	return render(request, 'mdbench/benchmarkinstance_filter.html', {'filter' : filter})\
-
 
 def filtered_benchmarks_plot(request):
     benchmarks = BenchmarkInstance.objects.all().order_by('-rate_max')
@@ -275,20 +268,6 @@ def filtered_benchmarks_plot(request):
                   )
     )
 
-# With plotly-express:
-# df=pd.DataFrame({"ID":x_data, "Speed":y_data, "Efficiency":e_data, "Labels":lab})
-#    fig = px.bar(
-#        df, 
-#        y = "ID", 
-#        x = "Speed", 
-#        range_color = (0,100), 
-#        text = "Labels", 
-#        orientation = 'h',
-#        color_continuous_scale = px.colors.sequential.Sunset, 
-#        color = "Efficiency", 
-#        height = h, 
-#        width = 900)
-
     fig.update_layout(
         template="plotly_white",
         title='Software performance',
@@ -305,7 +284,6 @@ def filtered_benchmarks_plot(request):
     plot_div = fig.to_html(full_html=False)
     return render(request, 'mdbench/benchmarkinstance_filter_plot.html', 
         {'filter' : filter, 'plot_div': plot_div})
-
 
 def get_search_data(request):
     form = BenchmarkInstanceSsearchForm(request.GET)
