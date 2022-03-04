@@ -2,9 +2,7 @@
 
 {%block content%}
 <div class="card border-0 text-left pt-4" style="background-image: url('https://mdbench.ace-net.ca/static/media/images/fig3.png'); border-radius: 0;">
-    <div class="card-title">
-        <h3>EXPLORE</h3>
-    </div>
+    <div class="card-title"><h3>ADVANCED SEARCH</h3></div>
     <div class="card-body">
     <form method='GET' action = '.'>
         <div class="row">
@@ -39,7 +37,7 @@
             </div>
 
             <div class="col-sm-2">
-              <div class="form-group">
+               <div class="form-group">
                   <div class="input-group">
                      <div class="input">
                         <label for="arch" class="form-label">Software ID</label>
@@ -47,8 +45,8 @@
                         </select>                     
                      </div>            
                   </div>
-              </div>
-           </div>          
+               </div>
+            </div>          
 
             <div class="col-sm-2">
                 <div class="form-group">
@@ -82,117 +80,116 @@
                 </div>
             </div>
 
-              <div class="col-sm-2">
-                <div class="form-group">
+            <div class="col-sm-2">
+               <div class="form-group">
                   <div class="input-group">
-                      <div class="input">
+                    <div class="input">
                       <label for="site_comtains" class="form-label">Cluster</label>
                       <select class="form-select mb-1 form-select-sm" type="search" name = "site_contains" placeholder="Narval .."/>
-                      <option value="">All</option>
-                      <option value="Beluga">Beluga</option>                   
-                      <option value="Cedar">Cedar</option>  
-                      <option value="Graham">Graham</option>    
-                      <option value="Narval">Narval</option>                    
-                      <option value="Niagara">Niagara</option>      
-                      <option value="Siku">Siku</option>
+                          <option value="">All</option>
+                          <option value="Beluga">Beluga</option>                   
+                          <option value="Cedar">Cedar</option>  
+                          <option value="Graham">Graham</option>    
+                          <option value="Narval">Narval</option>                    
+                          <option value="Niagara">Niagara</option>      
+                          <option value="Siku">Siku</option>
                       </select>
                     </div>            
                   </div>
-                </div>
-              </div>
-
-    <div class="row py-4">
-            <div class="col-sm-3">
-             <div class="form-group">
-                 <div class="input-group">
-                    <div class="input">
-                       <label for="gpu" class="form-label">GPU model</label>
-                       <select class="form-select mb-1 form-select-sm" style="background-color: #b7b796;" name = "gpu_model"/>
-                       <option value="">All</option>
-                       <option value="A100-SXM4">A100-SXM4</option>
-                       <option value="P100-PCIE">P100-PCIE</option>    
-                       <option value="RTX6000">RTX6000</option>       
-                       <option value="T4">T4</option>                                             
-                       <option value="V100">V100</option>                              
-                       <option value="V100-PCIE">V100-PCIE</option>   
-                       <option value="V100-SXM2">V100-SXM2</option>   
-                       </select>       
-                    </div>            
-                </div>
+               </div>
             </div>
-        </div>    
+
+            <div class="row py-4">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input">
+                                <label for="gpu" class="form-label">GPU model</label>
+                                <select class="form-select mb-1 form-select-sm" style="background-color: #b7b796;" name = "gpu_model"/>
+                                <option value="">All</option>
+                                <option value="A100-SXM4">A100-SXM4</option>
+                                <option value="P100-PCIE">P100-PCIE</option>    
+                                <option value="RTX6000">RTX6000</option>       
+                                <option value="T4">T4</option>                                             
+                                <option value="V100">V100</option>                              
+                                <option value="V100-PCIE">V100-PCIE</option>   
+                                <option value="V100-SXM2">V100-SXM2</option>   
+                                </select>       
+                            </div>            
+                        </div>
+                    </div>
+                </div>    
 
             <div class="col-sm-2">
-             <div class="form-group">
-                 <div class="input-group">
-                    <div class="input">
-                       <label for="cpu" class="form-label">CPU model</label>
-                       <select class="form-select mb-1 form-select-sm" style="background-color: #b7b796;" name = "cpu_model"/>
-                       <option value="">All</option>
-                       <option value="7532">EPYC 7532</option>
-                       <option value="7413">EPYC 7413</option>    
-                       <option value="ES-2683">XEON ES-2683</option>       
-                       <option value="E5-2650">XEON E5-2650</option>                                             
-                       <option value="6248">XEON GOLD 6248</option>      
-                       <option value="6148">XEON GOLD 6148</option>    
-                       <option value="5120">XEON GOLD 5120</option>                                                                                   
-                       <option value="4216">XEON SILVER 4216</option>                                                                                   
-                       <option value="4110">XEON SILVER 4110</option>                                                                                   
-                       </select>                              
-                    </div>            
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input">
+                          <label for="cpu" class="form-label">CPU model</label>
+                          <select class="form-select mb-1 form-select-sm" style="background-color: #b7b796;" name = "cpu_model"/>
+                          <option value="">All</option>
+                          <option value="7532">EPYC 7532</option>
+                          <option value="7413">EPYC 7413</option>    
+                          <option value="ES-2683">XEON ES-2683</option>       
+                          <option value="E5-2650">XEON E5-2650</option>                                             
+                          <option value="6248">XEON GOLD 6248</option>      
+                          <option value="6148">XEON GOLD 6148</option>    
+                          <option value="5120">XEON GOLD 5120</option>                                                                                   
+                          <option value="4216">XEON SILVER 4216</option>                                                                                   
+                          <option value="4110">XEON SILVER 4110</option>                                                                                   
+                          </select>                              
+                        </div>            
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col-sm-2">
-           <div class="form-group">
-              <div class="input-group">
-                 <div class="input">
-                    <label for="arch" class="form-label">AVX capability</label>
-                    <select class="form-select mb-1 form-select-sm" style="background-color: #b7b796;" name = "arch" placeholder="avx2 .."/>
-                    <option value="">All</option>
-                    <option value="avx2">AVX-2</option>
-                    <option value="avx512">AVX-512</option>       
-                    </select>                     
-                 </div>            
-              </div>
-           </div>
-        </div>
+            <div class="col-sm-2">
+               <div class="form-group">
+                  <div class="input-group">
+                     <div class="input">
+                        <label for="arch" class="form-label">AVX capability</label>
+                        <select class="form-select mb-1 form-select-sm" style="background-color: #b7b796;" name = "arch" placeholder="avx2 .."/>
+                        <option value="">All</option>
+                        <option value="avx2">AVX-2</option>
+                        <option value="avx512">AVX-512</option>       
+                        </select>                     
+                     </div>            
+                  </div>
+               </div>
+            </div>
 
-        <div class="col-sm-3">
-            <div class="form-group">
-                <div class="input-group">
-                    <div class="input">
-                        <label for="dataset" class="form-label">Simulation system</label>
-                        <select class="form-select mb-1 form-select-sm" style="background-color: #b7b796;" name = "dataset" placeholder="6n4o .."/>
-                        <option value="6n4o">PDB ID: 6n4o</option>
-                        <option value="4cg1">PDB ID: 4cg1</option>                        
-                        </select>
-                    </div>            
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input">
+                            <label for="dataset" class="form-label">Simulation system</label>
+                            <select class="form-select mb-1 form-select-sm" style="background-color: #b7b796;" name = "dataset" placeholder="6n4o .."/>
+                            <option value="6n4o">PDB ID: 6n4o</option>
+                            <option value="4cg1">PDB ID: 4cg1</option>                        
+                            </select>
+                        </div>            
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-2"></div> 
+            <div class="col-sm-2"></div> 
 
-        <div class="row my-4">
-              <div class="d-flex justify-content-center">
-                     <button class="btn btn-sm btn-outline-light mx-2" type="submit"><i class="fa fa-search"> Search</i></button>
-                     <button class="btn btn-sm btn-outline-light px-2" type=button onClick="javascript:history.go(-1);"> <i class="fa fa-chevron-left px-1"></i></button>                      
-              {{ csv_file }}
-              </div>
-
-        <div class="row mt-4">
-              <div class="d-flex justify-content-center">
-                 <div style="color: #85b737;"> APPLIED FILTERS: {{ querystr }}</div>
-                 <button class="btn btn-sm btn-outline-light px-2 mx-4" type="button" onclick="location.href='{% url 'export' %}'"><i class="fa fa-download"> Save results</i></button>.
-              </div>
-        </div>
+            <div class="row my-4">
+                <div class="d-flex justify-content-center">
+                    <button class="btn btn-sm btn-outline-light mx-2" type="submit"><i class="fa fa-search"> Search</i></button>
+                    <button class="btn btn-sm btn-outline-light px-2" type=button onClick="javascript:history.go(-1);"> <i class="fa fa-chevron-left px-1"></i></button>                      
+                    {{ csv_file }}
+                </div>
+            </div>      
+            <div class="row mt-4">
+                <div class="d-flex justify-content-center">
+                    <div style="color: #85b737;"> APPLIED FILTERS: {{ querystr }}</div>
+                    <button class="btn btn-sm btn-outline-light px-2 mx-4" type="button" onclick="location.href='{% url 'export' %}'"><i class="fa fa-download"> Save results</i></button>.
+                </div>
+            </div>
+          </div>
+        </form>
       </div>
-
-      </form>
     </div>
   </div>
-</div>
 </div>
 {% endblock content%}
 
