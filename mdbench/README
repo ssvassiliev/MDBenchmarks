@@ -122,3 +122,12 @@ python3 manage.py dumpdata mdbench.BenchmarkInstance \
 --pks 6 --format yaml > mdbench/fixtures/tmp.yaml
 
 python3 manage.py loaddata mdbench/fixtures/tmp.yaml
+
+         2683   6238
+1            x
+32     1     x
+64     2           x
+128    4           x
+256    8     x
+512   16     x
+1024  32           x 

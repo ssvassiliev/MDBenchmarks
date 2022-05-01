@@ -131,6 +131,8 @@ def QuerySetScatterPlot(qs, fig_title, n=1000):
             qs[0].software.name+"(" + \
             qs[0].software.module+"/" + \
             qs[0].software.module_version + "), " + \
+            qs[0].cpu.name + " "+\
+            qs[0].cpu.model + ", "+\
             qs[0].site.name 
      
     for c,i in enumerate(qs):

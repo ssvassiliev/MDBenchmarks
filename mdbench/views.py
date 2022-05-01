@@ -135,7 +135,7 @@ def index(request):
 
     sorted_bench = sorted(bench, key=lambda BenchmarkInstance: BenchmarkInstance.rate_max, reverse=True)
     caption="Higher is better (faster), darker is more efficient"
-    plot_div=QuerySetPlot(sorted_bench, "Higher is better (faster), darker is more efficient", 40)
+    plot_div=QuerySetPlot(sorted_bench, caption, 40)
     plot_div_cost_cpu=QuerySetBarPlotCostCPU(sorted_bench, caption, 40)
     plot_div_cost_gpu=QuerySetBarPlotCostGPU(sorted_bench, caption, 40)
 
@@ -286,5 +286,5 @@ def filtered_benchmarks_plot(request):
         {'filter' : filter, 'plot_div': plot_div})
 
 def get_search_data(request):
-    form = BenchmarkInstanceSsearchForm(request.GET)
+    form = BenchmarkInstanceSearchForm(request.GET)
     return render(request, 'index.html', {'form': form})
