@@ -5,7 +5,7 @@
 <td> {{ benchmark.software.instruction_set }}</td>
 <td> {{ benchmark.benchmark.name }}</td>
 <td style="background-color:#6ead66; color:white"> {{ benchmark.rate_max | stringformat:".2e"}}</td> 
-<td style="background-color:#a3cc91"> {{ benchmark.cpu.codename }}</td>
+<td style="background-color:#a3cc91"> {{ benchmark.cpu.name }} {{ benchmark.cpu.model }} </td>
 <td style="background-color:#a3cc91"> {{ benchmark.cpu_efficiency }}</td>
 <td style="background-color:#a3cc91"> {{ benchmark.core_year }}</td>
 <td style="background-color:#a3cc91"> {{ benchmark.gpu_year }}</td>

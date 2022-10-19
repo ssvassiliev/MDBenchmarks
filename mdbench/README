@@ -123,11 +123,16 @@ python3 manage.py dumpdata mdbench.BenchmarkInstance \
 
 python3 manage.py loaddata mdbench/fixtures/tmp.yaml
 
-         2683   6238
-1            x
-32     1     x
-64     2           x
-128    4           x
-256    8     x
-512   16     x
-1024  32           x 
+
+## Restarting application after system reboot:
+source /home/ubuntu/env-django/bin/activate
+cd /home/ubuntu/MDBenchmarks
+sudo mkdir /var/run/gunicorn
+sudo chown ubuntu /var/run/gunicorn
+gunicorn -c config/gunicorn/dev.py
+tail /var/log/gunicorn/dev.log
+sudo systemctl restart nginx
+
+bash ~/run_goaccess.sh
+
+Good morning everyone, our TechTeam meeting will take place in less than 30min. Here is the agenda: https://docs.google.com/spreadsheets/d/1t6CJolU225DrnkbEjSWmkothOI2aB_V6Zvy0O7UnpGs/edit#gid=489800184
