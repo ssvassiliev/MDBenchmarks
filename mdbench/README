@@ -1,3 +1,6 @@
+### Location of the datasets:
+/var/www/mdbench.ace-net.ca/static/media/datasets
+
 # 1. DEPLOYING THE APPLICATION
 # 2. LOADING DATA USING FIXTURES
 

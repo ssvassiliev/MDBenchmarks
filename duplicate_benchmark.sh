@@ -3,10 +3,13 @@
 # by duplicating a benchmark with a specific supplied PK
 # Usage: bash ./duplicate_benchmark serial|parallel pk
 
+
 if [ $# != 2 ]; then
   echo "Need exactly two arguments!"
   exit
 fi
+
+source ~/.bashrc
 
 if  [ $1 = "serial" ]; then
   python3 manage.py dumpdata mdbench.SerialBenchmarkInstance \
