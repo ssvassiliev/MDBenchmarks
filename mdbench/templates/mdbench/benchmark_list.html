@@ -34,7 +34,9 @@
     <td> {{ benchmark_list.1.id }}</td>   
       <td> {{ benchmark_list.1.name }}</td>
       <td> {{ benchmark_list.1.natoms }}</td>
-      <td> </td>    
+      <td> <div class="d-grid gap-2 col-6">
+        <button class="btn btn-sm btn-success text-nowrap mt-2" type="button" onclick="location.href='https://mdbench.ace-net.ca/static/media/datasets/benchmark_4cg1_sander_quick.tar.gz'">Sander.QUICK</button>
+      </td>   
       <td> {{ benchmark_list.1.description | safe | linebreaks }} </td>        
       <td><img src="https://mdbench.ace-net.ca/static/media/images/4cg1.png" style="height:200px;" alt="{{ benchmark.name }}"> </td>
      </tr>
