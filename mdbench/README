@@ -1,4 +1,4 @@
-### Location of the datasets:
+### Location of the MD datasets:
 /var/www/mdbench.ace-net.ca/static/media/datasets
 
 # 1. DEPLOYING THE APPLICATION
@@ -39,20 +39,19 @@ gunicorn -c config/gunicorn/dev.py
 server_tokens               off;
 access_log                  /var/log/nginx/mdbench.access.log;
 error_log                   /var/log/nginx/mdbench.error.log;
+
 # This configuration will be changed to redirect to HTTPS later
 server {
-  server_name               mdbench.ace-net.ca
-  listen                    80;
+  server_name               mdbench.ace-net.ca www.mdbench.ace-net.ca 198.168.184.247;
   location / {
-    proxy_pass              http://localhost:8000;
+    proxy_pass              http://127.0.0.1:8000;
     proxy_set_header        Host $host;
   }
-}
-# Add NGINX-AMPLIFY
-location /nginx_status { 
-        stub_status on;
-        allow 127.0.0.1;
-        deny all;
+
+  location /static {
+    autoindex on;
+    alias /var/www/mdbench.ace-net.ca/static/;
+  }
 }
 -------8><---------><8---------
 
@@ -86,7 +85,7 @@ python manage.py collectstatic
 sudo systemctl restart nginx
 
 # Updating CSS: copy .css in static html folder:
-cp /home/ubuntu/MDBenchmarks/mdbench/static/styles.css /var/www/mdbench.ace-net.ca/static/mdbench/css
+cp /home/ubuntu/MDBenchmarks/mdbench/static/mdbench/css/styles.css /var/www/mdbench.ace-net.ca/static/mdbench/css
 
 
 # 2. LOADING DATA WITH FIXTURES
