@@ -88,6 +88,12 @@ sudo systemctl restart nginx
 cp /home/ubuntu/MDBenchmarks/mdbench/static/mdbench/css/styles.css /var/www/mdbench.ace-net.ca/static/mdbench/css
 
 
+# Copy datasets
+
+sudo mkdir -p /var/www/mdbench.ace-net.ca/static/media/datasets/
+sudo cp benchmark_*.gz /var/www/mdbench.ace-net.ca/static/media/datasets/
+chmod a+r /var/www/mdbench.ace-net.ca/static/media/datasets/*  
+
 # 2. LOADING DATA WITH FIXTURES
 
 # Creating a fixture:
