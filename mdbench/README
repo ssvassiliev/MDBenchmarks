@@ -65,6 +65,7 @@ sudo systemctl restart nginx
 sudo mkdir -pv /var/www/mdbench.ace-net.ca/static/
 sudo chown -cR ubuntu:ubuntu /var/www/mdbench.ace-net.ca/
 
+
 # Edit settings.py:
 STATIC_URL = "/static/"
 STATIC_ROOT = "/var/www/mdbench.ace-net.ca/static"
@@ -80,6 +81,11 @@ python manage.py collectstatic
     alias /var/www/mdbench.ace-net.ca/static/;
   }
 }
+
+# Copy background image to nginx location:
+sudo mkdir -pv /var/www/mdbench.ace-net.ca/static/media/images
+sudo chown -cR ubuntu:ubuntu /var/www/mdbench.ace-net.ca/static/media/images
+cp /home/ubuntu/MDBenchmarks/media/images/fig3.png /var/www/mdbench.ace-net.ca/static/media/images/background.png
 
 # Turn off debug and restart nginx
 sudo systemctl restart nginx
