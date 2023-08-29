@@ -82,7 +82,7 @@ python manage.py collectstatic
   }
 }
 
-# Copy background image to nginx location:
+# Copy background image to nginx location (only needed for debug mode) :
 sudo mkdir -pv /var/www/mdbench.ace-net.ca/static/media/images
 sudo chown -cR ubuntu:ubuntu /var/www/mdbench.ace-net.ca/static/media/images
 cp /home/ubuntu/MDBenchmarks/media/images/fig3.png /var/www/mdbench.ace-net.ca/static/media/images/background.png
