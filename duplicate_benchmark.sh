@@ -5,7 +5,7 @@
 
 
 if [ $# != 2 ]; then
-  echo "Need exactly two arguments!"
+  echo "Usage: bash ./duplicate_benchmark serial|parallel pk"
   exit
 fi
 
