@@ -5,7 +5,7 @@
 
 
 if [ $# != 2 ]; then
-  echo "Usage: bash ./duplicate_benchmark serial|parallel pk"
+  echo "Usage: bash ./duplicate_model.sh serial|parallel|software pk"
   exit
 fi
 
