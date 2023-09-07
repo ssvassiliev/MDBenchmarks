@@ -1,4 +1,4 @@
-django<4.0
+django
 django-filter
 django-pygments
 django-sslserver
