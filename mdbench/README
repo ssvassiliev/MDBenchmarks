@@ -86,6 +86,7 @@ python manage.py collectstatic
 sudo mkdir -pv /var/www/mdbench.ace-net.ca/static/media/images
 sudo chown -cR ubuntu:ubuntu /var/www/mdbench.ace-net.ca/static/media/images
 cp /home/ubuntu/MDBenchmarks/media/images/fig3.png /var/www/mdbench.ace-net.ca/static/media/images/background.png
+# Also copy 4cg1.png and 6n4o.png to /var/www/mdbench.ace-net.ca/static/media/images 
 
 # Turn off debug and restart nginx
 sudo systemctl restart nginx
