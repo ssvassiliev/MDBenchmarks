@@ -36,7 +36,11 @@ except KeyError as e:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["localhost", "206.167.180.103", "mdbench.ace-net.ca"]
+ALLOWED_HOSTS = ["localhost", "198.168.184.247", "mdbench.ace-net.ca"]
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://mdbench.ace-net.ca',
+]
 
 
 # Application definition
