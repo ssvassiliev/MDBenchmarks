@@ -12,7 +12,7 @@
 <ul>
   <li><strong>Dataset:</strong></strong> {{ benchmarkinstance.benchmark }}</li> 
   <li><strong>Software:</strong> {{ benchmarkinstance.software }}</li>
-  <li><strong>Resource:</strong> {{ benchmarkinstance.resource.ntasks }} tasks, {{ benchmarkinstance.resource.ncpu }} cores, {{ benchmarkinstance.resource.nodes }} nodes, {{ benchmarkinstance.resource.ngpu }} GPUs, {{ benchmarkinstance.resource.nvlink | yesno:"with,no"}} NVLink</li>
+  <li><strong>Resource:</strong> {{ benchmarkinstance.resource.ntasks }} tasks, {{ benchmarkinstance.resource.ncpu }} cores, {{ benchmarkinstance.resource.nnodes }} nodes, {{ benchmarkinstance.resource.ngpu }} GPUs, {{ benchmarkinstance.resource.nvlink | yesno:"with,no"}} NVLink</li>
   <li><strong>CPU:</strong> {{ benchmarkinstance.cpu }}</li> 
   <li><strong>GPU:</strong> {{ benchmarkinstance.gpu }}</li> 
   <li><strong>Simulation speed:</strong> {{ benchmarkinstance.rate_max }} ns/day</li> 

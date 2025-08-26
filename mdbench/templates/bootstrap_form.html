@@ -111,7 +111,8 @@
                                 <label for="gpu" class="form-label">GPU model</label>
                                 <select class="form-select mb-1 form-select-sm" style="background-color: #b7b796;" name = "gpu_model"/>
                                 <option value="">All</option>
-                                <option value="H100 NVL">H100 NVL</option>
+                                <option value="H100-SXM5">H100-SXM5</option>                                
+                                <option value="H100-NVL">H100-NVL</option>
                                 <option value="A100-SXM4">A100-SXM4</option>
                                 <option value="P100-PCIE">P100-PCIE</option>    
                                 <option value="RTX6000">RTX6000</option>       
@@ -135,6 +136,7 @@
                           <option value="9654">EPYC 9654</option>
                           <option value="7532">EPYC 7532</option>
                           <option value="7413">EPYC 7413</option>    
+                          <option value="8570">XEON PLATINUM 8570</option>   
                           <option value="8160">XEON PLATINUM 8160</option>   
                           <option value="5418Y">XEON GOLD 5418Y</option>			  
                           <option value="6248">XEON GOLD 6248</option>      
@@ -170,8 +172,9 @@
                         <div class="input">
                             <label for="dataset" class="form-label">Simulation system</label>
                             <select class="form-select mb-1 form-select-sm" style="background-color: #b7b796;" name = "dataset" placeholder="6n4o .."/>
-                            <option value="6n4o">PDB ID: 6n4o</option>
-                            <option value="4cg1">PDB ID: 4cg1</option>                        
+                            <option value="6n4o">Argonaute (6n40): 239,131 atoms</option>
+                            <option value="9naw">Parvovirus (9naw): 3,023,780 atoms</option>                           
+                            <option value="4cg1">Cutinase (4cg1): 32,915 MM / 53 QM atoms</option>                        
                             </select>
                         </div>            
                     </div>
@@ -185,13 +188,16 @@
                     <button class="btn btn-sm btn-outline-light px-2" type=button onClick="javascript:history.go(-1);"> <i class="fa fa-chevron-left px-1"></i></button>                      
                     {{ csv_file }}
                 </div>
-            </div>      
+            </div>     
             <div class="row mt-4">
-                <div class="d-flex justify-content-center">
-                    <div style="color: #85b737;"> APPLIED FILTERS: {{ querystr }}</div>
-                    <button class="btn btn-sm btn-outline-light px-2 mx-4" type="button" onclick="location.href='{% url 'export' %}'"><i class="fa fa-download"> Save results</i></button>.
-                </div>
-            </div>
+              <div class="d-flex justify-content-center align-items-center">
+                <div style="color: #85b737;">APPLIED FILTERS: {{ querystr }}</div>
+                <button class="btn btn-sm btn-outline-light px-2 mx-4" type="button"
+                        onclick="location.href='{% url 'export' %}'">
+                  <i class="fa fa-download me-2"></i> Save results
+                </button>
+              </div>
+            </div>             
           </div>
         </form>
       </div>
