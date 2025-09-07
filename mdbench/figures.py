@@ -86,7 +86,13 @@ def QuerySetPlot(qs, fig_title, n=1000):
     # Limit plot to first n benchmarks
     figTitle=dict(text=fig_title,)
     if len(qs) == 0:
-        plot_div=('<div class="d-flex justify-content-center p-4"><h4 style="color:#bbb;">NO BENCHMARKS SELECTED</h4></div>')      
+        plot_div = (
+        '<div class="d-flex justify-content-center p-4">'
+        '<div>'
+        '<div style="color:#bbb; text-align:center; font-size:1.25rem;">NO RESULTS FOR THIS SIMULATION SYSTEM.</div>'
+        '<div style="color:#bbb; text-align:center; margin-top:1rem;">Try selecting a different simulation system.</div>'
+        '</div>'
+        '</div>')      
         return(plot_div)
     
     # Check if only the number of CPUs is changing
